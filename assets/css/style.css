@@ -24,6 +24,8 @@ p {
     --cs-primary: #e8e4dc;
     --cs-white: #fff;
     --cs-black: #000;
+    --cs-accent: #a16a50;
+    --cs-hover: #6b341a;
 }
 
 h1 {
@@ -41,6 +43,12 @@ h3 {
     font-weight: 700;
 }
 
+h4 {
+    font-size: 18px;
+    font-weight: 200;
+    color: var(--cs-black);
+}
+
 p {
     font-size: 18px;
     font-weight: 400;
@@ -50,13 +58,28 @@ p {
     padding: 60px 0px;
 }
 
-.space{
+.space {
     padding: 16px 0px 25px 0px;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #000;
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-srch {
+    padding: 10px 20px !important;
 }
 
 /* header */
 .header {
     background-color: #e8e4dc;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -73,16 +96,16 @@ p {
 }
 
 .navbar-brand img {
-    width: 170px;
+    width: 150px;
 }
 
 /* search */
-#offcanvasTop{
+#offcanvasTop {
     padding: 30px;
 }
 
-.offcanvas{
-    --bs-offcanvas-height:25vh;
+.offcanvas {
+    --bs-offcanvas-height: 25vh;
 }
 
 /* banner */
@@ -95,7 +118,7 @@ p {
 }
 
 .banner .row {
-    min-height: 90vh;
+    min-height: 100vh;
 }
 
 .banner h2 {
@@ -107,20 +130,149 @@ p {
     line-height: 42px;
 }
 
-.btn-cs{
+.btn-cs {
     padding: 15px 30px;
     font-size: 16px;
-    background-color: #a16a50;
+    background-color: var(--cs-accent);
     color: #fff;
     border-radius: 5px;
 }
 
-.btn-cs:hover{
-    background-color: #6b341a;
+.btn-cs:hover {
+    background-color: var(--cs-hover);
     color: #fff;
 }
 
 /* about */
-.about_title h2,p, .ab_btn{
+.about_title h2,
+.about_title p,
+.ab_btn {
     text-align: center;
+}
+
+.about_icon {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+}
+
+.about_icon:hover img {
+    transform: scale(1.08);
+}
+
+.about_icon img {
+
+    width: 100px;
+
+    padding-bottom: 10px;
+    transition: .2s all ease-in-out;
+}
+
+/* home-blog */
+.blog_box {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.blog_box:hover img {
+    transform: scale(1.1);
+}
+
+.blog_box img {
+    height: 430px;
+    object-fit: cover;
+    transition: .2s all ease-in-out;
+}
+
+.post_title {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    background-color: #e8e4dc7d;
+    backdrop-filter: blur(12px);
+}
+
+.post_title a h3 {
+    color: var(--cs-black);
+    line-height: 27px;
+}
+
+.post_title a h3:hover {
+    text-decoration: underline;
+    color: var(--cs-hover);
+}
+
+.author_box p {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* footer cta */
+.footer {
+    background: url(../uploads/contact-cta.webp);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: cover;
+    background-color: var(--cs-primary);
+}
+
+.footer .row {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact_title h3 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.subscribe-form form {
+    display: flex;
+    align-items: center;
+}
+
+.subscribe-form form input {
+    padding: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.subscribe-form form button[type="submit"] {
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 35%;
+    border-radius: 5px;
+}
+
+.social_icon a i {
+    color: var(--cs-accent);
+    font-size: 20px;
+    margin-right: 20px;
+    transition: 0.2s all ease-in-out;
+}
+
+.social_icon a i:hover {
+    color: var(--cs-hover);
+    transform: scale(1.1);
+}
+
+.copyright p {
+    font-size: 16px;
+}
+
+.copyright p a {
+    color: var(--cs-accent);
+    transition: .2s all ease-in-out;
+}
+
+.copyright p a:hover {
+    color: var(--cs-hover);
 }
