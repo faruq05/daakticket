@@ -64,7 +64,9 @@ p {
     padding: 0px 15px;
 }
 
-.nav-item a {}
+.nav-item a {
+    padding: 0;
+}
 
 .navbar-nav .nav-item.active .nav-link {
     font-weight: 500;
@@ -72,6 +74,15 @@ p {
 
 .navbar-brand img {
     width: 170px;
+}
+
+/* search */
+#offcanvasTop{
+    padding: 30px;
+}
+
+.offcanvas{
+    --bs-offcanvas-height:25vh;
 }
 
 /* banner */

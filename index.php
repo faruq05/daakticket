@@ -23,6 +23,21 @@
 
 <body>
     <!-- header starts========================================= -->
+    <!-- search componenet -->
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasTopLabel">What are you loooking for ...</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <!-- search comp ebds -->
+
     <div class="header" id="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -47,23 +62,13 @@
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-
-                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                            <a class="btn btn-search" data-bs-toggle="offcanvas" href="#offcanvasTop" role="button"
+                                aria-controls="offcanvasTop">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
                         </li>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+                        <!-- search -->
 
-                        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop"
-                            aria-labelledby="offcanvasTopLabel">
-                            <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                                ...
-                            </div>
-                        </div>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa-regular fa-user"></i></a>
                         </li>
@@ -80,7 +85,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="banner-title">
-                        <h1>Daak Ticket</h1>
+                        <h1>Daak Ticket .</h1>
                         <h2 class="space">Delivering Ideas, Inspiring Minds – A Platform for Knowledge, Stories, and
                             Community
                             Insight"</h2>
