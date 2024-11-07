@@ -20,7 +20,11 @@ p {
     text-decoration: none;
 }
 
-:root {}
+:root {
+    --cs-primary: #e8e4dc;
+    --cs-white: #fff;
+    --cs-black: #000;
+}
 
 h1 {
     font-size: 80px;
@@ -38,7 +42,7 @@ h3 {
 }
 
 p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
 }
 
@@ -46,7 +50,15 @@ p {
     padding: 60px 0px;
 }
 
+.space{
+    padding: 16px 0px 25px 0px;
+}
+
 /* header */
+.header {
+    background-color: #e8e4dc;
+}
+
 .navbar-expand-lg .navbar-nav .nav-link {
     padding: 0;
     padding: 0px 15px;
@@ -56,4 +68,48 @@ p {
 
 .navbar-nav .nav-item.active .nav-link {
     font-weight: 500;
+}
+
+.navbar-brand img {
+    width: 170px;
+}
+
+/* banner */
+.banner {
+    background: url(../uploads/banner-bg.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: cover;
+    background-color: var(--cs-primary);
+}
+
+.banner .row {
+    min-height: 90vh;
+}
+
+.banner h2 {
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    line-height: 42px;
+}
+
+.btn-cs{
+    padding: 15px 30px;
+    font-size: 16px;
+    background-color: #a16a50;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn-cs:hover{
+    background-color: #6b341a;
+    color: #fff;
+}
+
+/* about */
+.about_title h2,p, .ab_btn{
+    text-align: center;
 }

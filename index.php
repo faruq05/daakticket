@@ -12,10 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- stylesheet -->
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/media.css">
 </head>
 
 <body>
@@ -23,7 +26,7 @@
     <div class="header" id="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="#"><img src="images/logo.png" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="#"><img src="assets/uploads/logo.png" class="img-fluid" alt="logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -35,18 +38,78 @@
                             <a class="nav-link" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#">Blogs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </li>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+
+                        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop"
+                            aria-labelledby="offcanvasTopLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                ...
+                            </div>
+                        </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa-regular fa-user"></i></a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
+    </div>
+
+    <!-- banner starts -->
+    <div class="banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="banner-title">
+                        <h1>Daak Ticket</h1>
+                        <h2 class="space">Delivering Ideas, Inspiring Minds – A Platform for Knowledge, Stories, and
+                            Community
+                            Insight"</h2>
+                        <a href="blog.php" class="btn btn-cs">Read Our Blogs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- about 0-->
+    <div class="about cp60">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about_title">
+                        <h2>About Us</h2>
+                        <p class="space">Welcome to DaakTicket – your destination for diverse voices, stories, and
+                            insights from
+                            around the world. We believe in the power of words to connect, inspire, and inform. Our
+                            platform is designed to be a space where anyone can share valuable knowledge, personal
+                            stories, and unique perspectives on topics that matter.</p>
+                        <div class="ab_btn">
+                            <a href="about.php" class="btn btn-cs">Know More About Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
