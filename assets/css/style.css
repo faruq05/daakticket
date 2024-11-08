@@ -54,6 +54,10 @@ p {
     font-weight: 400;
 }
 
+a{
+    color: var(--cs-accent);
+}
+
 a:hover {
     color: var(--cs-hover) !important;
 }
@@ -285,6 +289,7 @@ a:hover {
     padding-top: 200px;
 }
 
+
 .user_access .row {
     min-height: 100vh;
 }
@@ -345,4 +350,11 @@ a:hover {
 .cta img {
     width: 150px;
     padding-bottom: 20px;
+}
+
+/* forgot - pass page1 */
+.back-login a{
+    color: var(--cs-accent);
+    margin-top: 20px;
+    text-align: center;
 }

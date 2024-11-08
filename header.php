@@ -29,7 +29,6 @@ include 'db.php';
 
 <body>
 
-
     <!-- header starts========================================= -->
     <!-- search componenet -->
     <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -45,7 +44,7 @@ include 'db.php';
         </div>
     </div>
     <!-- search comp ebds -->
-
+    
     <div class="header" id="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">

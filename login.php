@@ -19,7 +19,7 @@
                             <i class="fa-regular fa-eye-slash toggle-password" data-toggle="#signInPassword"></i>
                         </div>
                         <div class="form-group">
-                            <a href="#">Forgot Password?</a>
+                            <a href="forgot_password.php">Forgot Password?</a>
                         </div>
                         <button type="submit" name="sign_in_submit" class="btn btn-cs mt-2">Sign In</button>
                     </form>
