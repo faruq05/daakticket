@@ -55,7 +55,7 @@ p {
 }
 
 a:hover {
-    color: var(--cs-hover)!important;
+    color: var(--cs-hover) !important;
 }
 
 .cp60 {
@@ -144,7 +144,7 @@ a:hover {
 
 .btn-cs:hover {
     background-color: var(--cs-hover);
-    color: #fff;
+    color: #fff !important;
 }
 
 /* about */

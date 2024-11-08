@@ -80,3 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize password toggle
     setupPasswordToggle();
 });
+
+
+// Display the toast if there's a message from PHP
+const message = "<?php echo $message; ?>";
+if (message) {
+    const toastElement = document.getElementById('toastNotification');
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+}

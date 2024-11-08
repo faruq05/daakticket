@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <a href="#">Forgot Password?</a>
                         </div>
-                        <button type="submit" class="btn btn-cs mt-2">Sign In</button>
+                        <button type="submit" name="sign_in_submit" class="btn btn-cs mt-2">Sign In</button>
                     </form>
                 </div>
                 <div class="cta mt-5">
@@ -31,7 +31,7 @@
             <div class="col-md-6">
                 <div class="logIn register-form" id="signUpForm">
                     <h2>New Here? Create a New Account</h2>
-                    <form action="register.php" method="POST">
+                    <form action="login.php" method="POST">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" id="username" name="username" class="form-control" required>
@@ -67,10 +67,62 @@
                             <p id="specialCriteria">At least one special character</p>
                             <p id="matchCriteria">Passwords must match</p>
                         </div>
-                        <button type="submit" class="btn btn-cs mt-2">Sign In</button>
+                        <button type="submit" name="sign_up_submit" class="btn btn-cs mt-2">Sign In</button>
                     </form>
                 </div>
+                <?php
+                $message = "";
+                $messageType = "";
 
+                if (isset($_POST["sign_up_submit"])) {
+                    $username = $_POST['username'];
+                    $firstName = $_POST['firstName'];
+                    $lastName = $_POST['lastName'];
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $confirmPassword = $_POST['confirmPassword'];
+
+                    // Check if the username already exists
+                    $check_query = "SELECT * FROM User WHERE username = '$username'";
+                    $check_result = mysqli_query($conn, $check_query);
+
+                    if (mysqli_num_rows($check_result) > 0) {
+                        $message = "Username already exists. Please choose a different username.";
+                        $messageType = "error";
+                    } else {
+                        $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
+                        $insert_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
+                         VALUES ('$username', '$first_name', '$last_name', '$email', '$password_hash')";
+
+                        $result = mysqli_query($conn, $insert_query);
+
+                        if ($result) {
+                            $message = "User has been registered successfully";
+                            $messageType = "success";
+                        } else {
+                            $message = "Failed to register user!";
+                            $messageType = "error";
+                        }
+                    }
+                    $conn->close();
+                }
+                ?>
+
+            </div>
+
+            <!-- Bootstrap Toast for Notifications -->
+            <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="toastNotification"
+                    class="toast align-items-center text-bg-<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <?php echo $message; ?>
+                        </div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/media.css">
+    <!-- database connect -->
+    <?php include 'db.php'; ?>
 </head>
 
 <body>
