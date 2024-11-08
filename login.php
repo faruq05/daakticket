@@ -55,18 +55,15 @@
                             $_SESSION['email'] = $user['email'];
 
                             // Set a successful login message
-                            //echo "Successfully logged in";
                             $message = "Welcome, " . $_SESSION['username'] . "!";
                             $messageType = "success";
                         } else {
                             // Incorrect password
-                            // echo "Incorrect pass";
                             $message = "Incorrect password. Please try again.";
 
                         }
                     } else {
                         // No user found with the provided email
-                        //echo "no user found";
                         $message = "No account found with that email.";
                         $messageType = "error";
                     }
