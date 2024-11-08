@@ -3,6 +3,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname="daakticket";
+$conn=" ";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);

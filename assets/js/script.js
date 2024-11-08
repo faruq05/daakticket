@@ -89,3 +89,31 @@ if (message) {
     const toast = new bootstrap.Toast(toastElement);
     toast.show();
 }
+
+// Toast
+document.addEventListener("DOMContentLoaded", function () {
+    const toastMessageEl = document.getElementById('toastMessage');
+    const toastNotificationEl = document.getElementById('toastNotification');
+    
+    // Check if the element exists and contains a non-empty message
+    if (toastMessageEl && toastMessageEl.getAttribute('data-message').trim() !== "") {
+        const message = toastMessageEl.getAttribute('data-message');
+        const messageType = toastMessageEl.getAttribute('data-type');
+        
+        // Set toast body content and background color based on message type
+        toastNotificationEl.querySelector('.toast-body').innerText = message;
+        toastNotificationEl.classList.add('text-bg-' + messageType);
+
+        // Show the toast
+        const toast = new bootstrap.Toast(toastNotificationEl);
+        toast.show();
+
+        // Automatically hide the toast after 5 seconds
+        setTimeout(() => {
+            toast.hide();
+        }, 5000);
+    } else {
+        // If no message exists, hide the toast notification
+        toastNotificationEl.style.display = "none";
+    }
+});

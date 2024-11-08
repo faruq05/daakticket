@@ -1,3 +1,8 @@
+<?php
+// session_start();
+include 'db.php';
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -20,7 +25,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/media.css">
     <!-- database connect -->
-    <?php include 'db.php'; ?>
 </head>
 
 <body>

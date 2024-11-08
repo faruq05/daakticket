@@ -1,19 +1,21 @@
 <?php include 'header.php'; ?>
-
 <div class="user_access">
     <div class="container">
         <div class="row">
+
+            <!-- login form -->
             <div class="col-md-6">
                 <div class="logIn" id="signInForm">
                     <h2>Already a Member? Sign In</h2>
                     <form action="login.php" method="POST">
                         <div class="form-group">
-                            <label for="signInUsername">Username</label>
-                            <input type="text" class="form-control" id="signInUsername" name="username" required>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group position-relative">
                             <label for="signInPassword">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" name="password" required>
+                            <input type="password" class="form-control" id="signInPassword" name="password_hash"
+                                required>
                             <i class="fa-regular fa-eye-slash toggle-password" data-toggle="#signInPassword"></i>
                         </div>
                         <div class="form-group">
@@ -27,7 +29,48 @@
                     <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
                         learners.</h2>
                 </div>
+
+                <!-- login php code here -->
+                <?php
+                session_start();
+                $message = "";
+                $messageType = "";
+
+                if (isset($_POST["sign_in_submit"])) {
+                    $email = $_POST['email'];
+                    $password = $_POST['password_hash'];
+
+                    // Query to check if the user exists with the provided email
+                    $query_in = "SELECT user_id, username, email, password_hash FROM User WHERE email = '$email'";
+                    $result = mysqli_query($conn, $query_in);
+
+
+                    if (mysqli_num_rows($result) === 1) {
+                        $user = mysqli_fetch_assoc($result);
+
+                        // Verify the hashed password
+                        if (password_verify($password, $user['password_hash'])) {
+                            // Set session variables for the logged-in user
+                            $_SESSION['user_id'] = $user['user_id'];
+                            $_SESSION['username'] = $user['username'];
+                            $_SESSION['email'] = $user['email'];
+
+                            // Display a welcome message if logged in
+                            $message = "Welcome, " . $_SESSION['username'] . "!";
+                        } else {
+                            $message = "Incorrect password. Please try again.";
+                        }
+                    } else {
+                        $message = "No account found with that email.";
+                    }
+
+                    $conn->close();
+
+                }
+                ?>
             </div>
+
+            <!-- registration form -->
             <div class="col-md-6">
                 <div class="logIn register-form" id="signUpForm">
                     <h2>New Here? Create a New Account</h2>
@@ -37,20 +80,20 @@
                             <input type="text" id="username" name="username" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" required>
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" name="first_name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" class="form-control" required>
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group position-relative">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
+                            <label for="password_hash">Password</label>
+                            <input type="password" id="password" name="password_hash" class="form-control" required>
                             <i class="fa-regular fa-eye-slash toggle-password" data-toggle="#password"></i>
                         </div>
                         <div class="form-group position-relative">
@@ -70,16 +113,19 @@
                         <button type="submit" name="sign_up_submit" class="btn btn-cs mt-2">Sign In</button>
                     </form>
                 </div>
+
+                <!-- registration php code here  -->
                 <?php
+                ob_start();
                 $message = "";
                 $messageType = "";
 
                 if (isset($_POST["sign_up_submit"])) {
                     $username = $_POST['username'];
-                    $firstName = $_POST['firstName'];
-                    $lastName = $_POST['lastName'];
+                    $firstname = $_POST['first_name'];
+                    $lastname = $_POST['last_name'];
                     $email = $_POST['email'];
-                    $password = $_POST['password'];
+                    $password = $_POST['password_hash'];
                     $confirmPassword = $_POST['confirmPassword'];
 
                     // Check if the username already exists
@@ -90,9 +136,9 @@
                         $message = "Username already exists. Please choose a different username.";
                         $messageType = "error";
                     } else {
-                        $password_hash = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
+                        $password_hash = password_hash($password, PASSWORD_DEFAULT);
                         $insert_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
-                         VALUES ('$username', '$first_name', '$last_name', '$email', '$password_hash')";
+                         VALUES ('$username', '$firstname', '$lastname', '$email', '$password_hash')";
 
                         $result = mysqli_query($conn, $insert_query);
 
@@ -105,25 +151,33 @@
                         }
                     }
                     $conn->close();
+
                 }
+                ob_end_flush();
                 ?>
 
             </div>
 
-            <!-- Bootstrap Toast for Notifications -->
+            <!-- Check if there's a message, then create a hidden element to pass data to JavaScript -->
+            <?php if (!empty($message)): ?>
+                <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
+                    data-type="<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>" style="display: none;">
+                </div>
+            <?php endif; ?>
+
+            <!-- Toast Structure -->
             <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                <div id="toastNotification"
-                    class="toast align-items-center text-bg-<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>"
-                    role="alert" aria-live="assertive" aria-atomic="true">
+                <div id="toastNotification" class="toast align-items-center" role="alert" aria-live="assertive"
+                    aria-atomic="true">
                     <div class="d-flex">
-                        <div class="toast-body">
-                            <?php echo $message; ?>
-                        </div>
+                        <div class="toast-body"></div>
                         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
                             aria-label="Close"></button>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
