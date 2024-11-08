@@ -32,7 +32,7 @@
 
                 <!-- login php code here -->
                 <?php
-                session_start();
+                // session_start();
                 $message = "";
                 $messageType = "";
 
@@ -44,26 +44,36 @@
                     $query_in = "SELECT user_id, username, email, password_hash FROM User WHERE email = '$email'";
                     $result = mysqli_query($conn, $query_in);
 
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $count = mysqli_num_rows($result);
 
-                    if (mysqli_num_rows($result) === 1) {
-                        $user = mysqli_fetch_assoc($result);
-
-                        // Verify the hashed password
-                        if (password_verify($password, $user['password_hash'])) {
-                            // Set session variables for the logged-in user
-                            $_SESSION['user_id'] = $user['user_id'];
-                            $_SESSION['username'] = $user['username'];
-                            $_SESSION['email'] = $user['email'];
-
-                            // Display a welcome message if logged in
-                            $message = "Welcome, " . $_SESSION['username'] . "!";
-                        } else {
-                            $message = "Incorrect password. Please try again.";
-                        }
+                    if ($count == 1) {
+                        $message = "Logged In successfully";
+                        $messageType = "success";
                     } else {
-                        $message = "No account found with that email.";
+                        $message = "Logged In failed";
+                        $messageType = "error";
                     }
 
+                    // if (mysqli_num_rows($result) === 1) {
+                    //     $user = mysqli_fetch_assoc($result);
+                
+                    //     // Verify the hashed password
+                    //     if (password_verify($password, $user['password_hash'])) {
+                    //         // Set session variables for the logged-in user
+                    //         $_SESSION['user_id'] = $user['user_id'];
+                    //         $_SESSION['username'] = $user['username'];
+                    //         $_SESSION['email'] = $user['email'];
+                
+                    //         // Display a welcome message if logged in
+                    //         $message = "Welcome, " . $_SESSION['username'] . "!";
+                    //     } else {
+                    //         $message = "Incorrect password. Please try again.";
+                    //     }
+                    // } else {
+                    //     $message = "No account found with that email.";
+                    // }
+                
                     $conn->close();
 
                 }
