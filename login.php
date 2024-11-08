@@ -72,6 +72,18 @@
                 }
                 ?>
 
+                <!-- logout here -->
+                <?php
+                // Check if the user is logged in
+                if (isset($_SESSION['user_id'])): ?>
+                    <!-- Logout Button -->
+                    <form action="logout.php" method="POST">
+                        <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
+                    </form>
+                <?php else: ?>
+                    <!-- Login or Register Forms Go Here (Already included in your original code) -->
+                <?php endif; ?>
+
                 <!-- Display message if available -->
                 <?php if (!empty($message)): ?>
                     <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
@@ -120,7 +132,7 @@
                             <p id="specialCriteria">At least one special character</p>
                             <p id="matchCriteria">Passwords must match</p>
                         </div>
-                        <button type="submit" name="sign_up_submit" class="btn btn-cs mt-2">Sign In</button>
+                        <button type="submit" name="sign_up_submit" class="btn btn-cs mt-2">Register</button>
                     </form>
                 </div>
 
