@@ -54,6 +54,10 @@ p {
     font-weight: 400;
 }
 
+a:hover {
+    color: var(--cs-hover)!important;
+}
+
 .cp60 {
     padding: 60px 0px;
 }
@@ -131,7 +135,7 @@ p {
 }
 
 .btn-cs {
-    padding: 15px 30px;
+    padding: 12px 30px;
     font-size: 16px;
     background-color: var(--cs-accent);
     color: #fff;
@@ -144,17 +148,15 @@ p {
 }
 
 /* about */
-.about_title h2,
-.about_title p,
-.ab_btn {
-    text-align: center;
-}
-
 .about_icon {
     margin: auto;
     justify-content: center;
     display: flex;
     text-align: center;
+}
+
+.about_img img {
+    border-radius: 8px;
 }
 
 .about_icon:hover img {
@@ -275,4 +277,72 @@ p {
 
 .copyright p a:hover {
     color: var(--cs-hover);
+}
+
+/* logIn page */
+.user_access {
+    background-color: var(--cs-primary);
+    padding-top: 200px;
+}
+
+.user_access .row {
+    min-height: 100vh;
+}
+
+.logIn {
+    border: 1px solid #00000038;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.logIn h2,
+.cta h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.logIn form input {
+    background-color: #ffffff4f;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group a {
+    color: var(--cs-accent);
+    text-decoration: underline;
+}
+
+
+
+.position-relative {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 36px;
+    cursor: pointer;
+}
+
+#passwordCriteria {
+    display: none;
+}
+
+#passwordCriteria p {
+    color: red;
+    font-size: 12px;
+}
+
+#passwordCriteria p.valid {
+    color: green;
+    font-size: 12px;
+}
+
+.cta img {
+    width: 150px;
+    padding-bottom: 20px;
 }
