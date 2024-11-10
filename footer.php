@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-5">
                 <div class="subscribe-form">
-                    <form action="index.php/#footer" method="POST">
+                    <form action="index.php" method="POST">
                         <input type="email" id="email" name="email" placeholder="Enter your email address"
                             class="form-control" required>
                         <button type="submit" class="btn btn-cs" name="subscriber-submit">
