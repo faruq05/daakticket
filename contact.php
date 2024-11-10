@@ -59,8 +59,8 @@
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
-                $mail->Username = "faruq05.fiverr@gmail.com";
-                $mail->Password = "Bethell#99@faruq05.fiverr";
+                $mail->Username = "";
+                $mail->Password = "";
 
                 $mail->setFrom($email, $name);
                 $mail->addAddress("faruq05.fiverr@gmail.com", "Faruq");
