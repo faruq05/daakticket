@@ -36,6 +36,7 @@ h1 {
 h2 {
     font-size: 48px;
     font-weight: 700;
+    color: var(--cs-black);
 }
 
 h3 {
@@ -54,7 +55,7 @@ p {
     font-weight: 400;
 }
 
-a{
+a {
     color: var(--cs-accent);
 }
 
@@ -80,6 +81,28 @@ a:hover {
 
 .btn-srch {
     padding: 10px 20px !important;
+}
+
+.custom-shape-divider-bottom-1731212084 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1731212084 svg {
+    position: relative;
+    display: block;
+    width: calc(143% + 1.3px);
+    height: 104px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1731212084 .shape-fill {
+    fill: #FFFFFF;
 }
 
 /* header */
@@ -123,6 +146,7 @@ a:hover {
     background-position: bottom right;
     background-size: cover;
     background-color: var(--cs-primary);
+    position: relative;
 }
 
 .banner .row {
@@ -142,6 +166,7 @@ a:hover {
     padding: 12px 30px;
     font-size: 16px;
     background-color: var(--cs-accent);
+    border: 1px solid var(--cs-accent);
     color: #fff;
     border-radius: 5px;
 }
@@ -149,6 +174,7 @@ a:hover {
 .btn-cs:hover {
     background-color: var(--cs-hover);
     color: #fff !important;
+    box-shadow: 0px 8px 20px 4px #00000045;
 }
 
 /* about */
@@ -353,8 +379,36 @@ a:hover {
 }
 
 /* forgot - pass page1 */
-.back-login a{
+.back-login a {
     color: var(--cs-accent);
     margin-top: 20px;
     text-align: center;
+}
+
+/* contact page */
+.contactpg {
+    background: url(../uploads/contact-cta.webp);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: var(--cs-primary);
+    padding: 50px 0px;
+}
+
+.contactpg .row {
+    min-height: 30vh;
+
+}
+
+.contactpg h2 {
+    color: var(--cs-black);
+}
+
+.breadcrumb{
+    justify-content: center;
+}
+
+.contactpg_form h2{
+    font-size: 30px;
+    margin-bottom: 15px;
 }

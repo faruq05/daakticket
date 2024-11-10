@@ -1,5 +1,5 @@
 <!-- footer starts-->
-<div class="footer cp60">
+<div class="footer cp60" id="footer">
     <div class="container">
         <div class="row justify-content-space-between">
             <div class="col-md-6">
@@ -13,14 +13,65 @@
             </div>
             <div class="col-md-5">
                 <div class="subscribe-form">
-                    <form action="post">
-                        <input type="email" placeholder="Enter your email address" class="form-control">
-                        <button type="submit" class="btn btn-cs">
+                    <form action="index.php/#footer" method="POST">
+                        <input type="email" id="email" name="email" placeholder="Enter your email address"
+                            class="form-control" required>
+                        <button type="submit" class="btn btn-cs" name="subscriber-submit">
                             Subscribe <i class="fa-regular fa-paper-plane"></i>
                         </button>
                     </form>
                 </div>
+                <!-- subscriber php here -->
+                <?php
+                include 'db.php';
+                $message = "";
+                $messageType = "";
+                if (isset($_POST["subscriber-submit"])) {
+                    $email = $_POST['email'];
+                    // Check if the subscriber already exists
+                    $check_query = "SELECT * FROM subscriber WHERE email = '$email'";
+                    $check_result = mysqli_query($conn, $check_query);
 
+                    if (mysqli_num_rows($check_result) > 0) {
+                        $message = "You already subsribed with this email address";
+                        $messageType = "error";
+                    } else {
+                        $insert_query = "INSERT INTO subscriber (email) 
+                         VALUES ('$email')";
+
+                        $result = mysqli_query($conn, $insert_query);
+
+                        if ($result) {
+                            $message = "Thanks for subscribing";
+                            $messageType = "success";
+                        } else {
+                            $message = "Subscription failed, please try again";
+                            $messageType = "error";
+                        }
+                    }
+                }
+                $conn->close();
+
+                ?>
+            </div>
+
+            <!-- Check if there's a message, then create a hidden element to pass data to JavaScript -->
+            <?php if (!empty($message)): ?>
+                <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
+                    data-type="<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>" style="display: none;">
+                </div>
+            <?php endif; ?>
+
+            <!-- Toast Structure -->
+            <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="toastNotification" class="toast align-items-center" role="alert" aria-live="assertive"
+                    aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6 pt-5">
