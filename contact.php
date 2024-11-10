@@ -19,7 +19,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>Get in Touch With Us</h2>
-                <form action="contact.php" method="POST">
+                <form action="sendmail.php" method="POST">
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" required
                             placeholder="Enter your name ...">
@@ -40,36 +40,9 @@
                     <input type="submit" class="btn btn-cs" name="submit-contact-form" id="submit-contact-form"
                         value="Send Message">
                 </form>
-                <?php
-                $name = isset($_POST["name"]) ? $_POST["name"] : '';
-                $email = isset($_POST["email"]) ? $_POST["email"] : '';
-                $subject = isset($_POST["subject"]) ? $_POST["subject"] : '';
-                $message = isset($_POST["message"]) ? $_POST["message"] : '';
 
-                require "vendor/autoload.php";
+                
 
-                use PHPMailer\PHPMailer\PHPMailer;
-                use PHPMailer\PHPMailer\SMTP;
-
-                $mail = new PHPMailer(true);
-                $mail->isSMTP();
-                $mail->SMTPAuth = true;
-
-                $mail->Host = "smtp.gmail.com";
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-
-                $mail->Username = "";
-                $mail->Password = "";
-
-                $mail->setFrom($email, $name);
-                $mail->addAddress("faruq05.fiverr@gmail.com", "Faruq");
-
-                $mail->Subject = $subject;
-                $mail->Body = $message;
-
-                $mail->send();
-                ?>
             </div>
             <div class="col-md-6">
                 <div class="about_img">
