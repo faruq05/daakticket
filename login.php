@@ -24,11 +24,7 @@
                         <button type="submit" name="sign_in_submit" class="btn btn-cs mt-2">Sign In</button>
                     </form>
                 </div>
-                <div class="cta mt-5">
-                    <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
-                    <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
-                        learners.</h2>
-                </div>
+
 
                 <!-- login php code here -->
                 <?php
@@ -71,6 +67,12 @@
                     $conn->close();
                 }
                 ?>
+
+                <div class="cta mt-5">
+                    <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
+                    <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
+                        learners.</h2>
+                </div>
 
                 <!-- logout here -->
                 <?php
