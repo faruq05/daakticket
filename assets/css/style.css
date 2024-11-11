@@ -316,8 +316,20 @@ a:hover {
 }
 
 
+.login_access{
+    padding-top: 0!important;
+    padding: 0px!important;
+    background: url(../uploads/map-bg.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: cover;
+    background-color: var(--cs-primary);
+    min-height: 100vh;
+}
+
 .user_access .row {
     min-height: 100vh;
+   
 }
 
 .logIn {
@@ -372,6 +384,7 @@ a:hover {
     color: green;
     font-size: 12px;
 }
+
 
 .cta img {
     width: 150px;

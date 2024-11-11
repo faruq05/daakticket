@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-6">
                 <div class="about_img">
-                    <img src="assets/uploads/about-blog.webp" class="img-fluid" alt="about_blog">
+                    <img src="assets/uploads/contact-us.webp" class="img-fluid" alt="about_blog">
                 </div>
             </div>
         </div>

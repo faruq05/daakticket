@@ -1,4 +1,6 @@
-<?php include 'header.php'; ?>
+<?php 
+ob_start();
+include 'header.php'; ?>
 <div class="user_access">
     <div class="container">
         <div class="row">
@@ -50,6 +52,9 @@
                             // Set a successful login message
                             $_SESSION['message'] = "Welcome, " . $_SESSION['username'] . "!";
                             $_SESSION['messageType'] = 'success';
+                            // Redirect to user.php after successful login
+                            header('Location: user_dashboard.php');
+                            exit();
                         } else {
                             // Incorrect password
                             $_SESSION['message'] = 'Incorrect password. Please try again.';
@@ -63,6 +68,7 @@
 
                     $conn->close();
                 }
+                ob_end_flush();
                 ?>
 
 
