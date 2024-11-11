@@ -1,4 +1,6 @@
-<?php include 'header.php'; ?>
+<?php include 'header.php';
+session_start();
+ ?>
 
 <div class="user_access forgot-pass p-0">
     <div class="container">
@@ -27,5 +29,6 @@
         
     </div>
 </div>
+
 
 <?php include 'footer.php'; ?>

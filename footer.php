@@ -24,8 +24,7 @@
                 <!-- subscriber php here -->
                 <?php
                 include 'db.php';
-                $message = "";
-                $messageType = "";
+                // session_start();
                 if (isset($_POST["subscriber-submit"])) {
                     $email = $_POST['email'];
                     // Check if the subscriber already exists
@@ -33,8 +32,8 @@
                     $check_result = mysqli_query($conn, $check_query);
 
                     if (mysqli_num_rows($check_result) > 0) {
-                        $message = "You already subsribed with this email address";
-                        $messageType = "error";
+                        $_SESSION['message'] = 'You already subsribed with this email address';
+                        $_SESSION['messageType'] = 'error';
                     } else {
                         $insert_query = "INSERT INTO subscriber (email) 
                          VALUES ('$email')";
@@ -42,11 +41,11 @@
                         $result = mysqli_query($conn, $insert_query);
 
                         if ($result) {
-                            $message = "Thanks for subscribing";
-                            $messageType = "success";
+                            $_SESSION['message'] = 'Thanks for subscribing';
+                            $_SESSION['messageType'] = 'success';
                         } else {
-                            $message = "Subscription failed, please try again";
-                            $messageType = "error";
+                            $_SESSION['message'] = 'Subscription failed, please try again';
+                            $_SESSION['messageType'] = 'error';
                         }
                     }
                 }
@@ -55,24 +54,6 @@
                 ?>
             </div>
 
-            <!-- Check if there's a message, then create a hidden element to pass data to JavaScript -->
-            <?php if (!empty($message)): ?>
-                <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
-                    data-type="<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>" style="display: none;">
-                </div>
-            <?php endif; ?>
-
-            <!-- Toast Structure -->
-            <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                <div id="toastNotification" class="toast align-items-center" role="alert" aria-live="assertive"
-                    aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body"></div>
-                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-md-6 pt-5">
                 <div class="social_icon">
@@ -98,7 +79,22 @@
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/js/script.js"></script>
-
+<?php if (!empty($_SESSION['message'])): ?>
+    <script>
+        Swal.fire({
+            position: "center-middle",
+            icon: "<?php echo $_SESSION['messageType']; ?>",
+            title: "<?php echo $_SESSION['message']; ?>",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    <?php
+    // Clear message after displaying
+    unset($_SESSION['message']);
+    unset($_SESSION['messageType']);
+?>
+<?php endif; ?>
 <!-- <script src="js/wow.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script>

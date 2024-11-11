@@ -1,5 +1,6 @@
 <!-- phpmailer code here -->
 <?php
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -52,21 +53,21 @@ if (isset($_POST['submit-contact-form'])) {
 
 
         if ($mail->send()) {
-
-            echo 'Your message has been sent successfully. We will get back to you soon.';
-            header('Location:contact.php');
-            exit(0);
+            $_SESSION['message'] = 'Your message has been sent successfully. We will get back to you soon.';
+            $_SESSION['messageType'] = 'success';
         } else {
-
-            echo 'Message could not be sent';
-            header('Location:contact.php');
-            exit(0);
+            $_SESSION['message'] = 'Message could not be sent';
+            $_SESSION['messageType'] = 'error';
         }
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        $_SESSION['message'] = "Message could not be sent. Error: {$mail->ErrorInfo}";
+        $_SESSION['messageType'] = 'error';
     }
+
+    header('Location: contact.php');
+    exit;
 } else {
-    header('Location:contact.php');
-    exit(0);
+    header('Location: contact.php');
+    exit;
 }
 ?>

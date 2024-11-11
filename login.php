@@ -29,9 +29,6 @@
                 <!-- login php code here -->
                 <?php
 
-                $message = "";
-                $messageType = "";
-
                 if (isset($_POST["sign_in_submit"])) {
                     $email = $_POST['email'];
                     $password = $_POST['password_hash'];
@@ -51,16 +48,17 @@
                             $_SESSION['email'] = $user['email'];
 
                             // Set a successful login message
-                            $message = "Welcome, " . $_SESSION['username'] . "!";
-                            $messageType = "success";
+                            $_SESSION['message'] = "Welcome, " . $_SESSION['username'] . "!";
+                            $_SESSION['messageType'] = 'success';
                         } else {
                             // Incorrect password
-                            $message = "Incorrect password. Please try again.";
+                            $_SESSION['message'] = 'Incorrect password. Please try again.';
+                            $_SESSION['messageType'] = 'error';
                         }
                     } else {
                         // No user found with the provided email
-                        $message = "No account found with that email.";
-                        $messageType = "error";
+                        $_SESSION['message'] = 'No account found with that email.';
+                        $_SESSION['messageType'] = 'error';
                     }
 
                     $conn->close();
@@ -78,16 +76,7 @@
                         <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
                     </form>
                 <?php else: ?>
-                    <!-- Login or Register Forms Go Here (Already included in your original code) -->
                 <?php endif; ?>
-
-                <!-- Display message if available -->
-                <?php if (!empty($message)): ?>
-                    <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
-                        data-type="<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>" style="display: none;">
-                    </div>
-                <?php endif; ?>
-
 
                 <div class="cta mt-5">
                     <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
@@ -160,8 +149,8 @@
                     $check_result = mysqli_query($conn, $check_query);
 
                     if (mysqli_num_rows($check_result) > 0) {
-                        $message = "Username already exists. Please choose a different username.";
-                        $messageType = "error";
+                        $_SESSION['message'] = "Username already exists. Please choose a different username.";
+                        $_SESSION['messageType'] = 'error';
                     } else {
                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
                         $insert_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
@@ -170,9 +159,11 @@
                         $result = mysqli_query($conn, $insert_query);
 
                         if ($result) {
-                            $message = "User has been registered successfully";
-                            $messageType = "success";
+                            $_SESSION['message'] = "User has been registered successfully";
+                            $_SESSION['messageType'] = 'success';
                         } else {
+                            $_SESSION['message'] = "User has been registered successfully";
+                            $_SESSION['messageType'] = 'success';
                             $message = "Failed to register user!";
                             $messageType = "error";
                         }
@@ -183,26 +174,6 @@
                 ?>
 
             </div>
-
-            <!-- Check if there's a message, then create a hidden element to pass data to JavaScript -->
-            <?php if (!empty($message)): ?>
-                <div id="toastMessage" data-message="<?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>"
-                    data-type="<?php echo $messageType == 'success' ? 'success' : 'danger'; ?>" style="display: none;">
-                </div>
-            <?php endif; ?>
-
-            <!-- Toast Structure -->
-            <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                <div id="toastNotification" class="toast align-items-center" role="alert" aria-live="assertive"
-                    aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body"></div>
-                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
     </div>
