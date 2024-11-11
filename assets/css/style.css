@@ -108,9 +108,6 @@ a:hover {
 /* header */
 .header {
     background-color: #e8e4dc;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -424,4 +421,8 @@ a:hover {
 .contactpg_form h2{
     font-size: 30px;
     margin-bottom: 15px;
+}
+
+.dashboard{
+    min-height: 50vh;
 }

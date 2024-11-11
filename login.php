@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 include 'header.php'; ?>
 <div class="user_access">
@@ -70,18 +70,6 @@ include 'header.php'; ?>
                 ob_end_flush();
                 ?>
 
-
-
-                <!-- logout here -->
-                <?php
-                // Check if the user is logged in
-                if (isset($_SESSION['user_id'])): ?>
-                    <!-- Logout Button -->
-                    <form action="logout.php" method="POST">
-                        <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
-                    </form>
-                <?php else: ?>
-                <?php endif; ?>
 
                 <div class="cta mt-5">
                     <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
