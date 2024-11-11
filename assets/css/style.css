@@ -108,6 +108,9 @@ a:hover {
 /* header */
 .header {
     background-color: #e8e4dc;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -423,6 +426,6 @@ a:hover {
     margin-bottom: 15px;
 }
 
-.dashboard{
+.dashboard .row{
     min-height: 50vh;
 }

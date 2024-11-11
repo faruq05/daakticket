@@ -4,7 +4,7 @@ include 'header.php';
 
 <div class="dashboard">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-12">
                 <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
                     <!-- Display the welcome message if logged in -->
