@@ -44,11 +44,12 @@ include 'db.php';
         </div>
     </div>
     <!-- search comp ebds -->
-    
+
     <div class="header" id="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.php"><img src="assets/uploads/logo.png" class="img-fluid" alt="logo"></a>
+                <a class="navbar-brand" href="index.php"><img src="assets/uploads/logo.png" class="img-fluid"
+                        alt="logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -68,17 +69,23 @@ include 'db.php';
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact</a>
                         </li>
+                        <!-- search -->
                         <li class="nav-item">
                             <a class="btn btn-search" data-bs-toggle="offcanvas" href="#offcanvasTop" role="button"
                                 aria-controls="offcanvasTop">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
                         </li>
-                        <!-- search -->
+                        <!-- search ends -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php"><i class="fa-regular fa-user"></i></a>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a class="nav-link" href="user_dashboard.php"><i class="fa-regular fa-user"></i></a>
+                            <?php else: ?>
+                                <a class="nav-link" href="login.php"><i class="fa-regular fa-user"></i></a>
+                            <?php endif; ?>
                         </li>
+
 
                     </ul>
                 </div>
