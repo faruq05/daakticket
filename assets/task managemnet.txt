@@ -1,0 +1,19 @@
+Done: 
+1. homepage                             (Galib)
+2. contact                              (Faruq)
+    2.1 Send email                      (Faruq)
+3. Login                                (Faruq)
+    3.1. Forgot password                (Faruq)
+4. Registration                         (Galib)
+5. header                               (Faruq)
+6. footer                               (Faruq)
+    6.1 Subscriber                      (Galib)
+7. User dashboard (ongoing)             (Galib)
+    7.1 Logout                          (Galib)
+
+
+Ongoing:
+7. User dashboard (ongoing)
+
+Database:
+Both
