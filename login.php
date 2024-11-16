@@ -124,7 +124,64 @@ session_start(); // Start the session
                         <button type="submit" name="sign_up_submit" class="btn btn-cs mt-2">Register</button>
                     </form>
                 </div>
-                <!-- Registration PHP code remains unchanged -->
+                <!-- Registration PHP code -->
+                <?php
+                ob_start();
+                if (isset($_POST["sign_up_submit"])) {
+                    $username = $_POST['username'];
+                    $firstname = $_POST['first_name'];
+                    $lastname = $_POST['last_name'];
+                    $email = $_POST['email'];
+                    $password = $_POST['password_hash'];
+                    $confirmPassword = $_POST['confirmPassword'];
+
+                    // if the username already exists
+                    $check_username_query = "SELECT * FROM User WHERE username = '$username'";
+                    $check_username_result = mysqli_query($conn, $check_username_query);
+
+                    //  if the email already exists
+                    $check_email_query = "SELECT * FROM User WHERE email = '$email'";
+                    $check_email_result = mysqli_query($conn, $check_email_query);
+
+                    if (mysqli_num_rows($check_username_result) > 0) {
+                        $_SESSION['message'] = "Username already exists. Please choose a different username.";
+                        $_SESSION['messageType'] = 'error';
+                    } elseif (mysqli_num_rows($check_email_result) > 0) {
+                        $_SESSION['message'] = "Email already exists. Please use a different email address.";
+                        $_SESSION['messageType'] = 'error';
+                    } else {
+                        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                        $insert_user_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
+                              VALUES ('$username', '$firstname', '$lastname', '$email', '$password_hash')";
+
+                        $user_result = mysqli_query($conn, $insert_user_query);
+
+                        if ($user_result) {
+                            // Get the newly inserted user's ID
+                            $user_id = mysqli_insert_id($conn);
+
+                            $insert_profile_query = "
+                            INSERT INTO User_Profile (user_id, first_name, last_name, bio, profile_picture, facebook_link, twitter_link, instagram_link, linkedin_link) 
+                            VALUES ('$user_id', '$firstname', '$lastname', NULL, NULL, NULL, NULL, NULL, NULL)";
+                            $profile_result = mysqli_query($conn, $insert_profile_query);
+
+                            if ($profile_result) {
+                                $_SESSION['message'] = "User has been registered successfully, and profile created.";
+                                $_SESSION['messageType'] = 'success';
+                            } else {
+                                $_SESSION['message'] = "User registered, but failed to create profile.";
+                                $_SESSION['messageType'] = 'error';
+                            }
+                        } else {
+                            $_SESSION['message'] = "Failed to register user!";
+                            $_SESSION['messageType'] = 'error';
+                        }
+                    }
+                    $conn->close();
+                }
+                ob_end_flush();
+                ?>
+
             </div>
         </div>
     </div>

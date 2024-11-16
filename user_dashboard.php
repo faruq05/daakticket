@@ -9,7 +9,6 @@ include 'sidebar.php';
                 <div class="dash">
                     <!-- profile_picture -->
                     <?php
-
                     $user_id = $_SESSION['user_id'];
                     $query = "SELECT profile_picture FROM User_Profile WHERE user_id = '$user_id'";
                     $result = mysqli_query($conn, $query);
@@ -20,8 +19,7 @@ include 'sidebar.php';
                         $row = mysqli_fetch_assoc($result);
                         $profile_picture = $row['profile_picture'];
                     } else {
-                        // Handle case when no profile picture is found
-                        $profile_picture = null; // Or a default placeholder
+                        $profile_picture = null;
                     }
                     ?>
                     <div class="profile-container">
@@ -29,16 +27,14 @@ include 'sidebar.php';
                         <div class="profile-picture-container">
                             <?php
                             if ($profile_picture && file_exists($profile_picture)) {
-                                // Display the uploaded profile picture
-                                //echo "<img src='$profile_picture' alt='Profile Picture' class='profile-picture' />";
                                 $updated_profile_picture = $profile_picture . '?' . time();
                                 echo "<img src='$updated_profile_picture' alt='Profile Picture' class='profile-picture' />";
                             } else {
-                                // Display default placeholder if no profile picture is uploaded
+                                // placeholder image
                                 echo "<img src='uploads/profile_pictures/default_profile.png' alt='Profile Picture' class='profile-picture img-fluid' />";
                             }
                             ?>
-                            <!-- Hover effect to upload new picture -->
+                            <!-- upload pic -->
                             <div class="upload-icon" onClick="document.getElementById('upload-file').click();">
                                 <i class="fa fa-plus"></i>
                             </div>
