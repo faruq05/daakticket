@@ -92,10 +92,8 @@ a.sidebar-link {
     font-size: 0.9rem;
     white-space: nowrap;
     border-left: 3px solid transparent;
-}
-
-.sidebar-item:hover a{
-    color: #fff!important;
+    display: flex;
+    align-items: center;
 }
 
 .sidebar-link i {
@@ -105,7 +103,7 @@ a.sidebar-link {
 
 a.sidebar-link:hover {
     background-color: rgba(255, 255, 255, .075);
-    border-left: 3px solid #191919;
+    border-left: 3px solid #fff;
 }
 
 .sidebar-item {
@@ -116,7 +114,7 @@ a.sidebar-link:hover {
     position: absolute;
     top: 0;
     left: 70px;
-    background-color: #191919;
+    background-color: #0e2238;
     padding: 0;
     min-width: 15rem;
     display: none;

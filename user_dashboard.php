@@ -1,127 +1,81 @@
 <?php
 include 'header.php';
+include 'sidebar.php';
 ?>
-
-
-<div class="col-md-12 wrapper">
-    <aside id="sidebar">
-        <div class="d-flex">
-            <button class="toggle-btn" type="button">
-                <i class="lni lni-grid-alt"></i>
-            </button>
-            <div class="sidebar-logo">
-                <a href="#"> <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
-                        <p><?php echo htmlspecialchars($_SESSION['username']); ?></p>
-                    <?php endif; ?>
-                </a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-user"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-agenda"></i>
-                    <span>Posts</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-agenda"></i>
-                    <span>Media</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-agenda"></i>
-                    <span>Activity Log</span>
-                </a>
-            </li>
-            <!-- <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
-                    aria-expanded="false" aria-controls="auth">
-                    <i class="lni lni-protection"></i>
-                    <span>Posts</span>
-                </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Login</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Register</a>
-                    </li>
-                </ul>
-            </li> -->
-
-            <!-- <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                    data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                    <i class="lni lni-layout"></i>
-                    <span>Multi Level</span>
-                </a>
-                <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-two"
-                            aria-expanded="false" aria-controls="multi-two">
-                            Two Links
-                        </a>
-                        <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Link 1</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Link 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li> -->
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-popup"></i>
-                    <span>Notification</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-cog"></i>
-                    <span>Change Paassword</span>
-                </a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-exit"></i>
-                <span>Logout</span>
-            </a>
-        </div>
-    </aside>
-
-    <div class=" main dashboard">
+<div class=" main dashboard">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-12">
-                    <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
-                        <!-- Display the welcome message if logged in -->
-                        <h2>Welcome to Your Dashboard, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+                    <div class="dash">
+                        <!-- profile_picture -->
+                        <!-- HTML Form for Uploading and Deleting Profile Picture -->
+                        <?php
+                        // Fetch the user's profile picture from the database
+                        $user_id = $_SESSION['user_id']; // Assuming you have the user's ID stored in the session
+                        
+                        // Query to get the profile picture path from the User_Profile table
+                        $query = "SELECT profile_picture FROM User_Profile WHERE user_id = '$user_id'";
+                        $result = mysqli_query($conn, $query);
+                        $profile_picture = '';
 
-                        <!-- Logout Button -->
-                        <form action="logout.php" method="POST">
-                            <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
-                        </form>
-                    <?php else: ?>
-                        <!-- Redirect or display message if not logged in -->
-                        <p>You are not logged in. Please <a href="login.php">login</a> to access the dashboard.</p>
-                    <?php endif; ?>
+                        if ($result) {
+                            $row = mysqli_fetch_assoc($result);
+                            $profile_picture = $row['profile_picture'];
+                        }
+                        ?>
 
+                        <div class="profile-container">
+                            <!-- Profile picture container -->
+                            <div class="profile-picture-container">
+                                <?php
+                                if ($profile_picture && file_exists($profile_picture)) {
+                                    // Display the uploaded profile picture
+                                    //echo "<img src='$profile_picture' alt='Profile Picture' class='profile-picture' />";
+                                    $updated_profile_picture = $profile_picture . '?' . time();
+                                    echo "<img src='$updated_profile_picture' alt='Profile Picture' class='profile-picture' />";
+                                } else {
+                                    // Display default placeholder if no profile picture is uploaded
+                                    echo "<img src='uploads/profile_pictures/default_profile.png' alt='Profile Picture' class='profile-picture img-fluid' />";
+                                }
+                                ?>
+                                <!-- Hover effect to upload new picture -->
+                                <div class="upload-icon" onClick="document.getElementById('upload-file').click();">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <form action="upload_profile_picture.php" method="POST" enctype="multipart/form-data"
+                                    class="upload-form">
+                                    <!-- Hidden file input -->
+                                    <input type="file" name="profile_picture" id="upload-file" class="upload-file"
+                                        onChange="this.form.submit()" />
+                                </form>
+                            </div>
+
+                            <!-- Options to Upload or Delete -->
+                            <?php
+                            if ($profile_picture && file_exists($profile_picture)) {
+                                // Show options to change or delete the profile picture
+                                echo '<div class="profile-options">';
+                                // echo '<form action="upload_profile_picture.php" method="GET"><button type="submit" class="btn btn-primary">Change Profile Picture</button></form>';
+                                echo '<form action="delete_profile_picture.php" method="POST"><button type="submit" name="delete_picture" class="btn btn-danger mt-2">Delete Profile Picture</button></form>';
+                                echo '</div>';
+                            }
+                            ?>
+                        </div>
+
+
+
+                        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
+                            <!-- Display the welcome message if logged in -->
+                            <h2>Welcome to Your Dashboard, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+
+                        <?php else: ?>
+                            <!-- Redirect or display message if not logged in -->
+                            <p>You are not logged in. Please <a href="login.php">login</a> to access the dashboard.</p>
+                        <?php endif; ?>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
 <?php include 'footer.php'; ?>

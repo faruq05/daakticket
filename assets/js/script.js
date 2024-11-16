@@ -82,3 +82,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+// profile pic
+const profilePic = document.getElementById("profilePic");
+const fileInput = document.getElementById("fileInput");
+const uploadForm = document.getElementById("uploadForm");
+
+// Click on the profile picture to trigger file input
+profilePic.addEventListener("click", () => {
+    fileInput.click();
+});
+
+// Upload new picture
+fileInput.addEventListener("change", () => {
+    if (fileInput.files && fileInput.files[0]) {
+        uploadForm.submit(); // Submit the form to upload the picture
+    }
+});
+
+// Delete photo
+const deleteBtn = document.getElementById("deleteBtn");
+if (deleteBtn) {
+    deleteBtn.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete your profile picture?")) {
+            window.location.href = "delete_profile_picture.php";
+        }
+    });
+}

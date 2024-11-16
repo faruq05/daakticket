@@ -426,3 +426,62 @@ a {
 .dashboard .row{
     min-height: 50vh;
 }
+
+/* profile */
+/* Profile Container */
+.profile-container {
+    text-align: left;
+    margin-top: 50px;
+}
+
+/* Circular Profile Image */
+.profile-picture-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-picture-container img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effect: Plus Icon */
+.upload-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+.profile-picture-container:hover .upload-icon {
+    display: block;
+}
+
+/* Hidden File Input */
+.upload-file {
+    display: none;
+}
+
+/* Profile Options Below Picture */
+.profile-options {
+    margin-top: 20px;
+}
+.profile-options button {
+    margin-top: 10px;
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+}

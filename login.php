@@ -134,11 +134,11 @@ include 'header.php'; ?>
                     $password = $_POST['password_hash'];
                     $confirmPassword = $_POST['confirmPassword'];
 
-                    // if the username already exists
+                    // if username already exists
                     $check_username_query = "SELECT * FROM User WHERE username = '$username'";
                     $check_username_result = mysqli_query($conn, $check_username_query);
 
-                    //  if the email already exists
+                    //  if email already exists
                     $check_email_query = "SELECT * FROM User WHERE email = '$email'";
                     $check_email_result = mysqli_query($conn, $check_email_query);
 
@@ -150,14 +150,28 @@ include 'header.php'; ?>
                         $_SESSION['messageType'] = 'error';
                     } else {
                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                        $insert_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
-                         VALUES ('$username', '$firstname', '$lastname', '$email', '$password_hash')";
+                        $insert_user_query = "INSERT INTO User (username, first_name, last_name, email, password_hash) 
+                              VALUES ('$username', '$firstname', '$lastname', '$email', '$password_hash')";
 
-                        $result = mysqli_query($conn, $insert_query);
+                        $user_result = mysqli_query($conn, $insert_user_query);
 
-                        if ($result) {
-                            $_SESSION['message'] = "User has been registered successfully";
-                            $_SESSION['messageType'] = 'success';
+                        if ($user_result) {
+                            // Get the newly inserted user's ID
+                            $user_id = mysqli_insert_id($conn);
+
+                            // Insert data into User_Profile table
+                            $insert_profile_query = "
+                            INSERT INTO User_Profile (user_id, first_name, last_name, bio, profile_picture, facebook_link, twitter_link, instagram_link, linkedin_link) 
+                            VALUES ('$user_id', '$firstname', '$lastname', NULL, NULL, NULL, NULL, NULL, NULL)";
+                            $profile_result = mysqli_query($conn, $insert_profile_query);
+
+                            if ($profile_result) {
+                                $_SESSION['message'] = "User has been registered successfully, and profile created.";
+                                $_SESSION['messageType'] = 'success';
+                            } else {
+                                $_SESSION['message'] = "User registered, but failed to create profile.";
+                                $_SESSION['messageType'] = 'error';
+                            }
                         } else {
                             $_SESSION['message'] = "Failed to register user!";
                             $_SESSION['messageType'] = 'error';
@@ -167,6 +181,8 @@ include 'header.php'; ?>
                 }
                 ob_end_flush();
                 ?>
+
+
 
             </div>
 
