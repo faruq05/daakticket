@@ -1,11 +1,8 @@
 <?php
-// Include database connection
+session_start();
 include 'db.php';
 
-// Start the session
-session_start();
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -13,14 +10,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Query to get the current profile picture path
 $query = "SELECT profile_picture FROM User_Profile WHERE user_id = '$user_id'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 $profile_picture = $row['profile_picture'];
 
 if ($profile_picture && file_exists($profile_picture)) {
-    // Delete the file from the server
     unlink($profile_picture);
 
     // Update the database to set profile_picture to NULL
@@ -40,6 +35,5 @@ if ($profile_picture && file_exists($profile_picture)) {
 }
 
 // Redirect back to the profile page
-header('Location: user_dahsboard.php');
+header('Location:user_dashboard.php');
 exit();
-?>
