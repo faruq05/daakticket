@@ -8,22 +8,22 @@ include 'sidebar.php';
             <div class="col-md-12">
                 <div class="dash">
                     <!-- profile_picture -->
-                    <!-- HTML Form for Uploading and Deleting Profile Picture -->
                     <?php
-                    // Fetch the user's profile picture from the database
-                    $user_id = $_SESSION['user_id']; // Assuming you have the user's ID stored in the session
-                    
-                    // Query to get the profile picture path from the User_Profile table
+
+                    $user_id = $_SESSION['user_id'];
                     $query = "SELECT profile_picture FROM User_Profile WHERE user_id = '$user_id'";
                     $result = mysqli_query($conn, $query);
                     $profile_picture = '';
 
-                    if ($result) {
+
+                    if ($result && mysqli_num_rows($result) > 0) {
                         $row = mysqli_fetch_assoc($result);
                         $profile_picture = $row['profile_picture'];
+                    } else {
+                        // Handle case when no profile picture is found
+                        $profile_picture = null; // Or a default placeholder
                     }
                     ?>
-
                     <div class="profile-container">
                         <!-- Profile picture container -->
                         <div class="profile-picture-container">
