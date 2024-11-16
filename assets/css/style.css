@@ -431,7 +431,7 @@ a {
 /* Profile Container */
 .profile-container {
     text-align: left;
-    margin-top: 50px;
+    margin-top: 150px;
 }
 
 /* Circular Profile Image */
@@ -484,4 +484,9 @@ a {
         width: 120px;
         height: 120px;
     }
+}
+
+.profile-container h2{
+    font-size: 30px;
+    
 }

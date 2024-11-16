@@ -93,9 +93,9 @@
             <a href="#" class="sidebar-link">
                 <form id="logoutForm" action="logout.php" method="POST">
                     <i class="lni lni-power-button" style="cursor: pointer;"
-                        onclick="document.getElementById('logoutForm').submit();"></i>
+                        onclick="document.getElementById('logoutForm').submit();"> <span>Logout</span></i>
                 </form>
-                <span>Logout</span>
+               
             </a>
         </div>
     </aside>
