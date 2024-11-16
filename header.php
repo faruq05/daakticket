@@ -82,17 +82,17 @@ include 'db.php';
                             </a>
                         </li>
                         <!-- search ends -->
-                     
+
                         <li class="nav-item">
-                            <?php if (isset($_SESSION['role_id == 1002'])): ?>
+                            <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1002): ?>
                                 <a class="nav-link" href="user_dashboard.php"><i class="fa-regular fa-user"></i></a>
-                            <?php elseif (isset($_SESSION['role_id == 1001'])): ?>
+                            <?php elseif (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1001): ?>
                                 <a class="nav-link" href="admin_dashboard.php"><i class="fa-regular fa-user"></i></a>
                             <?php else: ?>
                                 <a class="nav-link" href="login.php"><i class="fa-regular fa-user"></i></a>
                             <?php endif; ?>
                         </li>
-                       
+
 
 
                     </ul>
