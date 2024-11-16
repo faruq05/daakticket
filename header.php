@@ -84,8 +84,10 @@ include 'db.php';
                         <!-- search ends -->
 
                         <li class="nav-item">
-                            <?php if (isset($_SESSION['user_id'])): ?>
+                            <?php if (isset($_SESSION['user_id == 1002'])): ?>
                                 <a class="nav-link" href="user_dashboard.php"><i class="fa-regular fa-user"></i></a>
+                            <?php elseif (isset($_SESSION['user_id == 1001'])): ?>
+                                <a class="nav-link" href="admin_dashboard.php"><i class="fa-regular fa-user"></i></a>
                             <?php else: ?>
                                 <a class="nav-link" href="login.php"><i class="fa-regular fa-user"></i></a>
                             <?php endif; ?>
