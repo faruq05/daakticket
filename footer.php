@@ -99,6 +99,24 @@
     unset($_SESSION['messageType']);
 ?>
 <?php endif; ?>
+<?php if (!empty($_SESSION['message'])): ?>
+    <script>
+        Swal.fire({
+            position: "center-middle",
+            icon: "<?php echo $_SESSION['messageType']; ?>",
+            title: "<?php echo $_SESSION['message']; ?>",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    <?php
+    // Clear message after displaying
+    unset($_SESSION['message']);
+    unset($_SESSION['messageType']);
+    ?>
+<?php endif; ?>
+
+
 <!-- <script src="js/wow.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script>

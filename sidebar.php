@@ -14,13 +14,13 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#profile" class="sidebar-link">
                     <i class="lni lni-user-4"></i>
                     <span>Profile</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#posts" class="sidebar-link">
                     <i class="lni lni-pen-to-square"></i>
                     <span>Posts</span>
                 </a>

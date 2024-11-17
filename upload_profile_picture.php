@@ -26,7 +26,7 @@ if (isset($_FILES['profile_picture'])) {
             // unique filename
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
             $new_file_name = 'profile_' . $user_id . '.' . $file_ext;
-            $file_path = 'uploads/profile_pictures/' . $new_file_name;
+            $file_path = 'assets/uploads/profile_pictures/' . $new_file_name;
 
             // Move the uploaded file to the uploads folder
             if (move_uploaded_file($file_tmp, $file_path)) {

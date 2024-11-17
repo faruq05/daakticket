@@ -5,7 +5,7 @@ include 'sidebar.php';
 <div class=" main dashboard">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-12">
+            <div class="col-md-12 cp60" id="profile">
                 <div class="dash">
                     <!-- profile_picture -->
                     <?php
@@ -21,7 +21,7 @@ include 'sidebar.php';
                         $profile_picture = null;
                     }
                     ?>
-                    <div class="profile-container">
+                    <div class="profile-container dash_font">
                         <!-- Profile picture container -->
                         <div class="profile-picture-container">
                             <?php
@@ -30,7 +30,7 @@ include 'sidebar.php';
                                 echo "<img src='$updated_profile_picture' alt='Profile Picture' class='profile-picture' />";
                             } else {
                                 // placeholder image
-                                echo "<img src='uploads/profile_pictures/default_profile.png' alt='Profile Picture' class='profile-picture img-fluid' />";
+                                echo "<img src='assets/uploads/profile_pictures/default_profile.png' alt='Profile Picture' class='profile-picture img-fluid' />";
                             }
                             ?>
                             <!-- upload pic -->
@@ -49,7 +49,7 @@ include 'sidebar.php';
                         <?php
                         if ($profile_picture && file_exists($profile_picture)) {
                             // Show options to change or delete the profile picture
-                            echo '<div class="profile-options">';
+                            echo '<div class="profile-options mb-3">';
                             // echo '<form action="upload_profile_picture.php" method="GET"><button type="submit" class="btn btn-primary">Change Profile Picture</button></form>';
                             echo '<form action="delete_profile_picture.php" method="POST"><button type="submit" name="delete_picture" class="btn btn-danger mt-2">Delete Profile Picture</button></form>';
                             echo '</div>';
@@ -57,7 +57,7 @@ include 'sidebar.php';
 
                         if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                             // Display the welcome message if logged in
-                            echo '<h2>Welcome to Your Dashboard, ' . htmlspecialchars($_SESSION['username']) . '!</h2>';
+                            echo '<h2>Welcome to Your Profile, ' . htmlspecialchars($_SESSION['username']) . '!</h2>';
                         } else {
                             // Redirect or display message if not logged in
                             echo '<p>You are not logged in. Please <a href="login.php">login</a> to access the dashboard.</p>';
@@ -70,7 +70,7 @@ include 'sidebar.php';
 
             <!-- user_info profile -->
 
-            <div class="col-md-12">
+            <div class="col-md-12 cp60">
                 <div class="user_info">
                     <?php
                     $query = "SELECT * FROM User_Profile WHERE user_id = '$user_id'";
@@ -193,6 +193,102 @@ include 'sidebar.php';
                 </div>
             </div>
 
+
+            <!-- add post is at add-new-post.php-->
+           <!-- display -->
+            <div class="col-md-12 cp60 dash_font" id="posts">
+                <h2 class="mb-3">Your Posts</h2>
+
+                <?php
+                $user_id = $_SESSION['user_id'];
+
+                // count post
+                $query = "SELECT COUNT(*) as post_count FROM blog_post WHERE user_id = '$user_id'";
+                $result = mysqli_query($conn, $query);
+                $post_count = 0;
+
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    $post_count = $row['post_count'];
+                }
+                ?>
+
+                <p>You have <strong><?php echo $post_count; ?></strong> post(s).</p>
+
+                <!-- display post code here  -->
+                <?php
+                $query = "SELECT blog_post.*, category.category_name FROM blog_post
+                LEFT JOIN category ON blog_post.category_id = category.category_id
+                WHERE blog_post.user_id = '$user_id' ORDER BY blog_post.created_at DESC";
+                $result = mysqli_query($conn, $query);
+
+                if ($result) {
+                    while ($post = mysqli_fetch_assoc($result)) {
+                        $post_id = $post['post_id'];
+                        $title = $post['title'];
+                        $content = $post['content'];
+                        $feature_image = $post['feature_image'];
+                        $created_at = date('d M, Y', strtotime($post['created_at']));
+                        $updated_at = date('d M, Y', strtotime($post['updated_at']));
+                        $category_name = $post['category_name'];
+
+                        // excerpt
+                        $excerpt = substr($content, 0, 100) . '...';
+                        ?>
+
+                        <!-- Displaying each post -->
+                        <div class="exist_post">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="post_ftimg">
+                                        <?php if ($feature_image && file_exists($feature_image)) { ?>
+                                            <img src="<?php echo $feature_image; ?>" class="img-fluid" alt="Post Image">
+                                        <?php } else { ?>
+                                            <img src="assets/uploads/post_images/default_image.jpg" class="img-fluid"
+                                                alt="Default Image">
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="ep_title">
+                                        <h3><?php echo htmlspecialchars($title); ?></h3>
+                                        <p class="mt-2 mb-2"><?php echo $excerpt; ?></p>
+                                        <span>Category: <?php echo htmlspecialchars($category_name); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="created">
+                                        <span>Created at <?php echo $created_at; ?></span>
+                                        <span>Updated at <?php echo $updated_at; ?></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="like_count  d-flex justify-content-center">
+                                        <!-- Placeholder for like/comment/share icons -->
+                                        <i class="lni lni-thumbs-up-3"></i>
+                                        <i class="lni lni-comment-1-text"></i>
+                                        <i class="lni lni-share-1"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="ep_dlt d-flex justify-content-center">
+                                        <a href="delete-post.php?post_id=<?php echo $post_id; ?>"
+                                            onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
+                                            <i class="lni lni-basket-shopping-3"></i>
+                                        </a>
+                                        <a href="edit-post.php?post_id=<?php echo $post_id; ?>"  class="edtp"><i
+                                                class="lni lni-pen-to-square"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                <!-- Add New Post Button -->
+                <a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
+            </div>
 
         </div>
     </div>

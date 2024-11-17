@@ -161,8 +161,8 @@ session_start(); // Start the session
                             $user_id = mysqli_insert_id($conn);
 
                             $insert_profile_query = "
-                            INSERT INTO User_Profile (user_id, first_name, last_name, bio, profile_picture, facebook_link, twitter_link, instagram_link, linkedin_link) 
-                            VALUES ('$user_id', '$firstname', '$lastname', NULL, NULL, NULL, NULL, NULL, NULL)";
+                            INSERT INTO User_Profile (user_id, first_name, last_name, email, bio, profile_picture, facebook_link, twitter_link, instagram_link, linkedin_link) 
+                            VALUES ('$user_id', '$firstname', '$lastname', '$email', NULL, NULL, NULL, NULL, NULL, NULL)";
                             $profile_result = mysqli_query($conn, $insert_profile_query);
 
                             if ($profile_result) {
