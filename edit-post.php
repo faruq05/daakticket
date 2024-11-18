@@ -39,6 +39,12 @@ if (isset($_GET['post_id'])) {
         $update_result = mysqli_query($conn, $update_query);
 
         if ($update_result) {
+            // add the update in post_history
+            // $change_description = "Updated post: $title";
+            // $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+            //               VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
+            // mysqli_query($conn, $log_query);
+
             $_SESSION['message'] = "Post updated successfully!";
             $_SESSION['messageType'] = "success";
             header('Location: user_dashboard.php');
@@ -115,10 +121,10 @@ ob_end_flush(); ?>
                         </select>
                     </div>
                     <div class="form-group post_button  mt-3">
-                    <button type="submit" name="submit_post" class="btn btn-cs">Update Post</button>
+                        <button type="submit" name="submit_post" class="btn btn-cs">Update Post</button>
                         <a href="user_dashboard.php" class="btn btn-cs ms-2">Don't want to Edit</a>
                     </div>
-                   
+
                 </form>
             </div>
         </div>

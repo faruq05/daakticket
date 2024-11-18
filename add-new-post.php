@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 include 'header.php';
 include 'sidebar.php';
@@ -26,6 +26,13 @@ if (isset($_POST['submit_post'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
+        // add the creation in post_history
+        // $last_post_id = mysqli_insert_id($conn); 
+        // $change_description = "Created new post: $title";
+        // $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+        //               VALUES ('$last_post_id', '$user_id', '$change_description')";
+        // mysqli_query($conn, $log_query);
+
         $_SESSION['message'] = 'Post created successfully!';
         $_SESSION['messageType'] = 'success';
         header('Location: user_dashboard.php');

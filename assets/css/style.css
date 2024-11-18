@@ -32,6 +32,15 @@ p {
     --cs-warnhover: #ec9b2c;
 }
 
+.btn-danger {
+    background-color: var(--cs-danger);
+    transition: all .2s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: var(--cs-dangerhover);
+}
+
 h1 {
     font-size: 80px;
     font-weight: 800;
@@ -214,27 +223,25 @@ a {
 
 }
 
-.blog_box:hover img {
-    transform: scale(1.1);
-}
-
 .blog_box img {
-    height: 430px;
     object-fit: cover;
     transition: .2s all ease-in-out;
 }
 
 .post_title {
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
     padding: 20px;
     background-color: #e8e4dc7d;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px); */
+    padding: 16px;
 }
 
 .post_title a h3 {
     color: var(--cs-black);
-    line-height: 27px;
+    line-height: 30px;
+    font-size: 23px;
+    margin: 10px 0px 5px 0px;
 }
 
 .post_title a h3:hover {
@@ -242,10 +249,18 @@ a {
     color: var(--cs-hover);
 }
 
+.blog_ttle p {
+    font-size: 14px;
+}
+
 .author_box p {
     font-size: 14px;
     font-style: italic;
     font-weight: 400;
+}
+
+.like_box i {
+    font-size: 20px;
 }
 
 /* footer cta */
@@ -587,4 +602,53 @@ a {
 .edit-ftimg img {
     border-radius: 10px;
 
+}
+
+/* post page */
+.postpg {
+    margin-top: 150px;
+}
+
+.postpg img {
+    border-radius: 20px;
+}
+
+.pcriteria {
+    display: flex;
+    align-items: center;
+    font-style: italic;
+}
+
+.pcriteria p {
+    font-size: 15px;
+    margin-right: 12px;
+    color: var(--cs-accent);
+}
+
+.post_content p{
+    margin-top: 20px;
+    text-align: justify;
+}
+
+.comment_section{
+  
+}
+
+.comment_section form{
+    margin-top: 20px;
+}
+
+.warn{
+    color: var(--cs-warnhover);
+}
+
+.comment-add{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comment-date{
+    font-size: 14px;
+    margin: 0px 5px;
 }

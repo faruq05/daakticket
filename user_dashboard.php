@@ -48,18 +48,14 @@ include 'sidebar.php';
                         <!-- Options to Upload or Delete -->
                         <?php
                         if ($profile_picture && file_exists($profile_picture)) {
-                            // Show options to change or delete the profile picture
                             echo '<div class="profile-options mb-3">';
-                            // echo '<form action="upload_profile_picture.php" method="GET"><button type="submit" class="btn btn-primary">Change Profile Picture</button></form>';
                             echo '<form action="delete_profile_picture.php" method="POST"><button type="submit" name="delete_picture" class="btn btn-danger mt-2">Delete Profile Picture</button></form>';
                             echo '</div>';
                         }
 
                         if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
-                            // Display the welcome message if logged in
                             echo '<h2>Welcome to Your Profile, ' . htmlspecialchars($_SESSION['username']) . '!</h2>';
                         } else {
-                            // Redirect or display message if not logged in
                             echo '<p>You are not logged in. Please <a href="login.php">login</a> to access the dashboard.</p>';
                         }
                         ?>
@@ -195,8 +191,8 @@ include 'sidebar.php';
 
 
             <!-- add post is at add-new-post.php-->
-           <!-- display -->
-            <div class="col-md-12 cp60 dash_font" id="posts">
+            <!-- display -->
+            <div class="col-md-12 add_post cp60 dash_font" id="posts">
                 <h2 class="mb-3">Your Posts</h2>
 
                 <?php
@@ -228,8 +224,8 @@ include 'sidebar.php';
                         $title = $post['title'];
                         $content = $post['content'];
                         $feature_image = $post['feature_image'];
-                        $created_at = date('d M, Y', strtotime($post['created_at']));
-                        $updated_at = date('d M, Y', strtotime($post['updated_at']));
+                        $created_at = date('F j, Y, g:i a', strtotime($post['created_at']));
+                        $updated_at = date('F j, Y, g:i a', strtotime($post['updated_at']));
                         $category_name = $post['category_name'];
 
                         // excerpt
@@ -258,12 +254,12 @@ include 'sidebar.php';
                                 </div>
                                 <div class="col-md-2">
                                     <div class="created">
-                                        <span>Created at <?php echo $created_at; ?></span>
+                                        <span>Created at <?php echo $created_at; ?></span> <br>
                                         <span>Updated at <?php echo $updated_at; ?></span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="like_count  d-flex justify-content-center">
+                                    <div class="like_box  d-flex justify-content-center">
                                         <!-- Placeholder for like/comment/share icons -->
                                         <i class="lni lni-thumbs-up-3"></i>
                                         <i class="lni lni-comment-1-text"></i>
@@ -276,10 +272,16 @@ include 'sidebar.php';
                                             onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
                                             <i class="lni lni-basket-shopping-3"></i>
                                         </a>
-                                        <a href="edit-post.php?post_id=<?php echo $post_id; ?>"  class="edtp"><i
+                                        <a href="edit-post.php?post_id=<?php echo $post_id; ?>" class="edtp"><i
                                                 class="lni lni-pen-to-square"></i></a>
+                                        <!-- Add a link to view post history -->
+                                        <!-- <a href="user_dashboard.php?post_id=<?php echo $post_id; ?>#Post_history"
+                                            class="history-link">
+                                            <i class="lni lni-bookmark"></i> History
+                                        </a> -->
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <?php
@@ -289,6 +291,8 @@ include 'sidebar.php';
                 <!-- Add New Post Button -->
                 <a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
             </div>
+
+
 
         </div>
     </div>

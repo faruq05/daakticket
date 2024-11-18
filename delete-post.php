@@ -25,6 +25,12 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $delete_result = mysqli_query($conn, $delete_query);
 
         if ($delete_result) {
+            // // add the delete history in post_history
+            // $change_description = "Deleted post: " . $post['title'];
+            // $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+            //               VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
+            // mysqli_query($conn, $log_query);
+
             $_SESSION['message'] = "Post deleted successfully!";
             $_SESSION['messageType'] = "success";
         } else {
@@ -35,12 +41,10 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $_SESSION['message'] = "Post not found. Please try again.";
         $_SESSION['messageType'] = "error";
     }
-
-    // Redirect to the dashboard after deletion
     header('Location: user_dashboard.php');
     exit;
 }
 
-ob_end_flush();?>
+ob_end_flush(); ?>
 
 <?php include 'footer.php'; ?>
