@@ -93,14 +93,17 @@ ob_end_flush(); ?>
                             : 'assets/uploads/profile_pictures/default_profile.png';
                         ?>
                         <div class="comment-add">
-                            <div class="comment-header d-flex align-items-center">
-                                <img src="<?php echo $profile_image; ?>" alt="User Image" class="img-fluid me-3"
-                                    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-                                <strong><?php echo htmlspecialchars($comment['username']); ?></strong>
-                                <span
-                                    class="comment-date ms-2 me-2">(<?php echo date('F j, Y, g:i a', strtotime($comment['created_at'])); ?>): </span>
+                            <img src="<?php echo $profile_image; ?>" alt="User Image" class="img-fluid me-3"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div class="">
+                                <div class="comment-header d-flex align-items-center">
+                                    <strong><?php echo htmlspecialchars($comment['username']); ?></strong>
+                                    <span
+                                        class="comment-date ms-2 me-2">(<?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>):
+                                    </span>
+                                </div>
+                                <p class="comment-text"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
                             </div>
-                            <p class="comment-text"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
                         </div>
                         <?php
                     }
@@ -110,7 +113,7 @@ ob_end_flush(); ?>
                 ?>
                 <hr>
 
-                
+
 
                 <!-- Comment Form -->
                 <?php if (isset($_SESSION['user_id'])): ?>

@@ -44,17 +44,20 @@ p {
 h1 {
     font-size: 80px;
     font-weight: 800;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
 }
 
 h2 {
     font-size: 48px;
     font-weight: 700;
     color: var(--cs-black);
+    font-family: "Edu AU VIC WA NT Pre", cursive;
 }
 
 h3 {
     font-size: 20px;
     font-weight: 700;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
 }
 
 h4 {
@@ -628,10 +631,6 @@ a {
 .post_content p{
     margin-top: 20px;
     text-align: justify;
-}
-
-.comment_section{
-  
 }
 
 .comment_section form{
