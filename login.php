@@ -30,6 +30,7 @@ session_start(); // Start the session
 
                 <!-- login php code here -->
                 <?php
+                ob_start();
                 if (isset($_POST["sign_in_submit"])) {
                     $email = $_POST['email'];
                     $password = $_POST['password_hash'];
@@ -72,8 +73,7 @@ session_start(); // Start the session
 
                     $conn->close();
                 }
-                ob_end_flush();
-                ?>
+                ob_end_flush();?>
                 <div class="cta mt-5">
                     <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
                     <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and

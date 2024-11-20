@@ -113,3 +113,58 @@
 
                 ?>
             </div>
+
+
+
+
+
+
+
+
+             <!-- Comments Section -->
+             <div class="comment_section cp60">
+                <h2>Comments</h2>
+                <?php
+                if ($comments_result && mysqli_num_rows($comments_result) > 0) {
+                    while ($comment = mysqli_fetch_assoc($comments_result)) {
+                        // Determine the user's profile image or use a placeholder
+                        $profile_image = !empty($comment['profile_picture'])
+                            ? htmlspecialchars($comment['profile_picture'])
+                            : 'assets/uploads/profile_pictures/default_profile.png';
+                        ?>
+                        <div class="comment-add">
+                            <img src="<?php echo $profile_image; ?>" alt="User Image" class="img-fluid me-3"
+                                style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div class="">
+                                <div class="comment-header d-flex align-items-center">
+                                    <strong><?php echo htmlspecialchars($comment['username']); ?></strong>
+                                    <span
+                                        class="comment-date ms-2 me-2">(<?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>):
+                                    </span>
+                                </div>
+                                <p class="comment-text"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo "<p>No comments yet. Be the first to comment!</p>";
+                }
+                ?>
+                <hr>
+
+
+
+                <!-- Comment Form -->
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form method="POST">
+                        <textarea name="comment_text" class="form-control" placeholder="Write your thoughts..."
+                            required></textarea>
+                        <button type="submit" class="btn btn-cs mt-2">Post Comment</button>
+                    </form>
+                <?php else: ?>
+                    <p>Please <a href="login.php">sign in</a> to comment.</p>
+                <?php endif; ?>
+
+
+            </div>

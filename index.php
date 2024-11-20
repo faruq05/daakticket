@@ -34,15 +34,18 @@
 <div class="blogs cp60">
     <div class="container">
         <div class="row gy-4">
-            <div class="about_title">
+            <div class="about_title d-flex align-items-center justify-content-between">
                 <h2>Featured Blogs</h2>
+                <div class="abt_btn">
+                    <a href="blog.php" class="btn btn-cs">View All Posts</a>
+                </div>
             </div>
             <?php
             $query = "SELECT p.*, u.username, c.category_name
           FROM blog_post p
           LEFT JOIN user u ON p.user_id = u.user_id
           LEFT JOIN category c ON p.category_id = c.category_id
-          ORDER BY p.created_at DESC";
+          ORDER BY p.created_at DESC LIMIT 6";
 
             $result = mysqli_query($conn, $query);
 

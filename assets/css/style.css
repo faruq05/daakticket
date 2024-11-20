@@ -55,7 +55,7 @@ h2 {
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 700;
     font-family: "Edu AU VIC WA NT Pre", cursive;
 }
@@ -69,6 +69,7 @@ h4 {
 p {
     font-size: 18px;
     font-weight: 400;
+    text-align: justify;
 }
 
 a {
@@ -453,7 +454,21 @@ a {
     margin-bottom: 15px;
 }
 
+/* about pg */
+.obj {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
 
+.obj::before,
+.obj::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px dashed #000;
+    margin: 0 20px;
+}
 
 /* profile */
 /* Profile Container */

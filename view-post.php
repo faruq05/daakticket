@@ -80,7 +80,7 @@ ob_end_flush(); ?>
                     <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
                 </div>
             </div>
-
+            
             <!-- Comments Section -->
             <div class="comment_section cp60">
                 <h2>Comments</h2>

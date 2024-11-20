@@ -40,19 +40,20 @@ include 'db.php';
 <body>
 
     <!-- header starts========================================= -->
-    <!-- search componenet -->
+    <!-- search component -->
     <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasTopLabel">What are you loooking for ...</h5>
+            <h5 class="offcanvas-title" id="offcanvasTopLabel">What are you looking for ...</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="search.php" method="GET" role="search">
+                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
                 <button class="btn btn-cs btn-srch" type="submit">Search</button>
             </form>
         </div>
     </div>
+
     <!-- search comp ebds -->
 
     <div class="header" id="header">
@@ -71,10 +72,10 @@ include 'db.php';
                             <a class="nav-link" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="about.php">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blogs</a>
+                            <a class="nav-link" href="blog.php">Blogs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact</a>
