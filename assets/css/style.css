@@ -119,6 +119,28 @@ a {
     fill: #FFFFFF;
 }
 
+/* share modal */
+.share-social a, .copy-link form button{
+    border: 1px solid var(--cs-accent);
+    border-color: var(--cs-accent);
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: .2s all ease-in-out;
+}
+
+.share-social a:hover, .copy-link form button:hover{
+    background-color: var(--cs-accent);
+    transform: scale(1.1);
+}
+
+.share-social a:hover i, .copy-link form button:hover i{
+    color: var(--cs-white);
+}
+
+.share-social a i, .copy-link form button i{
+    color: var(--cs-accent);
+}
 /* header */
 .header {
     background-color: #e8e4dc;
@@ -264,7 +286,13 @@ a {
 }
 
 .like_box i {
-    font-size: 20px;
+    font-size: 23px;
+    color: var(--cs-black);
+}
+
+.like_box i:hover{
+    color: var(--cs-warnhover);
+    transform: scale(1.1);
 }
 
 /* footer cta */
@@ -569,6 +597,14 @@ a {
 .exist_post i {
     font-size: 22px;
     margin-right: 10px;
+}
+
+.ep_title a h3{
+    color: var(--cs-black);
+}
+
+.ep_title a h3:hover{
+    color: var(--cs-hover);
 }
 
 .ep_title p,

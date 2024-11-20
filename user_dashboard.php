@@ -237,17 +237,20 @@ include 'sidebar.php';
                             <div class="row align-items-center">
                                 <div class="col-md-2">
                                     <div class="post_ftimg">
-                                        <?php if ($feature_image && file_exists($feature_image)) { ?>
-                                            <img src="<?php echo $feature_image; ?>" class="img-fluid" alt="Post Image">
-                                        <?php } else { ?>
-                                            <img src="assets/uploads/post_images/default_image.jpg" class="img-fluid"
-                                                alt="Default Image">
-                                        <?php } ?>
+                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
+                                            <?php if ($feature_image && file_exists($feature_image)) { ?>
+                                                <img src="<?php echo $feature_image; ?>" class="img-fluid" alt="Post Image">
+                                            <?php } else { ?>
+                                                <img src="assets/uploads/post_images/default_image.jpg" class="img-fluid"
+                                                    alt="Default Image">
+                                            <?php } ?></a>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="ep_title">
-                                        <h3><?php echo htmlspecialchars($title); ?></h3>
+                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
+                                            <h3><?php echo htmlspecialchars($title); ?></h3>
+                                        </a>
                                         <p class="mt-2 mb-2"><?php echo $excerpt; ?></p>
                                         <span>Category: <?php echo htmlspecialchars($category_name); ?>
                                     </div>

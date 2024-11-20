@@ -82,7 +82,7 @@ ob_end_flush(); ?>
             </div>
             
             <!-- Comments Section -->
-            <div class="comment_section cp60">
+            <div class="comment_section cp60" id="comment_section">
                 <h2>Comments</h2>
                 <?php
                 if ($comments_result && mysqli_num_rows($comments_result) > 0) {
