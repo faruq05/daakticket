@@ -52,7 +52,7 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($post = mysqli_fetch_assoc($result)) {
                     $excerpt = substr($post['content'], 0, 90) . (strlen($post['content']) > 90 ? '...' : '');
-                    ?>
+            ?>
                     <div class="col-md-4">
                         <div class="blog_box">
                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
@@ -138,11 +138,11 @@
                                                     </div>
                                                     <!-- share to social -->
                                                     <script>
-                                                        (function () {
+                                                        (function() {
                                                             var copyButton = document.querySelector('.copy-button');
                                                             var copyInput = document.querySelector('.copy-form input');
 
-                                                            copyButton.addEventListener('click', function (e) {
+                                                            copyButton.addEventListener('click', function(e) {
                                                                 e.preventDefault();
                                                                 copyInput.select();
                                                                 document.execCommand('copy');
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             } else {
                 echo "<p>No posts available.</p>";
