@@ -337,7 +337,7 @@ $result = mysqli_query($conn, $query);
 
                             // excerpt
                             $excerpt = substr($content, 0, 100) . '...';
-                            ?>
+                    ?>
 
                             <!-- Displaying each post -->
                             <div class="exist_post">
@@ -390,7 +390,7 @@ $result = mysqli_query($conn, $query);
 
                                 </div>
                             </div>
-                            <?php
+                    <?php
                         }
                     }
                     ?>
@@ -469,7 +469,7 @@ $result = mysqli_query($conn, $query);
 
                                     if ($result && mysqli_num_rows($result) > 0) {
                                         while ($category = mysqli_fetch_assoc($result)) {
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($category['category_id']); ?></td>
                                                 <td><?php echo htmlspecialchars($category['category_name']); ?></td>
@@ -481,7 +481,7 @@ $result = mysqli_query($conn, $query);
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <?php
+                                    <?php
                                         }
                                     } else {
                                         echo "<tr><td colspan='3'>No categories found.</td></tr>";
