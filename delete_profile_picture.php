@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$role_id = $_SESSION['role_id']; 
 
 $query = "SELECT profile_picture FROM User_Profile WHERE user_id = '$user_id'";
 $result = mysqli_query($conn, $query);
@@ -35,5 +36,9 @@ if ($profile_picture && file_exists($profile_picture)) {
 }
 
 // Redirect back to the profile page
-header('Location:user_dashboard.php');
+if ($role_id == 1001) {
+    header('Location: admin_dashboard.php');
+} else {
+    header('Location: user_dashboard.php');
+}
 exit();

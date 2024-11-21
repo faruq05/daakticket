@@ -12,27 +12,33 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#profile" class="sidebar-link">
                     <i class="lni lni-user-4"></i>
                     <span>Profile</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#all_user" class="sidebar-link">
                     <i class="lni lni-pen-to-square"></i>
-                    <span>Posts</span>
+                    <span>All Users</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#post_history" class="sidebar-link">
                     <i class="lni lni-gallery"></i>
-                    <span>Users</span>
+                    <span>Post History</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="#admin_post" class="sidebar-link">
                     <i class="lni lni-road-1"></i>
-                    <span>Activity Log</span>
+                    <span>Your Post</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#category" class="sidebar-link">
+                    <i class="lni lni-road-1"></i>
+                    <span>Add New Category</span>
                 </a>
             </li>
             <!-- <li class="sidebar-item">

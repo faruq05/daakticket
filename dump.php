@@ -168,3 +168,80 @@
 
 
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+<!-- Display Existing Posts -->
+<h2 class="mt-4 p-4">Existing Posts</h2>
+                <?php if (mysqli_num_rows($result) > 0): ?>
+                    <?php while ($post = mysqli_fetch_assoc($result)): ?>
+                        <div class="exist_post mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="post_ftimg">
+                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
+                                            <?php if (!empty($post['feature_image']) && file_exists($post['feature_image'])) { ?>
+                                                <img src="<?php echo $post['feature_image']; ?>" class="img-fluid" alt="Post Image">
+                                            <?php } else { ?>
+                                                <img src="assets/uploads/post_images/default_image.jpg" class="img-fluid"
+                                                    alt="Default Image">
+                                            <?php } ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="ep_title">
+                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
+                                            <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+                                        </a>
+                                        <p class="mt-2 mb-2">
+                                            <?php echo htmlspecialchars(substr($post['content'], 0, 100)) . '...'; ?>
+                                        </p>
+                                        <span>Category: <?php echo htmlspecialchars($post['category_name']); ?></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="created">
+                                        <span>Created at: <?php echo $post['created_at']; ?></span><br>
+                                        <span>Updated at: <?php echo $post['updated_at']; ?></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="like_box d-flex justify-content-center">
+                                        <i class="lni lni-thumbs-up-3"></i>
+                                        <i class="lni lni-comment-1-text"></i>
+                                        <i class="lni lni-share-1"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="ep_dlt d-flex justify-content-center">
+                                        <a href="delete-post.php?post_id=<?php echo $post['post_id']; ?>"
+                                            onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
+                                            <i class="lni lni-basket-shopping-3"></i>
+                                        </a>
+                                        <a href="edit-post.php?post_id=<?php echo $post['post_id']; ?>" class="edtp">
+                                            <i class="lni lni-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>No posts found.</p>
+                <?php endif; ?>
+
+                <!-- Add New Post Button -->
+                <a href="add-new-post.php" class="btn btn-cs m-3">Add New Post</a>

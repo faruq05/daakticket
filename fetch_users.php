@@ -1,13 +1,8 @@
 <?php
-require_once 'config.php';
+require_once 'db.php';
 header("Content-Type: application/json");
 
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
-if ($conn->connect_error) {
-    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
 
 // Fetch user data
 $userTable = "";

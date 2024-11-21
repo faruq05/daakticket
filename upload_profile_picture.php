@@ -2,13 +2,13 @@
 session_start();
 include 'db.php';
 
-
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
+$role_id = $_SESSION['role_id']; // Assuming role_id is stored in the session
 
 // Check if the file was uploaded
 if (isset($_FILES['profile_picture'])) {
@@ -23,7 +23,7 @@ if (isset($_FILES['profile_picture'])) {
 
     if (in_array($file_type, $allowed_types)) {
         if ($file_size < 5000000) { // Max 5MB
-            // unique filename
+            // Generate a unique filename
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
             $new_file_name = 'profile_' . $user_id . '.' . $file_ext;
             $file_path = 'assets/uploads/profile_pictures/' . $new_file_name;
@@ -40,9 +40,6 @@ if (isset($_FILES['profile_picture'])) {
                     $_SESSION['message'] = "Failed to update profile picture in the database!";
                     $_SESSION['messageType'] = 'error';
                 }
-
-                header('Location: user_dashboard.php');
-                exit();
             } else {
                 $_SESSION['message'] = "Failed to upload the profile picture!";
                 $_SESSION['messageType'] = 'error';
@@ -56,5 +53,11 @@ if (isset($_FILES['profile_picture'])) {
         $_SESSION['messageType'] = 'error';
     }
 }
-header('Location:user_dashboard.php');
+
+// Role-based redirection
+if ($role_id == 1001) { // Admin
+    header('Location: admin_dashboard.php');
+} else { // Regular user
+    header('Location: user_dashboard.php');
+}
 exit();

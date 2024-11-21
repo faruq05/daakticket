@@ -502,7 +502,7 @@ a {
 /* Profile Container */
 .profile-container {
     text-align: left;
-    margin-top: 85px;
+    /* margin-top: 85px; */
 }
 
 /* Circular Profile Image */
@@ -665,6 +665,10 @@ a {
 
 .postpg img {
     border-radius: 20px;
+    height: 600px;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
 }
 
 .pcriteria {
@@ -703,26 +707,6 @@ a {
     margin: 0px 5px;
 }
 /* Container for User Info and Post History Tables */
-.tables-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    margin-top: 20px;
-    flex-wrap: wrap; /* Ensures tables stack on smaller screens */
-}
-
-/* Individual Table Wrappers */
-.user-info-container,
-.post-history-container {
-    flex: 1; /* Allows equal width for both tables */
-    min-width: 300px; /* Ensures they don't shrink too much */
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Adds horizontal scrolling for small screens */
-}
 
 /* Table Styling */
 .user-info-container table,
@@ -734,7 +718,7 @@ a {
 .user-info-container th, .user-info-container td,
 .post-history-container th, .post-history-container td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
