@@ -337,7 +337,7 @@ $result = mysqli_query($conn, $query);
 
                             // excerpt
                             $excerpt = substr($content, 0, 100) . '...';
-                            ?>
+                    ?>
 
                             <!-- Displaying each post -->
                             <div class="exist_post">
@@ -371,15 +371,6 @@ $result = mysqli_query($conn, $query);
                                     <div class="col-md-2">
                                         <div class="like_box mt-2 d-flex align-items-center">
                                             <i class="lni lni-thumbs-up-3"></i>
-                                            <span class="like-count ps-2">
-                                                <?php
-                                                $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
-                                                $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
-                                                $like_result = mysqli_query($conn, $like_query);
-                                                $like_data = mysqli_fetch_assoc($like_result);
-                                                echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
-                                                ?>
-                                            </span>
                                             <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                                 <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                                     <i class="lni lni-comment-1-text"></i></a>
@@ -397,7 +388,70 @@ $result = mysqli_query($conn, $query);
                                             <i class="lni lni-share-1" data-bs-toggle="modal"
                                                 data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                                         </div>
-                                        <!-- Share Modal is in footer-->
+
+
+
+                                        <!-- Share Modal -->
+                                        <div class="modal fade" id="shareModal-<?php echo $post['post_id']; ?>" tabindex="-1"
+                                            aria-labelledby="shareModalLabel-<?php echo $post['post_id']; ?>"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="shareModalLabel-<?php echo $post['post_id']; ?>">
+                                                            Share Post</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center share-social">
+                                                        <!-- Share Icons -->
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <!-- Facebook -->
+                                                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>"
+                                                                target="_blank" title="Share on Facebook">
+                                                                <i class="fa-brands fa-facebook-f"></i>
+                                                            </a>
+                                                            <!-- X (Twitter) -->
+                                                            <a href="https://twitter.com/share?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&text=<?php echo urlencode($post['title']); ?>"
+                                                                target="_blank" title="Share on X">
+                                                                <i class="fa-brands fa-x-twitter"></i>
+                                                            </a>
+                                                            <!-- LinkedIn -->
+                                                            <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&title=<?php echo urlencode($post['title']); ?>"
+                                                                target="_blank" title="Share on LinkedIn">
+                                                                <i class="fa-brands fa-linkedin-in"></i>
+                                                            </a>
+                                                            <!-- Copy Link -->
+                                                            <div class="copy-link">
+                                                                <form class="copy-form">
+                                                                    <input type="hidden"
+                                                                        value="https://daakticket.faruqweb.com/view-post.php?post_id=<?php echo $post['post_id']; ?>"
+                                                                        readonly>
+                                                                    <button type="button" class="copy-button"
+                                                                        title="Copy Link"><i
+                                                                            class="fa-solid fa-copy"></i></button>
+                                                                </form>
+                                                            </div>
+                                                            <!-- share to social -->
+                                                            <script>
+                                                                (function () {
+                                                                    var copyButton = document.querySelector('.copy-button');
+                                                                    var copyInput = document.querySelector('.copy-form input');
+
+                                                                    copyButton.addEventListener('click', function (e) {
+                                                                        e.preventDefault();
+                                                                        copyInput.select();
+                                                                        document.execCommand('copy');
+                                                                        alert("Link copied to clipboard!");
+                                                                    });
+                                                                })();
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="ep_dlt d-flex justify-content-center">
@@ -413,7 +467,7 @@ $result = mysqli_query($conn, $query);
 
                                 </div>
                             </div>
-                            <?php
+                    <?php
                         }
                     }
                     ?>

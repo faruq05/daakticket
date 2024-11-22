@@ -142,7 +142,11 @@
 <script src="assets/js/sidebar-script.js"></script>
 <script src="assets/js/script.js"></script>
 <script>
+<<<<<<< HEAD
+    document.addEventListener("DOMContentLoaded", function() {
+=======
     document.addEventListener("DOMContentLoaded", function () {
+>>>>>>> 284c8231040e7b1ff09e8c8608e3640936917544
         // Initialize Masonry
         var grid = document.querySelector('#masonry-grid');
         new Masonry(grid, {
@@ -166,7 +170,7 @@
     // Clear message after displaying
     unset($_SESSION['message']);
     unset($_SESSION['messageType']);
-?>
+    ?>
 <?php endif; ?>
 <?php if (!empty($_SESSION['message'])): ?>
     <script>
@@ -182,7 +186,7 @@
     // Clear message after displaying
     unset($_SESSION['message']);
     unset($_SESSION['messageType']);
-?>
+    ?>
 <?php endif; ?>
 
 
