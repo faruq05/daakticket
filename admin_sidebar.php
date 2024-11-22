@@ -12,31 +12,31 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="#profile" class="sidebar-link">
+                <a href="admin_dashboard.php#profile" class="sidebar-link">
                     <i class="lni lni-user-4"></i>
                     <span>Profile</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#all_user" class="sidebar-link">
+                <a href="admin_dashboard.php#all_user" class="sidebar-link">
                     <i class="lni lni-pen-to-square"></i>
                     <span>All Users</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#post_history" class="sidebar-link">
+                <a href="admin_dashboard.php#post_history" class="sidebar-link">
                     <i class="lni lni-gallery"></i>
                     <span>Post History</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#admin_post" class="sidebar-link">
+                <a href="admin_dashboard.php#admin_post" class="sidebar-link">
                     <i class="lni lni-road-1"></i>
                     <span>Your Post</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#category" class="sidebar-link">
+                <a href="admin_dashboard.php#add_category" class="sidebar-link">
                     <i class="lni lni-road-1"></i>
                     <span>Add New Category</span>
                 </a>

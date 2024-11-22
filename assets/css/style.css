@@ -423,7 +423,7 @@ a {
 .toggle-password {
     position: absolute;
     right: 10px;
-    top: 36px;
+    top: 050px;
     cursor: pointer;
 }
 
@@ -665,10 +665,11 @@ a {
 
 .postpg img {
     border-radius: 20px;
-    height: 600px;
+    height: 800px;
     object-fit: cover;
     object-position: center;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .pcriteria {
@@ -739,5 +740,6 @@ a {
         margin-bottom: 20px; /* Add space between stacked tables */
     }
 }
-
-
+.categorypg{
+  padding-top: 100px;
+}

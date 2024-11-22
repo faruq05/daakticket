@@ -337,7 +337,7 @@ $result = mysqli_query($conn, $query);
 
                             // excerpt
                             $excerpt = substr($content, 0, 100) . '...';
-                    ?>
+                            ?>
 
                             <!-- Displaying each post -->
                             <div class="exist_post">
@@ -390,7 +390,7 @@ $result = mysqli_query($conn, $query);
 
                                 </div>
                             </div>
-                    <?php
+                            <?php
                         }
                     }
                     ?>
@@ -399,100 +399,48 @@ $result = mysqli_query($conn, $query);
                 </div>
             </div>
 
-            <!-- add new category -->
             <div class="col-md-12">
                 <div class="add_category cp60 dash_font" id="add_category">
-                    <?php
-                    ob_start();
-                    // Handle adding a new category
-                    if (isset($_POST['add_category'])) {
-                        $category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
+                    <h3 class="mb-4">Existing Categories</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sl. No.</th>
+                                <th>Category Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT * FROM category ORDER BY category_id DESC";
+                            $result = mysqli_query($conn, $query);
 
-                        if (!empty($category_name)) {
-                            $query = "INSERT INTO category (category_name) VALUES ('$category_name')";
-                            if (mysqli_query($conn, $query)) {
-                                $_SESSION['message'] = "Category added successfully!";
-                                $_SESSION['messageType'] = "success";
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $serialNo = 1;
+                                while ($category = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>
+                                        <td>{$serialNo}</td> 
+                                        <td>{$category['category_name']}</td>
+                                        <td>
+                                            <a href='?delete_id={$category['category_id']}' 
+                                            class='btn btn-danger btn-sm'
+                                            onclick='return confirm(\"Are you sure you want to delete this category?\")'>
+                                            Delete
+                                        </a></td>
+                                        </tr>";
+                                    $serialNo++; // Increment the serial number
+                                }
                             } else {
-                                $_SESSION['message'] = "Failed to add category. Please try again.";
-                                $_SESSION['messageType'] = "error";
+                                echo "<tr><td colspan='3' class='text-center'>No categories available.</td></tr>";
                             }
-                        } else {
-                            $_SESSION['message'] = "Category name cannot be empty.";
-                            $_SESSION['messageType'] = "error";
-                        }
-                    }
+                            ?>
+                        </tbody>
 
-                    // Handle deleting a category
-                    if (isset($_GET['delete_id'])) {
-                        $delete_id = intval($_GET['delete_id']);
-
-                        $query = "DELETE FROM category WHERE category_id = '$delete_id'";
-                        if (mysqli_query($conn, $query)) {
-                            $_SESSION['message'] = "Category deleted successfully!";
-                            $_SESSION['messageType'] = "success";
-                        } else {
-                            $_SESSION['message'] = "Failed to delete category. Please try again.";
-                            $_SESSION['messageType'] = "error";
-                        }
-                    }
-                    ob_end_flush() ?>
-                    <!-- Add Category Section -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>Add Category</h2>
-                            <form method="POST">
-                                <div class="mb-3">
-                                    <label for="category_name" class="form-label">Category Name</label>
-                                    <input type="text" name="category_name" id="category_name" class="form-control"
-                                        required>
-                                </div>
-                                <button type="submit" name="add_category" class="btn btn-primary">Add Category</button>
-                            </form>
-                        </div>
-
-                        <!-- List Categories Section -->
-                        <div class="col-md-6">
-                            <h2>Manage Categories</h2>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Category Name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $query = "SELECT * FROM category ORDER BY category_id DESC";
-                                    $result = mysqli_query($conn, $query);
-
-                                    if ($result && mysqli_num_rows($result) > 0) {
-                                        while ($category = mysqli_fetch_assoc($result)) {
-                                    ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($category['category_id']); ?></td>
-                                                <td><?php echo htmlspecialchars($category['category_name']); ?></td>
-                                                <td>
-                                                    <a href="?delete_id=<?php echo $category['category_id']; ?>"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this category?');">
-                                                        Delete
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                    <?php
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='3'>No categories found.</td></tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    </table>
+                    <a href="category_management.php" class="btn btn-cs">Add New Category</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
