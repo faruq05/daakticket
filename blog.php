@@ -16,31 +16,30 @@
 <!-- blog starts -->
 <div class="blogs cp60">
     <div class="container">
-        <div class="row gy-4">
+        <div class="about_title d-flex align-items-center justify-content-between mb-5">
             <!-- Filter by categories -->
-            <div class="about_title d-flex align-items-center justify-content-between">
-                <h3>Filter By</h3>
-                <div>
-                    <form method="GET" action="">
-                        <select name="category_id" class="form-select form-control" onchange="this.form.submit()">
-                            <option value="">All Categories</option>
-                            <?php
-                            // category fetch
-                            $category_query = "SELECT * FROM category ORDER BY category_name ASC";
-                            $category_result = mysqli_query($conn, $category_query);
+            <h3>Filter By</h3>
+            <div>
+                <form method="GET" action="">
+                    <select name="category_id" class="form-select form-control" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        <?php
+                        // category fetch
+                        $category_query = "SELECT * FROM category ORDER BY category_name ASC";
+                        $category_result = mysqli_query($conn, $category_query);
 
-                            if ($category_result && mysqli_num_rows($category_result) > 0) {
-                                while ($category = mysqli_fetch_assoc($category_result)) {
-                                    $selected = (isset($_GET['category_id']) && $_GET['category_id'] == $category['category_id']) ? 'selected' : '';
-                                    echo "<option value='{$category['category_id']}' $selected>" . htmlspecialchars($category['category_name']) . "</option>";
-                                }
+                        if ($category_result && mysqli_num_rows($category_result) > 0) {
+                            while ($category = mysqli_fetch_assoc($category_result)) {
+                                $selected = (isset($_GET['category_id']) && $_GET['category_id'] == $category['category_id']) ? 'selected' : '';
+                                echo "<option value='{$category['category_id']}' $selected>" . htmlspecialchars($category['category_name']) . "</option>";
                             }
-                            ?>
-                        </select>
-                    </form>
-                </div>
+                        }
+                        ?>
+                    </select>
+                </form>
             </div>
-
+        </div>
+        <div class="row gy-4" id="masonry-grid">
             <?php
             // Get the selected category from query string
             $category_filter = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
@@ -62,7 +61,7 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($post = mysqli_fetch_assoc($result)) {
                     $excerpt = substr($post['content'], 0, 90) . (strlen($post['content']) > 90 ? '...' : '');
-                    ?>
+            ?>
                     <div class="col-md-4">
                         <div class="blog_box">
                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
@@ -87,6 +86,15 @@
                                 </div>
                                 <div class="like_box mt-2 d-flex align-items-center">
                                     <i class="lni lni-thumbs-up-3"></i>
+                                    <span class="like-count ps-2">
+                                        <?php
+                                        $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                        $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
+                                        $like_result = mysqli_query($conn, $like_query);
+                                        $like_data = mysqli_fetch_assoc($like_result);
+                                        echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                        ?>
+                                    </span>
                                     <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                             <i class="lni lni-comment-1-text"></i></a>
@@ -148,11 +156,11 @@
                                                     </div>
                                                     <!-- share to social -->
                                                     <script>
-                                                        (function () {
+                                                        (function() {
                                                             var copyButton = document.querySelector('.copy-button');
                                                             var copyInput = document.querySelector('.copy-form input');
 
-                                                            copyButton.addEventListener('click', function (e) {
+                                                            copyButton.addEventListener('click', function(e) {
                                                                 e.preventDefault();
                                                                 copyInput.select();
                                                                 document.execCommand('copy');
@@ -168,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             } else {
                 echo "<p>No posts available.</p>";

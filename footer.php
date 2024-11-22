@@ -81,11 +81,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
-    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
-    async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script src="assets/js/sidebar-script.js"></script>
 <script src="assets/js/script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize Masonry
+        var grid = document.querySelector('#masonry-grid');
+        new Masonry(grid, {
+            itemSelector: '.col-md-4',
+            columnWidth: '.col-md-4',
+            percentPosition: true
+        });
+    });
+</script>
 <?php if (!empty($_SESSION['message'])): ?>
     <script>
         Swal.fire({
@@ -100,7 +109,7 @@
     // Clear message after displaying
     unset($_SESSION['message']);
     unset($_SESSION['messageType']);
-?>
+    ?>
 <?php endif; ?>
 <?php if (!empty($_SESSION['message'])): ?>
     <script>
@@ -116,7 +125,7 @@
     // Clear message after displaying
     unset($_SESSION['message']);
     unset($_SESSION['messageType']);
-?>
+    ?>
 <?php endif; ?>
 
 
