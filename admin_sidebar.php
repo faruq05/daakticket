@@ -81,7 +81,7 @@
                 </ul>
             </li> -->
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="admin_dashboard.php#notification" class="sidebar-link">
                     <i class="lni lni-bell-1"></i>
                     <span>Notification</span>
                 </a>

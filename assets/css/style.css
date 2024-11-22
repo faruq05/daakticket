@@ -120,7 +120,8 @@ a {
 }
 
 /* share modal */
-.share-social a, .copy-link form button{
+.share-social a,
+.copy-link form button {
     border: 1px solid var(--cs-accent);
     border-color: var(--cs-accent);
     padding: 10px 15px;
@@ -129,18 +130,22 @@ a {
     transition: .2s all ease-in-out;
 }
 
-.share-social a:hover, .copy-link form button:hover{
+.share-social a:hover,
+.copy-link form button:hover {
     background-color: var(--cs-accent);
     transform: scale(1.1);
 }
 
-.share-social a:hover i, .copy-link form button:hover i{
+.share-social a:hover i,
+.copy-link form button:hover i {
     color: var(--cs-white);
 }
 
-.share-social a i, .copy-link form button i{
+.share-social a i,
+.copy-link form button i {
     color: var(--cs-accent);
 }
+
 /* header */
 .header {
     background-color: #e8e4dc;
@@ -244,13 +249,21 @@ a {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
+    border: 1px solid rgba(100, 100, 111, 0.2);
+    transition: .2s all ease-in-out;
 
+
+
+}
+
+.blog_box:hover {
+    transform: scale(1.01);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
 }
 
 .blog_box img {
     object-fit: cover;
+    width: 100%;
     transition: .2s all ease-in-out;
     width: 100%;
 }
@@ -291,9 +304,10 @@ a {
     color: var(--cs-black);
 }
 
-.like_box i:hover{
+.like_box i:hover {
     color: var(--cs-warnhover);
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 /* footer cta */
@@ -600,11 +614,11 @@ a {
     margin-right: 10px;
 }
 
-.ep_title a h3{
+.ep_title a h3 {
     color: var(--cs-black);
 }
 
-.ep_title a h3:hover{
+.ep_title a h3:hover {
     color: var(--cs-hover);
 }
 
@@ -685,29 +699,81 @@ a {
     color: var(--cs-accent);
 }
 
-.post_content p{
+.post_content p {
     margin-top: 20px;
     text-align: justify;
 }
 
-.comment_section form{
-    margin-top: 20px;
+.like-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
-.warn{
+.like-icon-button i {
+    font-size: 24px;
+    color: #0000007c;
+    transition: color 0.3s ease-in-out;
+}
+
+.like-icon-button i.liked {
     color: var(--cs-warnhover);
 }
 
-.comment-add{
+.like-section span {
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+
+.like-section span {
+    margin-left: 3px;
+    font-size: 16px;
+}
+
+
+.comment_section form {
+    margin-top: 20px;
+}
+
+.warn {
+    color: var(--cs-warnhover);
+}
+
+.comment-add {
     display: flex;
     align-items: center;
     margin-top: 20px;
 }
 
-.comment-date{
+.comment-date {
     font-size: 14px;
     margin: 0px 5px;
 }
+
+.comment-count-box a i{
+    color: var(--cs-black);
+}
+
+.post_react{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--cs-primary);
+    box-shadow: -1px 10px 20px 0px #0000001a;
+    width: 30%;
+    padding: 10px;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 45px;
+}
+
+.post_react i{
+    
+font-size: 25px;
+}
+
 /* Container for User Info and Post History Tables */
 
 /* Table Styling */
@@ -717,8 +783,10 @@ a {
     border-collapse: collapse;
 }
 
-.user-info-container th, .user-info-container td,
-.post-history-container th, .post-history-container td {
+.user-info-container th,
+.user-info-container td,
+.post-history-container th,
+.post-history-container td {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
@@ -733,14 +801,57 @@ a {
 /* Responsive Behavior */
 @media (max-width: 768px) {
     .tables-container {
-        flex-direction: column; /* Stack tables vertically on smaller screens */
+        flex-direction: column;
+        /* Stack tables vertically on smaller screens */
     }
 
     .user-info-container,
     .post-history-container {
-        margin-bottom: 20px; /* Add space between stacked tables */
+        margin-bottom: 20px;
+        /* Add space between stacked tables */
     }
 }
-.categorypg{
-  padding-top: 100px;
+
+.categorypg {
+    padding-top: 100px;
+}
+
+/* dkwsdashd */
+.notification-panel h4 {
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+.notification-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.notification-list li a{
+    color: var(--cs-accent);
+    transition: .2s all ease-in-out;
+}
+
+.notification-list li a:hover{
+    color: var(--cs-hover);
+}
+
+.notification-list li:last-child {
+    border-bottom: none;
+}
+
+.notification-list a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.notification-list a:hover {
+    text-decoration: underline;
 }

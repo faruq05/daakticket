@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include 'header.php';
+
 // Fetch post ID
 $post_id = $_GET['post_id'] ?? null;
 if (!$post_id) {
@@ -8,7 +9,41 @@ if (!$post_id) {
     exit;
 }
 
-$post_id = intval($post_id); // Sanitize post ID
+$post_id = intval($post_id);
+
+// Handle like/unlike submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_like'])) {
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+
+        // if the user already liked the post
+        $check_like_query = "SELECT * FROM likes WHERE post_id = $post_id AND user_id = $user_id";
+        $like_result = mysqli_query($conn, $check_like_query);
+
+        if (mysqli_num_rows($like_result) === 0) {
+            // insert new like, user has not liked the post yet
+            $like_query = "INSERT INTO likes (post_id, user_id, created_at) VALUES ($post_id, $user_id, NOW())";
+            if (mysqli_query($conn, $like_query)) {
+                $_SESSION['message'] = "You liked the post!";
+            } else {
+                $_SESSION['message'] = "Error liking the post. Please try again.";
+            }
+        } else {
+            // User already liked the post, delete the like
+            $unlike_query = "DELETE FROM likes WHERE post_id = $post_id AND user_id = $user_id";
+            if (mysqli_query($conn, $unlike_query)) {
+                $_SESSION['message'] = "You unliked the post.";
+            } else {
+                $_SESSION['message'] = "Error unliking the post. Please try again.";
+            }
+        }
+    } else {
+        $_SESSION['message'] = "Please sign in to like the post.";
+    }
+
+    header("Location: view-post.php?post_id=$post_id");
+    exit;
+}
 
 // Handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -59,7 +94,22 @@ $comments_query = "SELECT
                    ORDER BY c.created_at DESC";
 $comments_result = mysqli_query($conn, $comments_query);
 
-ob_end_flush(); ?>
+// Check if the user liked the post
+$user_liked = false;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $user_like_query = "SELECT * FROM likes WHERE post_id = $post_id AND user_id = $user_id";
+    $user_like_result = mysqli_query($conn, $user_like_query);
+    $user_liked = mysqli_num_rows($user_like_result) > 0;
+}
+
+// Count likes for this post
+$like_count_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $post_id";
+$like_count_result = mysqli_query($conn, $like_count_query);
+$like_count = mysqli_fetch_assoc($like_count_result)['like_count'];
+
+ob_end_flush();
+?>
 
 <div class="container">
     <div class="row">
@@ -73,14 +123,47 @@ ob_end_flush(); ?>
                         <?php echo htmlspecialchars($post['category_name'] ?? 'Uncategorized'); ?></p>
                     <p><strong>Author:</strong> <?php echo htmlspecialchars($post['username'] ?? 'Unknown'); ?></p>
                     <p><strong>Date:</strong> <?php echo date('F j, Y, g:i a', strtotime($post['created_at'])); ?></p>
-
                 </div>
                 <div class="post_content">
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
                 </div>
+
+                <div class="post_react">
+                    <!-- Like Section -->
+                    <div class="like-section">
+                        <form method="POST">
+                            <input type="hidden" name="toggle_like" value="1">
+                            <button type="submit" class="like-icon-button">
+                                <i class="fa-solid fa-thumbs-up<?php echo $user_liked ? ' liked' : ''; ?>"></i>
+                                <span><?php echo $like_count; ?></span>
+                            </button>
+
+                        </form>
+                    </div>
+                    <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
+                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
+                            <i class="lni lni-comment-1-text"></i></a>
+                        <span class="comment-count">
+                            <?php
+                            $post_id = $post['post_id'];
+                            $comment_query = "SELECT COUNT(*) AS comment_count FROM comment WHERE post_id = '$post_id'";
+                            $comment_result = mysqli_query($conn, $comment_query);
+                            $comment_data = mysqli_fetch_assoc($comment_result);
+                            echo htmlspecialchars($comment_data['comment_count'] ?? 0); // if no comments then 0
+                            ?>
+                        </span>
+                    </div>
+                    <div class="share_box">
+                        <i class="lni lni-share-1" data-bs-toggle="modal"
+                            data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
+
+                    </div>
+                </div>
+
+
             </div>
-            
+
             <!-- Comments Section -->
             <div class="comment_section cp60" id="comment_section">
                 <h2>Comments</h2>

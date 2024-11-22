@@ -264,6 +264,15 @@ include 'sidebar.php';
                                 <div class="col-md-2">
                                     <div class="like_box mt-2 d-flex align-items-center">
                                         <i class="lni lni-thumbs-up-3"></i>
+                                        <span class="like-count ps-2">
+                                            <?php
+                                            $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                            $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
+                                            $like_result = mysqli_query($conn, $like_query);
+                                            $like_data = mysqli_fetch_assoc($like_result);
+                                            echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                            ?>
+                                        </span>
                                         <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                                 <i class="lni lni-comment-1-text"></i></a>
@@ -281,68 +290,7 @@ include 'sidebar.php';
                                         <i class="lni lni-share-1" data-bs-toggle="modal"
                                             data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                                     </div>
-
-
-
-                                    <!-- Share Modal -->
-                                    <div class="modal fade" id="shareModal-<?php echo $post['post_id']; ?>" tabindex="-1"
-                                        aria-labelledby="shareModalLabel-<?php echo $post['post_id']; ?>" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"
-                                                        id="shareModalLabel-<?php echo $post['post_id']; ?>">
-                                                        Share Post</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-center share-social">
-                                                    <!-- Share Icons -->
-                                                    <div class="d-flex justify-content-around align-items-center">
-                                                        <!-- Facebook -->
-                                                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>"
-                                                            target="_blank" title="Share on Facebook">
-                                                            <i class="fa-brands fa-facebook-f"></i>
-                                                        </a>
-                                                        <!-- X (Twitter) -->
-                                                        <a href="https://twitter.com/share?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&text=<?php echo urlencode($post['title']); ?>"
-                                                            target="_blank" title="Share on X">
-                                                            <i class="fa-brands fa-x-twitter"></i>
-                                                        </a>
-                                                        <!-- LinkedIn -->
-                                                        <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&title=<?php echo urlencode($post['title']); ?>"
-                                                            target="_blank" title="Share on LinkedIn">
-                                                            <i class="fa-brands fa-linkedin-in"></i>
-                                                        </a>
-                                                        <!-- Copy Link -->
-                                                        <div class="copy-link">
-                                                            <form class="copy-form">
-                                                                <input type="hidden"
-                                                                    value="https://daakticket.faruqweb.com/view-post.php?post_id=<?php echo $post['post_id']; ?>"
-                                                                    readonly>
-                                                                <button type="button" class="copy-button" title="Copy Link"><i
-                                                                        class="fa-solid fa-copy"></i></button>
-                                                            </form>
-                                                        </div>
-                                                        <!-- share to social -->
-                                                        <script>
-                                                            (function () {
-                                                                var copyButton = document.querySelector('.copy-button');
-                                                                var copyInput = document.querySelector('.copy-form input');
-
-                                                                copyButton.addEventListener('click', function (e) {
-                                                                    e.preventDefault();
-                                                                    copyInput.select();
-                                                                    document.execCommand('copy');
-                                                                    alert("Link copied to clipboard!");
-                                                                });
-                                                            })();
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- Share Modal is in footer -->
                                 </div>
                                 <div class="col-md-2">
                                     <div class="ep_dlt d-flex justify-content-center">
@@ -371,6 +319,83 @@ include 'sidebar.php';
             </div>
 
 
+            <!-- notification center -->
+            <div class="col-md-12 add_post cp60 dash_font" id="notification">
+                <?php
+                // Ensure user is logged in
+                if (!isset($_SESSION['user_id'])) {
+                    echo "Please log in to view notifications.";
+                    exit;
+                }
+
+                $user_id = $_SESSION['user_id'];
+
+                // Fetch notifications for likes
+                $like_notifications_query = "
+    SELECT l.created_at, u.username, p.title, p.post_id
+    FROM likes l
+    INNER JOIN user u ON l.user_id = u.user_id
+    INNER JOIN blog_post p ON l.post_id = p.post_id
+    WHERE p.user_id = $user_id
+    ORDER BY l.created_at DESC
+";
+                $like_notifications_result = mysqli_query($conn, $like_notifications_query);
+
+                // Fetch notifications for comments
+                $comment_notifications_query = "
+    SELECT c.created_at, u.username, c.comment_text, p.title, p.post_id
+    FROM comment c
+    INNER JOIN user u ON c.user_id = u.user_id
+    INNER JOIN blog_post p ON c.post_id = p.post_id
+    WHERE p.user_id = $user_id
+    ORDER BY c.created_at DESC
+";
+                $comment_notifications_result = mysqli_query($conn, $comment_notifications_query);
+                ?>
+
+                <div class="notification-panel">
+                    <h3 class="mb-4">Notifications</h3>
+
+                    <!-- Like Notifications -->
+                    <h4><i class="lni lni-thumbs-up-3 pe-2"></i>Likes</h4>
+                    <?php if ($like_notifications_result && mysqli_num_rows($like_notifications_result) > 0): ?>
+                        <ul class="notification-list">
+                            <?php while ($like = mysqli_fetch_assoc($like_notifications_result)): ?>
+                                <li>
+                                    <strong><?php echo htmlspecialchars($like['username']); ?></strong> liked your post
+                                    <a href="view-post.php?post_id=<?php echo $like['post_id']; ?>">
+                                        "<?php echo htmlspecialchars($like['title']); ?>"
+                                    </a>
+                                    on <?php echo date('d/m/Y H:i:s', strtotime($like['created_at'])); ?>.
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>No likes yet.</p>
+                    <?php endif; ?>
+
+                    <!-- Comment Notifications -->
+                    <h4 class="mt-3"><i class="lni lni-comment-1-text pe-2"></i>Comments</h4>
+                    <?php if ($comment_notifications_result && mysqli_num_rows($comment_notifications_result) > 0): ?>
+                        <ul class="notification-list">
+                            <?php while ($comment = mysqli_fetch_assoc($comment_notifications_result)): ?>
+                                <li>
+                                    <strong><?php echo htmlspecialchars($comment['username']); ?></strong> commented on your
+                                    post
+                                    <a href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">
+                                        "<?php echo htmlspecialchars($comment['title']); ?>"
+                                    </a>:
+                                    <q><?php echo htmlspecialchars($comment['comment_text']); ?></q>
+                                    on <?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>.
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>No comments yet.</p>
+                    <?php endif; ?>
+                </div>
+
+            </div>
 
         </div>
     </div>

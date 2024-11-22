@@ -30,6 +30,7 @@
     </svg>
 </div>
 
+
 <!-- blog starts -->
 <div class="blogs cp60">
     <div class="container">
@@ -39,6 +40,7 @@
                 <a href="blog.php" class="btn btn-cs">View All Posts</a>
             </div>
         </div>
+        <div class="row gy-4" id="masonry-grid">
         <div class="row" id="masonry-grid">
 
             <?php
@@ -76,6 +78,35 @@
                                     </a>
                                     <p><?php echo htmlspecialchars($excerpt); ?></p>
                                 </div>
+                                <div class="like_box mt-2 d-flex align-items-center">
+                                    <i class="lni lni-thumbs-up-3"></i>
+                                    <span class="like-count ps-2">
+                                        <?php
+                                        $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                        $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
+                                        $like_result = mysqli_query($conn, $like_query);
+                                        $like_data = mysqli_fetch_assoc($like_result);
+                                        echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                        ?>
+                                    </span>
+                                    <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
+                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
+                                            <i class="lni lni-comment-1-text"></i></a>
+                                        <span class="comment-count">
+                                            <?php
+                                            $post_id = $post['post_id'];
+                                            $comment_query = "SELECT COUNT(*) AS comment_count FROM comment WHERE post_id = '$post_id'";
+                                            $comment_result = mysqli_query($conn, $comment_query);
+                                            $comment_data = mysqli_fetch_assoc($comment_result);
+                                            echo htmlspecialchars($comment_data['comment_count'] ?? 0); // if no comments then 0
+                                            ?>
+                                        </span>
+                                    </div>
+                                    <!-- Share Modal Trigger -->
+                                    <i class="lni lni-share-1" data-bs-toggle="modal"
+                                        data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
+                                </div>
+                                <!-- Share Modal is in footer-->                               
                             </div>
                         </div>
                     </div>

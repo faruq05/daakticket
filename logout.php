@@ -1,11 +1,16 @@
 <?php
-session_start(); // Start the session
+session_start();
 
-// Destroy all session variables and log out the user
-session_unset(); // Remove all session variables
-session_destroy(); // Destroy the session
+// Set the logout success message
+$_SESSION['message'] = "Successfully logged out!";
+$_SESSION['messageType'] = "success";
 
-// Redirect the user to the login page or homepage
-header("Location: index.php"); // You can change this to any page where you want to redirect
-exit();
+// Destroy the session
+session_unset();
+session_destroy();
+
+// Redirect to the login page
+header("Location: login.php");
+exit;
 ?>
+
