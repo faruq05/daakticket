@@ -252,6 +252,7 @@ a {
 .blog_box img {
     object-fit: cover;
     transition: .2s all ease-in-out;
+    width: 100%;
 }
 
 .post_title {

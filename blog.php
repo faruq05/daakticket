@@ -16,31 +16,30 @@
 <!-- blog starts -->
 <div class="blogs cp60">
     <div class="container">
-        <div class="row gy-4">
+        <div class="about_title d-flex align-items-center justify-content-between mb-5">
             <!-- Filter by categories -->
-            <div class="about_title d-flex align-items-center justify-content-between">
-                <h3>Filter By</h3>
-                <div>
-                    <form method="GET" action="">
-                        <select name="category_id" class="form-select form-control" onchange="this.form.submit()">
-                            <option value="">All Categories</option>
-                            <?php
-                            // category fetch
-                            $category_query = "SELECT * FROM category ORDER BY category_name ASC";
-                            $category_result = mysqli_query($conn, $category_query);
+            <h3>Filter By</h3>
+            <div>
+                <form method="GET" action="">
+                    <select name="category_id" class="form-select form-control" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        <?php
+                        // category fetch
+                        $category_query = "SELECT * FROM category ORDER BY category_name ASC";
+                        $category_result = mysqli_query($conn, $category_query);
 
-                            if ($category_result && mysqli_num_rows($category_result) > 0) {
-                                while ($category = mysqli_fetch_assoc($category_result)) {
-                                    $selected = (isset($_GET['category_id']) && $_GET['category_id'] == $category['category_id']) ? 'selected' : '';
-                                    echo "<option value='{$category['category_id']}' $selected>" . htmlspecialchars($category['category_name']) . "</option>";
-                                }
+                        if ($category_result && mysqli_num_rows($category_result) > 0) {
+                            while ($category = mysqli_fetch_assoc($category_result)) {
+                                $selected = (isset($_GET['category_id']) && $_GET['category_id'] == $category['category_id']) ? 'selected' : '';
+                                echo "<option value='{$category['category_id']}' $selected>" . htmlspecialchars($category['category_name']) . "</option>";
                             }
-                            ?>
-                        </select>
-                    </form>
-                </div>
+                        }
+                        ?>
+                    </select>
+                </form>
             </div>
-
+        </div>
+        <div class="row gy-4" id="masonry-grid">
             <?php
             // Get the selected category from query string
             $category_filter = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
