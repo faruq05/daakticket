@@ -2,9 +2,11 @@
 ob_start();
 include 'header.php';
 include 'sidebar.php';
+
 if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
     // Get the post_id from the URL
     $post_id = $_GET['post_id'];
+    $role_id = $_SESSION['role_id'];
 
     // Query to fetch the feature image of the post
     $query = "SELECT feature_image FROM blog_post WHERE post_id = '$post_id'";
@@ -25,12 +27,6 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $delete_result = mysqli_query($conn, $delete_query);
 
         if ($delete_result) {
-            // // add the delete history in post_history
-            // $change_description = "Deleted post: " . $post['title'];
-            // $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
-            //               VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
-            // mysqli_query($conn, $log_query);
-
             $_SESSION['message'] = "Post deleted successfully!";
             $_SESSION['messageType'] = "success";
         } else {
@@ -42,7 +38,7 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $_SESSION['messageType'] = "error";
     }
     if ($_SESSION['role_id'] == 1001) {
-        header('Location: admin_dashboard.php');
+        header('Location: user_dashboard.php');
         exit();
     } else {
         header('Location: user_dashboard.php');
@@ -50,6 +46,7 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
     }
 }
 
-ob_end_flush(); ?>
+ob_end_flush();
+?>
 
 <?php include 'footer.php'; ?>

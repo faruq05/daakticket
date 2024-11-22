@@ -89,7 +89,7 @@ include 'db.php';
                         </li>
                         <!-- search ends -->
 
-                        <li class="nav-item">
+                         <li class="nav-item">
                             <?php if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1002): ?>
                                 <a class="nav-link" href="user_dashboard.php"><i class="fa-regular fa-user"></i></a>
                             <?php elseif (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1001): ?>
@@ -98,9 +98,6 @@ include 'db.php';
                                 <a class="nav-link" href="login.php"><i class="fa-regular fa-user"></i></a>
                             <?php endif; ?>
                         </li>
-
-
-
                     </ul>
                 </div>
             </div>

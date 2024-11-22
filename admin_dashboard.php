@@ -337,7 +337,7 @@ $result = mysqli_query($conn, $query);
 
                             // excerpt
                             $excerpt = substr($content, 0, 100) . '...';
-                    ?>
+                            ?>
 
                             <!-- Displaying each post -->
                             <div class="exist_post">
@@ -390,7 +390,7 @@ $result = mysqli_query($conn, $query);
 
                                 </div>
                             </div>
-                    <?php
+                            <?php
                         }
                     }
                     ?>
