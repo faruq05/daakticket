@@ -752,6 +752,12 @@ a {
     color: var(--cs-black);
 }
 
+/* .ttl{
+    font-size: 18px;
+    font-family: 'Popins';
+    margin-top: 20px;
+} */
+
 .post_react{
     display: flex;
     align-items: center;
