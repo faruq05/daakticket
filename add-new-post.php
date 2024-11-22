@@ -59,7 +59,7 @@ if (isset($_POST['submit_post'])) {
     }
 }
 
-ob_end_flush();?>
+ob_end_flush(); ?>
 
 
 <div class="main dashboard post">
@@ -96,7 +96,10 @@ ob_end_flush();?>
                     </div>
                     <div class="form-group post_button  mt-3">
                         <button type="submit" name="submit_post" class="btn btn-cs">Publish Post</button>
-                        <a href="user_dashboard.php" class="btn btn-cs ms-2">Cancel Post</a>
+                        <a href="<?php echo ($_SESSION['role_id'] == 1001) ? 'admin_dashboard.php' : 'user_dashboard.php'; ?>"
+                            class="btn btn-cs ep_dlt ms-2">
+                            Cancel Post
+                        </a>
                     </div>
                 </form>
             </div>

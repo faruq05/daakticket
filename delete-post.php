@@ -42,10 +42,10 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $_SESSION['messageType'] = "error";
     }
     if ($_SESSION['role_id'] == 1001) {
-        header('Location: user_dashboard.php');
+        header('Location: admin_dashboard.php');
         exit();
     } else {
-        header('Location: admin_dashboard.php');
+        header('Location: user_dashboard.php');
         exit();
     }
 }
