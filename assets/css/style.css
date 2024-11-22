@@ -259,6 +259,7 @@ a {
     object-fit: cover;
     width: 100%;
     transition: .2s all ease-in-out;
+    width: 100%;
 }
 
 .post_title {

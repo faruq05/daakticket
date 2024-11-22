@@ -40,21 +40,26 @@
                 <a href="blog.php" class="btn btn-cs">View All Posts</a>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="row gy-4" id="masonry-grid">
+=======
+        <div class="row" id="masonry-grid">
+
+>>>>>>> 284c8231040e7b1ff09e8c8608e3640936917544
             <?php
             $query = "SELECT p.*, u.username, c.category_name
-          FROM blog_post p
-          LEFT JOIN user u ON p.user_id = u.user_id
-          LEFT JOIN category c ON p.category_id = c.category_id
-          ORDER BY p.created_at DESC LIMIT 6";
+                FROM blog_post p
+                LEFT JOIN user u ON p.user_id = u.user_id
+                LEFT JOIN category c ON p.category_id = c.category_id
+                ORDER BY p.created_at DESC LIMIT 6";
 
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($post = mysqli_fetch_assoc($result)) {
                     $excerpt = substr($post['content'], 0, 90) . (strlen($post['content']) > 90 ? '...' : '');
-            ?>
-                    <div class="col-md-4">
+                    ?>
+                    <div class="col-md-4 mb-4">
                         <div class="blog_box">
                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                 <img src="<?php echo htmlspecialchars($post['feature_image']); ?>" class="img-fluid"
@@ -76,6 +81,7 @@
                                     </a>
                                     <p><?php echo htmlspecialchars($excerpt); ?></p>
                                 </div>
+<<<<<<< HEAD
                                 <div class="like_box mt-2 d-flex align-items-center">
                                     <i class="lni lni-thumbs-up-3"></i>
                                     <span class="like-count ps-2">
@@ -165,16 +171,17 @@
                                         </div>
                                     </div>
                                 </div>
+=======
+>>>>>>> 284c8231040e7b1ff09e8c8608e3640936917544
                             </div>
                         </div>
                     </div>
-            <?php
+                    <?php
                 }
             } else {
                 echo "<p>No posts available.</p>";
             }
             ?>
-
         </div>
     </div>
 </div>

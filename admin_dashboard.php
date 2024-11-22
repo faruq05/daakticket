@@ -371,6 +371,7 @@ $result = mysqli_query($conn, $query);
                                     <div class="col-md-2">
                                         <div class="like_box mt-2 d-flex align-items-center">
                                             <i class="lni lni-thumbs-up-3"></i>
+<<<<<<< HEAD
                                             <span class="like-count ps-2">
                                                 <?php
                                                 $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
@@ -380,6 +381,8 @@ $result = mysqli_query($conn, $query);
                                                 echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
                                                 ?>
                                             </span>
+=======
+>>>>>>> 284c8231040e7b1ff09e8c8608e3640936917544
                                             <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                                 <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                                     <i class="lni lni-comment-1-text"></i></a>
@@ -444,11 +447,19 @@ $result = mysqli_query($conn, $query);
                                                             </div>
                                                             <!-- share to social -->
                                                             <script>
+<<<<<<< HEAD
                                                                 (function() {
                                                                     var copyButton = document.querySelector('.copy-button');
                                                                     var copyInput = document.querySelector('.copy-form input');
 
                                                                     copyButton.addEventListener('click', function(e) {
+=======
+                                                                (function () {
+                                                                    var copyButton = document.querySelector('.copy-button');
+                                                                    var copyInput = document.querySelector('.copy-form input');
+
+                                                                    copyButton.addEventListener('click', function (e) {
+>>>>>>> 284c8231040e7b1ff09e8c8608e3640936917544
                                                                         e.preventDefault();
                                                                         copyInput.select();
                                                                         document.execCommand('copy');
