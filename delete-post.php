@@ -37,10 +37,8 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $_SESSION['message'] = "Post not found. Please try again.";
         $_SESSION['messageType'] = "error";
     }
-
-    // Redirect based on the role_id
-    if ($role_id == 1001) {
-        header('Location: admin_dashboard.php');
+    if ($_SESSION['role_id'] == 1001) {
+        header('Location: user_dashboard.php');
         exit();
     } else {
         header('Location: user_dashboard.php');
