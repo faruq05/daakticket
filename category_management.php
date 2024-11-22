@@ -5,16 +5,27 @@ include 'admin_sidebar.php';
 
 // Handle Add Category
 if (isset($_POST['add_category'])) {
-    $category_name = mysqli_real_escape_string($conn, $_POST['category_name']);
+    $category_name = mysqli_real_escape_string($conn, trim($_POST['category_name']));
 
     if (!empty($category_name)) {
-        $query = "INSERT INTO category (category_name) VALUES ('$category_name')";
-        if (mysqli_query($conn, $query)) {
-            $_SESSION['message'] = "Category added successfully!";
-            $_SESSION['messageType'] = "success";
-        } else {
-            $_SESSION['message'] = "Failed to add category. Please try again.";
+        // Check if the category already exists
+        $check_query = "SELECT * FROM category WHERE category_name = '$category_name'";
+        $check_result = mysqli_query($conn, $check_query);
+
+        if (mysqli_num_rows($check_result) > 0) {
+            // Category already exists
+            $_SESSION['message'] = "Category already exists!";
             $_SESSION['messageType'] = "error";
+        } else {
+            // Insert the new category
+            $query = "INSERT INTO category (category_name) VALUES ('$category_name')";
+            if (mysqli_query($conn, $query)) {
+                $_SESSION['message'] = "Category added successfully!";
+                $_SESSION['messageType'] = "success";
+            } else {
+                $_SESSION['message'] = "Failed to add category. Please try again.";
+                $_SESSION['messageType'] = "error";
+            }
         }
     } else {
         $_SESSION['message'] = "Category name cannot be empty.";
@@ -39,7 +50,8 @@ if (isset($_GET['delete_id'])) {
     header('Location: category_management.php');
     exit();
 }
-ob_end_flush(); ?>
+ob_end_flush();
+?>
 
 <div class="main categorypg">
     <div class="container">
@@ -47,7 +59,7 @@ ob_end_flush(); ?>
             <div class="col-md-12 cp60">
                 <!-- Add Category Form -->
                 <div class="add_category_form">
-                    <h3 class="mt-2 mb-4 ">Add New Category</h3>
+                    <h3 class="mt-2 mb-4">Add New Category</h3>
                     <div class="card p-4">
                         <form method="POST" action="">
                             <div class="mb-3">

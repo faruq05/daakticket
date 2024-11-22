@@ -30,16 +30,17 @@
     </svg>
 </div>
 
+
 <!-- blog starts -->
 <div class="blogs cp60">
     <div class="container">
-        <div class="row gy-4">
-            <div class="about_title d-flex align-items-center justify-content-between">
-                <h2>Featured Blogs</h2>
-                <div class="abt_btn">
-                    <a href="blog.php" class="btn btn-cs">View All Posts</a>
-                </div>
+        <div class="about_title d-flex align-items-center justify-content-between mb-5">
+            <h2>Featured Blogs</h2>
+            <div class="abt_btn">
+                <a href="blog.php" class="btn btn-cs">View All Posts</a>
             </div>
+        </div>
+        <div class="row gy-4" id="masonry-grid">
             <?php
             $query = "SELECT p.*, u.username, c.category_name
           FROM blog_post p
@@ -77,6 +78,15 @@
                                 </div>
                                 <div class="like_box mt-2 d-flex align-items-center">
                                     <i class="lni lni-thumbs-up-3"></i>
+                                    <span class="like-count ps-2">
+                                        <?php
+                                        $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                        $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
+                                        $like_result = mysqli_query($conn, $like_query);
+                                        $like_data = mysqli_fetch_assoc($like_result);
+                                        echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                        ?>
+                                    </span>
                                     <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                             <i class="lni lni-comment-1-text"></i></a>
