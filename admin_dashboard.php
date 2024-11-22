@@ -399,6 +399,7 @@ $result = mysqli_query($conn, $query);
                 </div>
             </div>
 
+            <!-- category view -->
             <div class="col-md-12">
                 <div class="add_category cp60 dash_font" id="add_category">
                     <h3 class="mb-4">Existing Categories</h3>
