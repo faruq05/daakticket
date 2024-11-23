@@ -380,6 +380,116 @@ include 'sidebar.php';
             </div>
 
 
+            <!-- notification center -->
+            <div class="col-md-12 add_post cp60 dash_font" id="notification">
+                <?php
+                // Ensure user is logged in
+                if (!isset($_SESSION['user_id'])) {
+                    echo "Please log in to view notifications.";
+                    exit;
+                }
+
+                $user_id = $_SESSION['user_id'];
+
+                // Fetch notifications for likes
+                $like_notifications_query = "
+    SELECT l.created_at, u.username, p.title, p.post_id
+    FROM likes l
+    INNER JOIN user u ON l.user_id = u.user_id
+    INNER JOIN blog_post p ON l.post_id = p.post_id
+    WHERE p.user_id = $user_id
+    ORDER BY l.created_at DESC
+";
+                $like_notifications_result = mysqli_query($conn, $like_notifications_query);
+
+                // Fetch notifications for comments
+                $comment_notifications_query = "
+    SELECT c.created_at, u.username, c.comment_text, p.title, p.post_id
+    FROM comment c
+    INNER JOIN user u ON c.user_id = u.user_id
+    INNER JOIN blog_post p ON c.post_id = p.post_id
+    WHERE p.user_id = $user_id
+    ORDER BY c.created_at DESC
+";
+                $comment_notifications_result = mysqli_query($conn, $comment_notifications_query);
+                ?>
+
+                <h3 class="mb-4">Notifications</h3>
+                <div class="accordion" id="accordionExample">
+                    <!-- like notification -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#like_panel" aria-expanded="false" aria-controls="like_panel">
+                                <h4><i class="lni lni-thumbs-up-3 pe-2"></i>Likes</h4>
+                            </button>
+                        </h2>
+                        <div id="like_panel" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <?php if ($like_notifications_result && mysqli_num_rows($like_notifications_result) > 0): ?>
+                                    <ul class="notification-list">
+                                        <?php while ($like = mysqli_fetch_assoc($like_notifications_result)): ?>
+                                            <li>
+                                                <strong>
+                                                    <?php echo htmlspecialchars($like['username']); ?>
+                                                </strong> liked your post
+                                                <a href="view-post.php?post_id=<?php echo $like['post_id']; ?>">
+                                                    "
+                                                    <?php echo htmlspecialchars($like['title']); ?>"
+                                                </a>
+                                                on
+                                                <?php echo date('d/m/Y H:i:s', strtotime($like['created_at'])); ?>.
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <p>No likes yet.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- comment notification -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h4 class="mt-3"><i class="lni lni-comment-1-text pe-2"></i>Comments</h4>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <?php if ($comment_notifications_result && mysqli_num_rows($comment_notifications_result) > 0): ?>
+                                    <ul class="notification-list">
+                                        <?php while ($comment = mysqli_fetch_assoc($comment_notifications_result)): ?>
+                                            <li>
+                                                <strong>
+                                                    <?php echo htmlspecialchars($comment['username']); ?>
+                                                </strong> commented on your
+                                                post
+                                                <a href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">
+                                                    "
+                                                    <?php echo htmlspecialchars($comment['title']); ?>"
+                                                </a>:
+                                                <q>
+                                                    <?php echo htmlspecialchars($comment['comment_text']); ?>
+                                                </q>
+                                                on
+                                                <?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>.
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <p>No comments yet.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
         </div>
     </div>

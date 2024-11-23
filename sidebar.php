@@ -1,4 +1,3 @@
-
 <div class="col-md-12 wrapper">
     <aside id="sidebar">
         <div class="d-flex">
@@ -29,12 +28,6 @@
                 <a href="#" class="sidebar-link">
                     <i class="lni lni-gallery"></i>
                     <span>Media</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-road-1"></i>
-                    <span>Activity Log</span>
                 </a>
             </li>
             <!-- <li class="sidebar-item">
@@ -77,7 +70,7 @@
                 </ul>
             </li> -->
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="user_dashboard.php#posts" class="sidebar-link">
                     <i class="lni lni-bell-1"></i>
                     <span>Notification</span>
                 </a>
@@ -95,12 +88,11 @@
                     <i class="lni lni-power-button" style="cursor: pointer;"
                         onclick="document.getElementById('logoutForm').submit();"> <span>Logout</span></i>
                 </form>
-               
+
             </a>
         </div>
     </aside>
 
-   
+
 
 </div>
-

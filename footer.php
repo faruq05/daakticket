@@ -1,3 +1,60 @@
+<!-- Share Modal -->
+<div class="modal fade" id="shareModal-<?php echo $post['post_id']; ?>" tabindex="-1"
+    aria-labelledby="shareModalLabel-<?php echo $post['post_id']; ?>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel-<?php echo $post['post_id']; ?>">
+                    Share Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center share-social">
+                <!-- Share Icons -->
+                <div class="d-flex justify-content-around align-items-center">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>"
+                        target="_blank" title="Share on Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <!-- X (Twitter) -->
+                    <a href="https://twitter.com/share?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&text=<?php echo urlencode($post['title']); ?>"
+                        target="_blank" title="Share on X">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&title=<?php echo urlencode($post['title']); ?>"
+                        target="_blank" title="Share on LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <!-- Copy Link -->
+                    <div class="copy-link">
+                        <form class="copy-form">
+                            <input type="hidden"
+                                value="https://daakticket.faruqweb.com/view-post.php?post_id=<?php echo $post['post_id']; ?>"
+                                readonly>
+                            <button type="button" class="copy-button" title="Copy Link"><i
+                                    class="fa-solid fa-copy"></i></button>
+                        </form>
+                    </div>
+                    <!-- share to social -->
+                    <script>
+                        (function() {
+                            var copyButton = document.querySelector('.copy-button');
+                            var copyInput = document.querySelector('.copy-form input');
+
+                            copyButton.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                copyInput.select();
+                                document.execCommand('copy');
+                                alert("Link copied to clipboard!");
+                            });
+                        })();
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- footer starts-->
 <div class="footer cp60" id="footer">
     <div class="container">
@@ -78,9 +135,7 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script src="assets/js/sidebar-script.js"></script>
 <script src="assets/js/script.js"></script>

@@ -46,7 +46,7 @@ if (isset($_GET['delete_id'])) {
         $_SESSION['messageType'] = "error";
     }
 
-    // Redirect to reset the URL and avoid retaining the `delete_id` parameter
+    // Redirect to reset the URL and avoid retaining the delete_id parameter
     header('Location: category_management.php');
     exit();
 }
