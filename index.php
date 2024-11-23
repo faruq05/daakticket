@@ -53,7 +53,7 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($post = mysqli_fetch_assoc($result)) {
                     $excerpt = substr($post['content'], 0, 90) . (strlen($post['content']) > 90 ? '...' : '');
-                    ?>
+            ?>
                     <div class="col-md-4 mb-4">
                         <div class="blog_box">
                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
@@ -104,12 +104,12 @@
                                     <i class="lni lni-share-1" data-bs-toggle="modal"
                                         data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                                     <!-- share modal is in footer -->
-                                     
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 }
             } else {
                 echo "<p>No posts available.</p>";

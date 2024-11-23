@@ -2,6 +2,7 @@
 include 'header.php';
 include 'admin_sidebar.php';
 
+
 // Check if the user is logged in as an admin
 if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 1001) {
     header('Location: login.php');
@@ -435,11 +436,11 @@ $result = mysqli_query($conn, $query);
                                                             </div>
                                                             <!-- share to social -->
                                                             <script>
-                                                                (function () {
+                                                                (function() {
                                                                     var copyButton = document.querySelector('.copy-button');
                                                                     var copyInput = document.querySelector('.copy-form input');
 
-                                                                    copyButton.addEventListener('click', function (e) {
+                                                                    copyButton.addEventListener('click', function(e) {
                                                                         e.preventDefault();
                                                                         copyInput.select();
                                                                         document.execCommand('copy');
