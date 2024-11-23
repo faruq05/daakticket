@@ -77,7 +77,7 @@
             </li>
             <li class="sidebar-item">
                 <a href="user_dashboard.php#browsing_histroy" class="sidebar-link">
-                    <i class="lni lni-bell-1"></i>
+                <i class="lni lni-search-text"></i>
                     <span>Browsing History</span>
                 </a>
             </li>

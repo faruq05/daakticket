@@ -25,19 +25,19 @@
             </li>
             <li class="sidebar-item">
                 <a href="admin_dashboard.php#post_history" class="sidebar-link">
-                    <i class="lni lni-gallery"></i>
+                    <i class="lni lni-box-archive-1"></i>
                     <span>Post History</span>
                 </a>
             </li>
             <li class="sidebar-item">
                 <a href="admin_dashboard.php#admin_post" class="sidebar-link">
-                    <i class="lni lni-road-1"></i>
+                    <i class="lni lni-pen-to-square"></i>
                     <span>Your Post</span>
                 </a>
             </li>
             <li class="sidebar-item">
                 <a href="admin_dashboard.php#add_category" class="sidebar-link">
-                    <i class="lni lni-road-1"></i>
+                    <i class="lni lni-dashboard-square-1"></i>
                     <span>Add New Category</span>
                 </a>
             </li>
@@ -82,7 +82,7 @@
             </li> -->
             <li class="sidebar-item">
                 <a href="admin_action.php" class="sidebar-link">
-                    <i class="lni lni-bell-1"></i>
+                    <i class="lni lni-gear-1"></i>
                     <span>Admin Actions</span>
                 </a>
             </li>
@@ -94,7 +94,7 @@
             </li>
             <li class="sidebar-item">
                 <a href="admin_dashboard.php#browsing_histroy" class="sidebar-link">
-                    <i class="lni lni-bell-1"></i>
+                    <i class="lni lni-search-text"></i>
                     <span>Browse History</span>
                 </a>
             </li>
