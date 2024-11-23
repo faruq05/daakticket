@@ -2,6 +2,13 @@
 // Get the search query from the URL
 $search_query = isset($_GET['query']) ? mysqli_real_escape_string($conn, $_GET['query']) : '';
 
+// search data store checking user logged in
+if (isset($_SESSION['user_id']) && !empty($search_query)) {
+    $user_id = $_SESSION['user_id'];
+    $insert_history_query = "INSERT INTO search_history (user_id, search_query) VALUES ('$user_id', '$search_query')";
+    mysqli_query($conn, $insert_history_query);
+}
+
 // Query to search for posts
 $query = "SELECT p.*, u.username, c.category_name
           FROM blog_post p

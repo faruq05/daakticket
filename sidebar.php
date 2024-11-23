@@ -13,7 +13,7 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="#profile" class="sidebar-link">
+                <a href="user_dashboard.php#profile" class="sidebar-link">
                     <i class="lni lni-user-4"></i>
                     <span>Profile</span>
                 </a>
@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="media.php" class="sidebar-link">
                     <i class="lni lni-gallery"></i>
                     <span>Media</span>
                 </a>
@@ -76,9 +76,15 @@
                 </a>
             </li>
             <li class="sidebar-item">
+                <a href="user_dashboard.php#browsing_histroy" class="sidebar-link">
+                    <i class="lni lni-bell-1"></i>
+                    <span>Browsing History</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="#" class="sidebar-link">
                     <i class="lni lni-shield-2-check"></i>
-                    <span>Change Paassword</span>
+                    <span>Change Password</span>
                 </a>
             </li>
         </ul>

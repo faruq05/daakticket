@@ -81,13 +81,25 @@
                 </ul>
             </li> -->
             <li class="sidebar-item">
+                <a href="admin_action.php" class="sidebar-link">
+                    <i class="lni lni-bell-1"></i>
+                    <span>Admin Actions</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="admin_dashboard.php#notification" class="sidebar-link">
                     <i class="lni lni-bell-1"></i>
                     <span>Notification</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="admin_dashboard.php#browsing_histroy" class="sidebar-link">
+                    <i class="lni lni-bell-1"></i>
+                    <span>Browse History</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="admin_dashboard.php#forgot_password" class="sidebar-link">
                     <i class="lni lni-shield-2-check"></i>
                     <span>Change Paassword</span>
                 </a>

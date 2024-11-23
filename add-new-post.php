@@ -28,6 +28,7 @@ if (isset($_POST['submit_post'])) {
 
         if (move_uploaded_file($image_tmp, $image_path)) {
             $feature_image = $image_path;
+            $file_type = mime_content_type($image_tmp); // Determine file type
         }
     }
 
@@ -37,12 +38,15 @@ if (isset($_POST['submit_post'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // Optional: Log the post creation in the post history
-        $last_post_id = mysqli_insert_id($conn);
-        $change_description = "Created new post: $title";
-        $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
-                      VALUES ('$last_post_id', '$user_id', '$change_description')";
-        mysqli_query($conn, $log_query);
+        // Get the last inserted post_id
+        $post_id = mysqli_insert_id($conn);
+
+        // Insert the media details into the media table
+        if (!empty($feature_image)) {
+            $media_query = "INSERT INTO media (post_id, file_path, file_type) 
+                            VALUES ('$post_id', '$feature_image', '$file_type')";
+            mysqli_query($conn, $media_query); // Execute media insertion query
+        }
 
         $_SESSION['message'] = 'Post created successfully!';
         $_SESSION['messageType'] = 'success';
@@ -60,7 +64,9 @@ if (isset($_POST['submit_post'])) {
     }
 }
 
-ob_end_flush(); ?>
+ob_end_flush();
+?>
+
 
 
 <div class="main dashboard post">

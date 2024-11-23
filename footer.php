@@ -135,9 +135,6 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script src="assets/js/sidebar-script.js"></script>
 <script src="assets/js/script.js"></script>
@@ -184,50 +181,5 @@
     unset($_SESSION['messageType']);
     ?>
 <?php endif; ?>
-
-
-<!-- <script src="js/wow.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(".owl-carousel").owlCarousel(
-                {
-                    items: 1,
-                    loop: true,
-                    autoplay: true,
-                    autoplayTimeout: 5000,
-                    smartSpeed: 500,
-                    margin: 20,
-                    nav: true,
-                    dots: false,
-                    touchDrag: true,
-                    mouseDrag: true,
-                    autoplayHoverPause: true,
-                    navText: ["<i class='fa-solid fa-arrow-left'></i>", "<i class='fa-solid fa-arrow-right'></i>"],
-                    responsive: {
-                        0: {
-                            items: 1,
-                        },
-                        425: {
-                            items: 1,
-                        },
-                        767: {
-                            items: 1,
-                        },
-                        768: {
-                            items: 1,
-                        },
-
-
-                    }
-                }
-            );
-
-        });
-    </script>  -->
 </body>
-
 </html>

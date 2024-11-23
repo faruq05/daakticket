@@ -337,7 +337,7 @@ $result = mysqli_query($conn, $query);
 
                             // excerpt
                             $excerpt = substr($content, 0, 100) . '...';
-                    ?>
+                            ?>
 
                             <!-- Displaying each post -->
                             <div class="exist_post">
@@ -371,6 +371,15 @@ $result = mysqli_query($conn, $query);
                                     <div class="col-md-2">
                                         <div class="like_box mt-2 d-flex align-items-center">
                                             <i class="lni lni-thumbs-up-3"></i>
+                                            <span class="like-count ps-2">
+                                                <?php
+                                                $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                                $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
+                                                $like_result = mysqli_query($conn, $like_query);
+                                                $like_data = mysqli_fetch_assoc($like_result);
+                                                echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                                ?>
+                                            </span>
                                             <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                                                 <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
                                                     <i class="lni lni-comment-1-text"></i></a>
@@ -467,7 +476,7 @@ $result = mysqli_query($conn, $query);
 
                                 </div>
                             </div>
-                    <?php
+                            <?php
                         }
                     }
                     ?>
@@ -551,46 +560,148 @@ $result = mysqli_query($conn, $query);
 
                 <div class="notification-panel">
                     <h3 class="mb-4">Notifications</h3>
+                    <div class="accordion" id="accordionExample">
+                        <!-- like notification -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#like_panel" aria-expanded="false" aria-controls="like_panel">
+                                    <h4><i class="lni lni-thumbs-up-3 pe-2"></i>Likes</h4>
+                                </button>
+                            </h2>
+                            <div id="like_panel" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <?php if ($like_notifications_result && mysqli_num_rows($like_notifications_result) > 0): ?>
+                                        <ul class="notification-list">
+                                            <?php while ($like = mysqli_fetch_assoc($like_notifications_result)): ?>
+                                                <li>
+                                                    <strong>
+                                                        <?php echo htmlspecialchars($like['username']); ?>
+                                                    </strong> liked your post
+                                                    <a href="view-post.php?post_id=<?php echo $like['post_id']; ?>">
+                                                        "
+                                                        <?php echo htmlspecialchars($like['title']); ?>"
+                                                    </a>
+                                                    on
+                                                    <?php echo date('d/m/Y H:i:s', strtotime($like['created_at'])); ?>.
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        <p>No likes yet.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- comment notification -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h4><i class="lni lni-comment-1-text pe-2"></i>Comments</h4>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <?php if ($comment_notifications_result && mysqli_num_rows($comment_notifications_result) > 0): ?>
+                                        <ul class="notification-list">
+                                            <?php while ($comment = mysqli_fetch_assoc($comment_notifications_result)): ?>
+                                                <li>
+                                                    <strong>
+                                                        <?php echo htmlspecialchars($comment['username']); ?>
+                                                    </strong> commented on your
+                                                    post
+                                                    <a href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">
+                                                        "
+                                                        <?php echo htmlspecialchars($comment['title']); ?>"
+                                                    </a>:
+                                                    <q>
+                                                        <?php echo htmlspecialchars($comment['comment_text']); ?>
+                                                    </q>
+                                                    on
+                                                    <?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>.
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        <p>No comments yet.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Like Notifications -->
-                    <h4><i class="lni lni-thumbs-up-3 pe-2"></i>Likes</h4>
-                    <?php if ($like_notifications_result && mysqli_num_rows($like_notifications_result) > 0): ?>
-                        <ul class="notification-list">
-                            <?php while ($like = mysqli_fetch_assoc($like_notifications_result)): ?>
+            <!-- browsing history -->
+            <div class="col-md-12 add_post cp60 dash_font" id="browsing_histroy">
+                <?php
+                ob_start();
+                // Ensure user is logged in
+                if (!isset($_SESSION['user_id'])) {
+                    echo "Please log in to view search history.";
+                    exit;
+                }
+
+                $user_id = $_SESSION['user_id'];
+
+                // Handle search history deletion
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_search_history'])) {
+                    $delete_query = "DELETE FROM search_history WHERE user_id = $user_id";
+                    if (mysqli_query($conn, $delete_query)) {
+                        $_SESSION['message'] = "Search history deleted successfully!";
+                        $_SESSION['messageType'] = "success";
+                    } else {
+                        $_SESSION['message'] = "Failed to delete search history. Please try again.";
+                        $_SESSION['messageType'] = "error";
+                    }
+                }
+
+                // Fetch search history
+                $search_history_query = "
+    SELECT search_query, search_timestamp
+    FROM search_history
+    WHERE user_id = $user_id
+    ORDER BY search_timestamp DESC
+";
+                $search_history_result = mysqli_query($conn, $search_history_query);
+                ob_end_flush(); ?>
+
+                <div class="history_header d-flex align-items-center justify-content-between mb-2">
+                    <h3>Browsing History</h3>
+                    <form method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete all search history?');">
+                        <button type="submit" name="delete_search_history" class="btn btn-danger mb-3">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="history-panel">
+                    <?php if ($search_history_result && mysqli_num_rows($search_history_result) > 0): ?>
+                        <ul class="history-list">
+                            <?php while ($history = mysqli_fetch_assoc($search_history_result)): ?>
                                 <li>
-                                    <strong><?php echo htmlspecialchars($like['username']); ?></strong> liked your post
-                                    <a href="view-post.php?post_id=<?php echo $like['post_id']; ?>">
-                                        "<?php echo htmlspecialchars($like['title']); ?>"
-                                    </a>
-                                    on <?php echo date('d/m/Y H:i:s', strtotime($like['created_at'])); ?>.
+                                    <span class="search-query">
+                                        You searched for <b>"<?php echo htmlspecialchars($history['search_query']); ?>"</b>
+                                    </span>
+                                    <span class="search-timestamp">
+                                        at - <b><?php echo date('d/m/Y H:i:s', strtotime($history['search_timestamp'])); ?></b>
+                                    </span>
                                 </li>
                             <?php endwhile; ?>
                         </ul>
                     <?php else: ?>
-                        <p>No likes yet.</p>
-                    <?php endif; ?>
-
-                    <!-- Comment Notifications -->
-                    <h4 class="mt-3"><i class="lni lni-comment-1-text pe-2"></i>Comments</h4>
-                    <?php if ($comment_notifications_result && mysqli_num_rows($comment_notifications_result) > 0): ?>
-                        <ul class="notification-list">
-                            <?php while ($comment = mysqli_fetch_assoc($comment_notifications_result)): ?>
-                                <li>
-                                    <strong><?php echo htmlspecialchars($comment['username']); ?></strong> commented on your
-                                    post
-                                    <a href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">
-                                        "<?php echo htmlspecialchars($comment['title']); ?>"
-                                    </a>:
-                                    <q><?php echo htmlspecialchars($comment['comment_text']); ?></q>
-                                    on <?php echo date('d/m/Y H:i:s', strtotime($comment['created_at'])); ?>.
-                                </li>
-                            <?php endwhile; ?>
-                        </ul>
-                    <?php else: ?>
-                        <p>No comments yet.</p>
+                        <p>No search history available.</p>
                     <?php endif; ?>
                 </div>
+            </div>
 
+            <!-- forgot_password -->
+            <div class="col-md-12 add_post cp60 dash_font" id="forgot_password">
+                <h3>Forgot Password?</h3>
+                <p class="mt-2"><a href="forgot_password.php">Click Here</a> to change password</p>
             </div>
         </div>
     </div>

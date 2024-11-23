@@ -30,16 +30,9 @@ if (isset($_FILES['profile_picture'])) {
 
             // Move the uploaded file to the uploads folder
             if (move_uploaded_file($file_tmp, $file_path)) {
-                $update_query = "UPDATE User_Profile SET profile_picture = '$file_path' WHERE user_id = '$user_id'";
+                // Update the profile picture in the User_Profile table
+                $update_query = "UPDATE user_profile SET profile_picture = '$file_path' WHERE user_id = '$user_id'";
                 $update_result = mysqli_query($conn, $update_query);
-
-                if ($update_result) {
-                    $_SESSION['message'] = "Profile picture updated successfully!";
-                    $_SESSION['messageType'] = 'success';
-                } else {
-                    $_SESSION['message'] = "Failed to update profile picture in the database!";
-                    $_SESSION['messageType'] = 'error';
-                }
             } else {
                 $_SESSION['message'] = "Failed to upload the profile picture!";
                 $_SESSION['messageType'] = 'error';
