@@ -176,7 +176,7 @@ ob_end_flush();
                         $profile_image = !empty($comment['profile_picture'])
                             ? htmlspecialchars($comment['profile_picture'])
                             : 'assets/uploads/profile_pictures/default_profile.png';
-                        ?>
+                ?>
                         <div class="comment-add">
                             <img src="<?php echo $profile_image; ?>" alt="User Image" class="img-fluid me-3"
                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
@@ -190,7 +190,7 @@ ob_end_flush();
                                 <p class="comment-text"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
                             </div>
                         </div>
-                        <?php
+                <?php
                     }
                 } else {
                     echo "<p>No comments yet. Be the first to comment!</p>";

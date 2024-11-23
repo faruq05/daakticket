@@ -335,11 +335,11 @@ include 'sidebar.php';
                                                         </div>
                                                         <!-- share to social -->
                                                         <script>
-                                                            (function () {
+                                                            (function() {
                                                                 var copyButton = document.querySelector('.copy-button');
                                                                 var copyInput = document.querySelector('.copy-form input');
 
-                                                                copyButton.addEventListener('click', function (e) {
+                                                                copyButton.addEventListener('click', function(e) {
                                                                     e.preventDefault();
                                                                     copyInput.select();
                                                                     document.execCommand('copy');
