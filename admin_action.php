@@ -1,40 +1,42 @@
 <?php
-session_start();
+include "header.php";
 include 'db.php';
-include 'header.php';
 include 'admin_sidebar.php';
-
-// Function to log admin actions dynamically
+ob_start();
+// Function to log admin actions
 if (!function_exists('log_admin_action')) {
-    function log_admin_action($conn, $action_description) {
-        if (isset($_SESSION['user_id']) && !empty($action_description)) {
-            $user_id = (int)$_SESSION['user_id'];
+    function log_admin_action($conn, $action_description)
+    {
+        if (isset($_SESSION['user_id'])) {
+            $user_id = (int) $_SESSION['user_id'];
             $action_description = mysqli_real_escape_string($conn, $action_description);
             $log_query = "INSERT INTO admin_actions (user_id, action_description) 
-                          VALUES ($user_id, '$action_description')";
+                         VALUES ($user_id, '$action_description')";
             if (!mysqli_query($conn, $log_query)) {
                 error_log("Failed to log admin action: " . mysqli_error($conn));
             }
         }
     }
 }
-
-// Example: Log the session message dynamically
-if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
-    log_admin_action($conn, $_SESSION['message']);
-    unset($_SESSION['message']); // Prevent logging the same message multiple times
+// Example of logging an action (you can remove this after testing)
+if (isset($_SESSION['user_id'])) {
+    log_admin_action($conn, "Viewed admin activity log");
 }
-
 // Fetch all admin actions
 $query = "SELECT a.action_id, u.username, a.action_description, a.action_timestamp 
           FROM admin_actions a
-          LEFT JOIN users u ON a.user_id = u.user_id
+          LEFT JOIN user u ON a.user_id = u.user_id
           ORDER BY a.action_timestamp DESC";
 $result = mysqli_query($conn, $query);
+// Check for query error
+if (!$result) {
+    echo "Error: " . mysqli_error($conn);
+}
+ob_end_flush();
 ?>
-<div class="main">
+<div class=" main dashboard cp60">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-12">
                 <h3 class="mt-4 mb-4">Admin Activity Log</h3>
                 <div class="card">
