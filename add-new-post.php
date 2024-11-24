@@ -4,7 +4,6 @@ include 'header.php';
 include 'sidebar.php';
 
 if (isset($_POST['submit_post'])) {
-    // Ensure the user is signed in
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['message'] = 'You must be logged in to create a post.';
         $_SESSION['messageType'] = 'error';
@@ -20,7 +19,7 @@ if (isset($_POST['submit_post'])) {
     $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
     $feature_image = '';
 
-    // Handle feature image upload
+    // feature image
     if (isset($_FILES['feature_image']) && $_FILES['feature_image']['error'] === UPLOAD_ERR_OK) {
         $image_tmp = $_FILES['feature_image']['tmp_name'];
         $image_name = 'post_' . time() . '_' . $_FILES['feature_image']['name'];
@@ -28,7 +27,7 @@ if (isset($_POST['submit_post'])) {
 
         if (move_uploaded_file($image_tmp, $image_path)) {
             $feature_image = $image_path;
-            $file_type = mime_content_type($image_tmp); // Determine file type
+            $file_type = mime_content_type($image_tmp);
         }
     }
 
@@ -38,8 +37,12 @@ if (isset($_POST['submit_post'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // Get the last inserted post_id
         $post_id = mysqli_insert_id($conn);
+
+        $change_description = "Created new post: $title";
+        $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+                  VALUES ('$post_id', '$user_id', '$change_description')";
+        mysqli_query($conn, $log_query);
 
         // Insert the media details into the media table
         if (!empty($feature_image)) {
@@ -48,7 +51,7 @@ if (isset($_POST['submit_post'])) {
             mysqli_query($conn, $media_query); // Execute media insertion query
         }
 
-        $_SESSION['message'] = 'Post created successfully!';
+        $_SESSION['message'] = 'Post created successfully, waiting for admin approval!';
         $_SESSION['messageType'] = 'success';
 
         // Redirect based on role

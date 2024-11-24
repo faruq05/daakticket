@@ -70,7 +70,7 @@
                 </ul>
             </li> -->
             <li class="sidebar-item">
-                <a href="user_dashboard.php#posts" class="sidebar-link">
+                <a href="user_dashboard.php#notification" class="sidebar-link">
                     <i class="lni lni-bell-1"></i>
                     <span>Notification</span>
                 </a>

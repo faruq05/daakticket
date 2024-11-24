@@ -35,17 +35,17 @@ if (isset($_GET['post_id'])) {
         }
 
         // Update post in the database
-        $update_query = "UPDATE blog_post SET title = '$title', content = '$content', feature_image = '$feature_image', category_id = '$category_id', updated_at = NOW() WHERE post_id = '$post_id'";
+        $update_query = "UPDATE blog_post SET title = '$title', content = '$content', feature_image = '$feature_image', category_id = '$category_id', status = 'pending', updated_at = NOW() WHERE post_id = '$post_id'";
         $update_result = mysqli_query($conn, $update_query);
 
         if ($update_result) {
             // add the update in post_history
-            // $change_description = "Updated post: $title";
-            // $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
-            //               VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
-            // mysqli_query($conn, $log_query);
+            $change_description = "Updated post: $title";
+            $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+                          VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
+            mysqli_query($conn, $log_query);
 
-            $_SESSION['message'] = "Post updated successfully!";
+            $_SESSION['message'] = "Post updated successfully, waiting for admin approval!";
             $_SESSION['messageType'] = "success";
             header('Location: user_dashboard.php');
             exit();

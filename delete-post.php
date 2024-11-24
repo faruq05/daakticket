@@ -27,6 +27,11 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
         $delete_result = mysqli_query($conn, $delete_query);
 
         if ($delete_result) {
+            
+            $change_description = "Deleted post: " . $post['title'];
+            $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
+                          VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
+            mysqli_query($conn, $log_query);
             $_SESSION['message'] = "Post deleted successfully!";
             $_SESSION['messageType'] = "success";
         } else {

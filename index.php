@@ -46,6 +46,7 @@
                 FROM blog_post p
                 LEFT JOIN user u ON p.user_id = u.user_id
                 LEFT JOIN category c ON p.category_id = c.category_id
+                WHERE p.status = 'approved'
                 ORDER BY p.created_at DESC LIMIT 6";
 
             $result = mysqli_query($conn, $query);

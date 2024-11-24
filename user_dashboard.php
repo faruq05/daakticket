@@ -191,193 +191,8 @@ include 'sidebar.php';
 
 
             <!-- add post is at add-new-post.php-->
-            <!-- display -->
-            <div class="col-md-12 add_post cp60 dash_font" id="posts">
-                <h2 class="mb-3">Your Posts</h2>
-
-                <?php
-                $user_id = $_SESSION['user_id'];
-
-                // count post
-                $query = "SELECT COUNT(*) as post_count FROM blog_post WHERE user_id = '$user_id'";
-                $result = mysqli_query($conn, $query);
-                $post_count = 0;
-
-                if ($result) {
-                    $row = mysqli_fetch_assoc($result);
-                    $post_count = $row['post_count'];
-                }
-                ?>
-
-                <p>You have <strong><?php echo $post_count; ?></strong> post(s).</p>
-
-                <!-- display post code here  -->
-                <?php
-                $query = "SELECT blog_post.*, category.category_name FROM blog_post
-                LEFT JOIN category ON blog_post.category_id = category.category_id
-                WHERE blog_post.user_id = '$user_id' ORDER BY blog_post.created_at DESC";
-                $result = mysqli_query($conn, $query);
-
-                if ($result) {
-                    while ($post = mysqli_fetch_assoc($result)) {
-                        $post_id = $post['post_id'];
-                        $title = $post['title'];
-                        $content = $post['content'];
-                        $feature_image = $post['feature_image'];
-                        $created_at = date('F j, Y, g:i a', strtotime($post['created_at']));
-                        $updated_at = date('F j, Y, g:i a', strtotime($post['updated_at']));
-                        $category_name = $post['category_name'];
-
-                        // excerpt
-                        $excerpt = substr($content, 0, 100) . '...';
-                        ?>
-
-                        <!-- Displaying each post -->
-                        <div class="exist_post">
-                            <div class="row align-items-center">
-                                <div class="col-md-2">
-                                    <div class="post_ftimg">
-                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
-                                            <?php if ($feature_image && file_exists($feature_image)) { ?>
-                                                <img src="<?php echo $feature_image; ?>" class="img-fluid" alt="Post Image">
-                                            <?php } else { ?>
-                                                <img src="assets/uploads/post_images/default_image.jpg" class="img-fluid"
-                                                    alt="Default Image">
-                                            <?php } ?></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="ep_title">
-                                        <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
-                                            <h3><?php echo htmlspecialchars($title); ?></h3>
-                                        </a>
-                                        <p class="mt-2 mb-2"><?php echo $excerpt; ?></p>
-                                        <span>Category: <?php echo htmlspecialchars($category_name); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="created">
-                                        <span>Created at <?php echo $created_at; ?></span> <br>
-                                        <span>Updated at <?php echo $updated_at; ?></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="like_box mt-2 d-flex align-items-center">
-                                        <i class="lni lni-thumbs-up-3"></i>
-                                        <span class="like-count ps-2">
-                                        <?php
-                                        $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
-                                        $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
-                                        $like_result = mysqli_query($conn, $like_query);
-                                        $like_data = mysqli_fetch_assoc($like_result);
-                                        echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
-                                        ?>
-                                    </span>
-                                        <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
-                                            <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
-                                                <i class="lni lni-comment-1-text"></i></a>
-                                            <span class="comment-count">
-                                                <?php
-                                                $post_id = $post['post_id'];
-                                                $comment_query = "SELECT COUNT(*) AS comment_count FROM comment WHERE post_id = '$post_id'";
-                                                $comment_result = mysqli_query($conn, $comment_query);
-                                                $comment_data = mysqli_fetch_assoc($comment_result);
-                                                echo htmlspecialchars($comment_data['comment_count'] ?? 0); // if no comments then 0
-                                                ?>
-                                            </span>
-                                        </div>
-                                        <!-- Share Modal Trigger -->
-                                        <i class="lni lni-share-1" data-bs-toggle="modal"
-                                            data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
-                                    </div>
-
-
-
-                                    <!-- Share Modal -->
-                                    <div class="modal fade" id="shareModal-<?php echo $post['post_id']; ?>" tabindex="-1"
-                                        aria-labelledby="shareModalLabel-<?php echo $post['post_id']; ?>" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title"
-                                                        id="shareModalLabel-<?php echo $post['post_id']; ?>">
-                                                        Share Post</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-center share-social">
-                                                    <!-- Share Icons -->
-                                                    <div class="d-flex justify-content-around align-items-center">
-                                                        <!-- Facebook -->
-                                                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>"
-                                                            target="_blank" title="Share on Facebook">
-                                                            <i class="fa-brands fa-facebook-f"></i>
-                                                        </a>
-                                                        <!-- X (Twitter) -->
-                                                        <a href="https://twitter.com/share?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&text=<?php echo urlencode($post['title']); ?>"
-                                                            target="_blank" title="Share on X">
-                                                            <i class="fa-brands fa-x-twitter"></i>
-                                                        </a>
-                                                        <!-- LinkedIn -->
-                                                        <a href="https://www.linkedin.com/shareArticle?url=<?php echo urlencode('https://daakticket.faruqweb.com/view-post.php?post_id=' . $post['post_id']); ?>&title=<?php echo urlencode($post['title']); ?>"
-                                                            target="_blank" title="Share on LinkedIn">
-                                                            <i class="fa-brands fa-linkedin-in"></i>
-                                                        </a>
-                                                        <!-- Copy Link -->
-                                                        <div class="copy-link">
-                                                            <form class="copy-form">
-                                                                <input type="hidden"
-                                                                    value="https://daakticket.faruqweb.com/view-post.php?post_id=<?php echo $post['post_id']; ?>"
-                                                                    readonly>
-                                                                <button type="button" class="copy-button" title="Copy Link"><i
-                                                                        class="fa-solid fa-copy"></i></button>
-                                                            </form>
-                                                        </div>
-                                                        <!-- share to social -->
-                                                        <script>
-                                                            (function() {
-                                                                var copyButton = document.querySelector('.copy-button');
-                                                                var copyInput = document.querySelector('.copy-form input');
-
-                                                                copyButton.addEventListener('click', function(e) {
-                                                                    e.preventDefault();
-                                                                    copyInput.select();
-                                                                    document.execCommand('copy');
-                                                                    alert("Link copied to clipboard!");
-                                                                });
-                                                            })();
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="ep_dlt d-flex justify-content-center">
-                                        <a href="delete-post.php?post_id=<?php echo $post_id; ?>"
-                                            onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
-                                            <i class="lni lni-basket-shopping-3"></i>
-                                        </a>
-                                        <a href="edit-post.php?post_id=<?php echo $post_id; ?>" class="edtp"><i
-                                                class="lni lni-pen-to-square"></i></a>
-                                        <!-- Add a link to view post history -->
-                                        <!-- <a href="user_dashboard.php?post_id=<?php echo $post_id; ?>#Post_history"
-                                            class="history-link">
-                                            <i class="lni lni-bookmark"></i> History
-                                        </a> -->
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
-                <!-- Add New Post Button -->
-                <a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
-            </div>
+            <!-- user post info is in fetch_post.php -->
+            <?php include 'fetch-post.php'; ?>
 
 
             <!-- notification center -->
@@ -412,6 +227,24 @@ include 'sidebar.php';
     ORDER BY c.created_at DESC
 ";
                 $comment_notifications_result = mysqli_query($conn, $comment_notifications_query);
+
+                // Fetch notifications for post approval by admin
+                $approval_notifications_query = "
+    SELECT p.title, p.post_id, p.updated_at
+    FROM blog_post p
+    WHERE p.user_id = $user_id AND p.status = 'approved'
+    ORDER BY p.updated_at DESC
+";
+                $approval_notifications_result = mysqli_query($conn, $approval_notifications_query);
+
+                // Fetch notifications for post rejection by admin
+                $rejection_notifications_query = "
+    SELECT p.title, p.post_id, p.updated_at
+    FROM blog_post p
+    WHERE p.user_id = $user_id AND p.status = 'rejected'
+    ORDER BY p.updated_at DESC
+";
+                $rejection_notifications_result = mysqli_query($conn, $rejection_notifications_query);
                 ?>
 
                 <div class="notification-panel">
@@ -487,6 +320,55 @@ include 'sidebar.php';
                                 </div>
                             </div>
                         </div>
+                        <!-- Post Approval Notifications -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#approval_panel" aria-expanded="false"
+                                    aria-controls="approval_panel">
+                                    <h4><i class="lni lni-gear-1"></i><i class="lni lni-checkmark-circle pe-2"></i>Post Update</h4>
+                                </button>
+                            </h2>
+                            <div id="approval_panel" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <h3 class="mt-2 mb-2">Approved Posts</h3>
+                                    <?php if ($approval_notifications_result && mysqli_num_rows($approval_notifications_result) > 0): ?>
+                                        <ul class="notification-list">
+                                            <?php while ($approval = mysqli_fetch_assoc($approval_notifications_result)): ?>
+                                                <li>
+                                                    <strong>Your post
+                                                        <a
+                                                            href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">"<?php echo htmlspecialchars($approval['title']); ?>"</a>
+                                                    </strong>
+                                                    has been approved by admin on
+                                                    <?php echo date('d/m/Y H:i:s', strtotime($approval['updated_at'])); ?>.
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        <p>No posts have been approved yet.</p>
+                                    <?php endif; ?>
+                                    <h3 class="mt-2 mb-2">Rejected Posts</h3>
+                                    <?php if ($rejection_notifications_result && mysqli_num_rows($rejection_notifications_result) > 0): ?>
+                                        <ul class="notification-list">
+                                            <?php while ($rejection = mysqli_fetch_assoc($rejection_notifications_result)): ?>
+                                                <li>
+                                                    <strong>Your post
+                                                        <a
+                                                            href="view-post.php?post_id=<?php echo $comment['post_id']; ?>">"<?php echo htmlspecialchars($rejection['title']); ?>"</a></strong>
+                                                    has been rejected by admin on
+                                                    <?php echo date('d/m/Y H:i:s', strtotime($rejection['updated_at'])); ?>.
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        <p>No posts have been rejected yet.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

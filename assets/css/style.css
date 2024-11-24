@@ -41,6 +41,20 @@ p {
     background-color: var(--cs-dangerhover);
 }
 
+.btn-cscolor{
+    background-color: var(--cs-accent);
+    color: var(--cs-white);
+}
+
+.btn-cscolor:hover{
+    background-color: var(--cs-hover);
+    color: var(--cs-white);
+}
+
+.aprv td a:hover{
+    color: var(--cs-hover);
+}
+
 h1 {
     font-size: 80px;
     font-weight: 800;
@@ -158,6 +172,7 @@ a {
 .share-social a i,
 .copy-link form button i {
     color: var(--cs-accent);
+    margin: 0;
 }
 
 /* header */
@@ -380,7 +395,7 @@ a {
     transition: .2s all ease-in-out;
 }
 
-.copyright p a:hover {
+.copyright p a:hover, .claim p a:hover {
     color: var(--cs-hover);
 }
 
@@ -621,7 +636,7 @@ a {
 
 .exist_post i {
     font-size: 22px;
-    margin-right: 10px;
+ 
 }
 
 .ep_title a h3 {
@@ -642,6 +657,9 @@ a {
     color: var(--cs-accent);
 }
 
+.ep_dlt{
+    gap: 10px;
+}
 .ep_dlt .dltp i {
     color: #fff;
     background-color: var(--cs-danger);
@@ -903,10 +921,54 @@ a {
     margin: 20px auto;
     padding: 10px;
 }
+
 .gallery-item img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* admin post approve */
+.menu_tab {
+    margin-top: 50px;
+}
+
+.menu_tab ul {
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu_tab_user ul {
+    justify-content: start;
+    gap: 20px;
+}
+
+.nav-pills .nav-link {
+
+    border: 1px solid var(--cs-warning);
+    transition: .2s all ease-in-out;
+    color: var(--cs-black);
+}
+
+.nav-pills .nav-link:hover{
+    border: 1px solid var(--cs-warnhover);
+
+    color: var(--cs-white);
+
+    background-color: var(--cs-warnhover);
+}
+
+.nav-pills .nav-link.active {
+
+    border: 1px solid var(--cs-warnhover);
+
+    color: var(--cs-white);
+
+    background-color: var(--cs-warnhover);
+}
+
+.drp button i{
+    margin: 0;
 }

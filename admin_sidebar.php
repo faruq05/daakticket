@@ -36,6 +36,12 @@
                 </a>
             </li>
             <li class="sidebar-item">
+                <a href="approve_post.php" class="sidebar-link">
+                    <i class="lni lni-pen-to-square"></i>
+                    <span>Approve Post</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="admin_dashboard.php#add_category" class="sidebar-link">
                     <i class="lni lni-dashboard-square-1"></i>
                     <span>Add New Category</span>
