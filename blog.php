@@ -120,7 +120,10 @@
                     <?php
                 }
             } else {
-                echo "<p>No posts available.</p>";
+                echo '<div class="nothing_found text-center">
+                <img src="assets/uploads/published.png" class="img-fluid w-10" alt="published">
+                <p class="text-center mt-4">No posts found.</p>
+              </div>';
             }
             ?>
         </div>

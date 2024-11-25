@@ -1,4 +1,5 @@
 <?php
+require 'init.php';
 $servername = "localhost";
 $username = "root";
 $password = "";

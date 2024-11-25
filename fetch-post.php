@@ -232,7 +232,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                     }
                 } else {
                     echo '<div class="nothing_found text-center">
-                    <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                    <img src="assets/uploads/published.png" class="img-fluid w-10" alt="published">
                     <p class="text-center mt-4">No Published posts found.</p>
                   </div>';
                 }
@@ -426,7 +426,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                     }
                 } else {
                     echo '<div class="nothing_found text-center">
-                    <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                    <img src="assets/uploads/draft.png" class="img-fluid w-10" alt="draft">
                     <p class="text-center mt-4">No draft posts found.</p>
                   </div>';
                 }
@@ -592,7 +592,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                     }
                 } else {
                     echo '<div class="nothing_found text-center">
-                    <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                    <img src="assets/uploads/pending.png" class="img-fluid w-10" alt="pending">
                     <p class="text-center mt-4">No Pending posts found.</p>
                   </div>';
                 }
@@ -679,7 +679,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                     }
                 } else {
                     echo '<div class="nothing_found text-center">
-                            <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                            <img src="assets/uploads/rejected.png" class="img-fluid w-10" alt="rejected">
                             <p class="text-center mt-4">No Rejected posts found.</p>
                           </div>';
                 }

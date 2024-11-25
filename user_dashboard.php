@@ -278,7 +278,10 @@ include 'sidebar.php';
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No likes yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/like.png" class="img-fluid w-10" alt="like">
+                                            <p class="text-center mt-4">No likes yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -315,7 +318,10 @@ include 'sidebar.php';
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No comments yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/comment.png" class="img-fluid w-10" alt="comment">
+                                            <p class="text-center mt-4">No comments yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -326,7 +332,8 @@ include 'sidebar.php';
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#approval_panel" aria-expanded="false"
                                     aria-controls="approval_panel">
-                                    <h4><i class="lni lni-gear-1"></i><i class="lni lni-checkmark-circle pe-2"></i>Post Update</h4>
+                                    <h4><i class="lni lni-gear-1"></i><i class="lni lni-checkmark-circle pe-2"></i>Post
+                                        Update</h4>
                                 </button>
                             </h2>
                             <div id="approval_panel" class="accordion-collapse collapse" aria-labelledby="headingThree"
@@ -347,7 +354,10 @@ include 'sidebar.php';
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No posts have been approved yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/approved.png" class="img-fluid w-10" alt="approved">
+                                            <p class="text-center mt-4">No posts have been approved yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                     <h3 class="mt-2 mb-2">Rejected Posts</h3>
                                     <?php if ($rejection_notifications_result && mysqli_num_rows($rejection_notifications_result) > 0): ?>
@@ -363,7 +373,10 @@ include 'sidebar.php';
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No posts have been rejected yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/rejected.png" class="img-fluid w-10" alt="rejected">
+                                            <p class="text-center mt-4">No posts have been rejected yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -431,7 +444,10 @@ include 'sidebar.php';
                             <?php endwhile; ?>
                         </ul>
                     <?php else: ?>
-                        <p>No search history available.</p>
+                        <div class="nothing_found text-center">
+                            <img src="assets/uploads/no_history.png" class="img-fluid w-10" alt="no_history">
+                            <p class="text-center mt-4">No search history available.</p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

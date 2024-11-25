@@ -115,9 +115,9 @@
                 }
             } else {
                 echo '<div class="nothing_found text-center">
-                <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
-                <p class="text-center mt-4">No Published posts found.</p>
-              </div>';
+                    <img src="assets/uploads/published.png" class="img-fluid w-10" alt="published">
+                    <p class="text-center mt-4">No Published posts found.</p>
+                  </div>';
             }
             ?>
         </div>

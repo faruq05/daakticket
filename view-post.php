@@ -141,34 +141,6 @@ $like_count_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $p
 $like_count_result = mysqli_query($conn, $like_count_query);
 $like_count = mysqli_fetch_assoc($like_count_result)['like_count'];
 
-
-//report code
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
-    if (!empty($_POST['post_id']) && !empty($_POST['report_reason'])) {
-        $post_id = intval($_POST['post_id']);
-        $report_reason = mysqli_real_escape_string($conn, $_POST['report_reason']);
-
-        // Insert the report into the database
-        $report_query = "INSERT INTO report (post_id, report_reason, report_date)
-                         VALUES ($post_id, '$report_reason', NOW())";
-
-        if (mysqli_query($conn, $report_query)) {
-            $_SESSION['message'] = "Thank you for your report. Our team will review it shortly.";
-            $_SESSION['messageType'] = "success";
-        } else {
-            $_SESSION['message'] = "An error occurred. Please try again.";
-            $_SESSION['messageType'] = "error";
-        }
-    } else {
-        $_SESSION['message'] = "Invalid report submission.";
-        $_SESSION['messageType'] = "error";
-    }
-
-    // Redirect to the same page to avoid resubmission
-    header("Location: view-post.php?post_id=$post_id");
-    exit();
-}
-
 ob_end_flush();
 ?>
 
@@ -200,7 +172,7 @@ ob_end_flush();
 
                 <div class="post_react">
                     <!-- Like Section -->
-                    <div class="like-section">
+                    <div class="like-section" id="like_section">
                         <form method="POST">
                             <input type="hidden" name="toggle_like" value="1">
                             <button type="submit" class="like-icon-button">
@@ -228,10 +200,42 @@ ob_end_flush();
                             data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
                     <div class="report_box">
-                        <!-- report trigger -->
-                        <i class="lni lni-flag-1" data-bs-toggle="modal"
+                        <?php
+                        // report
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_report'])) {
+                            // Retrieve the reporter's user ID from the session
+                            if (!isset($_SESSION['user_id'])) {
+                                $_SESSION['message'] = "You must be logged in to report a post.";
+                                $_SESSION['messageType'] = "error";
+                                header("Location: login.php");
+                                exit();
+                            }
+                        
+                            $user_id = intval($_SESSION['user_id']);
+                            $post_id = intval($_POST['post_id']);  
+                            $report_reason = $conn->real_escape_string($_POST['report_reason']); 
+                        
+                            // Insert report into the database
+                            $report_query = "INSERT INTO report (post_id, report_reason, user_id) 
+                                             VALUES ('$post_id', '$report_reason', '$user_id')";
+                        
+                            if ($conn->query($report_query)) {
+                                $_SESSION['message'] = "Thank you for your report. Our team will review it shortly.";
+                                $_SESSION['messageType'] = "success";
+                            } else {
+                                $_SESSION['message'] = "An error occurred. Please try again.";
+                                $_SESSION['messageType'] = "error";
+                            }
+                            header("Location: view-post.php?post_id=$post_id");
+                            exit();
+                        }  
+                        ?>
+                        <!-- Report trigger -->
+                        <i class="lni lni-flag-1 ms-2" data-bs-toggle="modal"
                             data-bs-target="#reportModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
+
+
                     <!-- Share Modal -->
                     <div class="modal " id="shareModal-<?php echo $post['post_id']; ?>" tabindex="-1"
                         aria-labelledby="shareModalLabel-<?php echo $post['post_id']; ?>" aria-hidden="true">
@@ -291,13 +295,12 @@ ob_end_flush();
                         </div>
                     </div>
 
-
                     <!-- Report Modal -->
                     <div class="modal fade" id="reportModal-<?php echo $post['post_id']; ?>" tabindex="-1"
                         aria-labelledby="reportModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="view-post.php?post_id=<?php echo $post['post_id']; ?>">
+                                <form method="POST" action="submit_report.php">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -306,22 +309,21 @@ ob_end_flush();
                                     <div class="modal-body">
                                         <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
                                         <div class="mb-3">
-                                            <label for="reportReason" class="form-label">Reason for Reporting
-                                                (required)</label>
-                                            <textarea name="report_reason" id="reportReason" class="form-control"
+                                            <label for="reportReason" class="form-label">Reason for Reporting</label>
+                                            <textarea class="form-control" id="reportReason" name="report_reason"
                                                 rows="4" required></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-danger" name="submit_report">Submit Report</button>
+                                        <button type="button" class="btn btn-delete"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-edit" name="submit_report">Submit
+                                            Report</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>
@@ -360,7 +362,7 @@ ob_end_flush();
                         <div class="comment-buttons">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <?php if ($_SESSION['user_id'] === $comment['user_id']) { ?>
+                                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $comment['user_id']) { ?>
                                         <a href="view-post.php?post_id=<?php echo $post_id; ?>&comment_id=<?php echo $comment['comment_id']; ?>"
                                             class="btn btn-edit">Edit</a>
                                         <a href="view-post.php?post_id=<?php echo $post_id; ?>&delete=1&comment_id=<?php echo $comment['comment_id']; ?>"
@@ -369,7 +371,6 @@ ob_end_flush();
                                     <?php } ?>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 <?php }

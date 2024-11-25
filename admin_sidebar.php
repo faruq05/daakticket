@@ -38,7 +38,7 @@
             <li class="sidebar-item">
                 <a href="approve_post.php" class="sidebar-link">
                     <i class="lni lni-check-circle-1"></i>
-                    <span>Approve Post</span>
+                    <span>Post Manager</span>
                 </a>
             </li>
             <li class="sidebar-item">

@@ -12,6 +12,7 @@ $pending_search_query = isset($_GET['pending_search']) ? mysqli_real_escape_stri
 $approved_search_query = isset($_GET['approved_search']) ? mysqli_real_escape_string($conn, $_GET['approved_search']) : '';
 $rejected_search_query = isset($_GET['rejected_search']) ? mysqli_real_escape_string($conn, $_GET['rejected_search']) : '';
 
+
 // Fetch posts based on status
 $pending_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_image, u.username, bp.created_at 
                         FROM blog_post bp
@@ -39,6 +40,17 @@ $rejected_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_ima
                                                            OR u.username LIKE '%$rejected_search_query%')
                          ORDER BY bp.created_at DESC";
 $rejected_posts = mysqli_query($conn, $rejected_posts_query);
+
+$reported_posts_query = "SELECT rp.report_id, bp.post_id, bp.title, bp.content, bp.created_at, 
+                                u.username AS author, r.username AS reporter, rp.report_reason, rp.report_date
+                         FROM report rp
+                         INNER JOIN blog_post bp ON rp.post_id = bp.post_id
+                         INNER JOIN user u ON bp.user_id = u.user_id
+                         INNER JOIN user r ON rp.user_id = r.user_id
+                         ORDER BY rp.report_date DESC";
+$reported_posts = mysqli_query($conn, $reported_posts_query);
+
+
 ?>
 
 <div class="main dashboard">
@@ -73,6 +85,14 @@ $rejected_posts = mysqli_query($conn, $rejected_posts_query);
                                 type="button" role="tab" aria-controls="pills-rejected"
                                 aria-selected="<?php echo ($current_tab == 'rejected' ? 'true' : 'false'); ?>">
                                 Rejected Posts
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link <?php echo ($current_tab == 'report' ? 'active' : ''); ?>"
+                                id="pills-report-tab" data-bs-toggle="pill" data-bs-target="#pills-rejected"
+                                type="button" role="tab" aria-controls="pills-report"
+                                aria-selected="<?php echo ($current_tab == 'report' ? 'true' : 'false'); ?>">
+                                Report Posts
                             </button>
                         </li>
                     </ul>
@@ -124,6 +144,8 @@ $rejected_posts = mysqli_query($conn, $rejected_posts_query);
                             </form>
                             <?php displayPostsTable($rejected_posts, 'rejected'); ?>
                         </div>
+
+                        
                     </div>
                 </div>
             </div>
@@ -195,6 +217,10 @@ function displayPostsTable($posts, $tab)
         </div>
     <?php endif;
 }
+
+
 ?>
+
+
 
 <?php include 'footer.php'; ?>

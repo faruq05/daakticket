@@ -426,7 +426,10 @@ $result = mysqli_query($conn, $query);
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No likes yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/like.png" class="img-fluid w-10" alt="like">
+                                            <p class="text-center mt-4">No likes yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -463,7 +466,10 @@ $result = mysqli_query($conn, $query);
                                             <?php endwhile; ?>
                                         </ul>
                                     <?php else: ?>
-                                        <p>No comments yet.</p>
+                                        <div class="nothing_found text-center mt-2">
+                                            <img src="assets/uploads/comment.png" class="img-fluid w-10" alt="comment">
+                                            <p class="text-center mt-4">No comments yet.</p>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -530,7 +536,10 @@ $result = mysqli_query($conn, $query);
                             <?php endwhile; ?>
                         </ul>
                     <?php else: ?>
-                        <p>No search history available.</p>
+                        <div class="nothing_found text-center">
+                            <img src="assets/uploads/no_history.png" class="img-fluid w-10" alt="no_history">
+                            <p class="text-center mt-4">No search history available.</p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
