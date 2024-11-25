@@ -28,7 +28,7 @@ if ($stmt->affected_rows > 0) {
     //Credentials
     $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->Username = 'daakticket05@gmail.com';         //SMTP username
-    $mail->Password = 'uitwbfxnprpgimjd';               //SMTP password
+    $mail->Password = 'doeybjsruqeejdom';               //SMTP password
 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
     $mail->Port = 587;

@@ -15,7 +15,7 @@ if (isset($_POST['submit-contact-form'])) {
     $subject = $_POST['subject'];
     $message = $_POST['message'];
 
-    //Create an instance; passing `true` enables exceptions
+    //Create an instance; passing true enables exceptions
     $mail = new PHPMailer(true);
 
     try {
@@ -27,10 +27,10 @@ if (isset($_POST['submit-contact-form'])) {
         //Credentials
         $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->Username = 'daakticket05@gmail.com';                     //SMTP username
-        $mail->Password = 'uitwbfxnprpgimjd';                               //SMTP password
+        $mail->Password = 'doeybjsruqeejdom';                               //SMTP password
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-        $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
 
         //Recipients
         $mail->setFrom('daakticket05@gmail.com', $name);

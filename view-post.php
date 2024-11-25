@@ -141,6 +141,8 @@ $like_count_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = $p
 $like_count_result = mysqli_query($conn, $like_count_query);
 $like_count = mysqli_fetch_assoc($like_count_result)['like_count'];
 
+
+//report code
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_report'])) {
     if (!empty($_POST['post_id']) && !empty($_POST['report_reason'])) {
         $post_id = intval($_POST['post_id']);
@@ -226,6 +228,7 @@ ob_end_flush();
                             data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
                     <div class="report_box">
+                        <!-- report trigger -->
                         <i class="lni lni-flag-1" data-bs-toggle="modal"
                             data-bs-target="#reportModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
