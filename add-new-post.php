@@ -19,6 +19,7 @@ if (isset($_POST['submit_post'])) {
     $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
     $feature_image = '';
 
+   
     // feature image
     if (isset($_FILES['feature_image']) && $_FILES['feature_image']['error'] === UPLOAD_ERR_OK) {
         $image_tmp = $_FILES['feature_image']['tmp_name'];

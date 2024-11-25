@@ -47,14 +47,14 @@
                 LEFT JOIN user u ON p.user_id = u.user_id
                 LEFT JOIN category c ON p.category_id = c.category_id
                 WHERE p.status = 'approved'
-                ORDER BY p.created_at DESC LIMIT 6";
+                ORDER BY p.created_at DESC LIMIT 9";
 
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($post = mysqli_fetch_assoc($result)) {
                     $excerpt = substr($post['content'], 0, 90) . (strlen($post['content']) > 90 ? '...' : '');
-            ?>
+                    ?>
                     <div class="col-md-4 mb-4">
                         <div class="blog_box">
                             <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
@@ -64,9 +64,11 @@
                             <div class="post_title">
                                 <div class="author_box d-flex align-items-center pt-2">
                                     <i class="lni lni-pencil-1"></i>
-                                    <p class="ps-2"><?php echo htmlspecialchars($post['username'] ?? 'Unknown'); ?></p>
+                                    <a href="profile.php?user_id=<?php echo $post['user_id']; ?>" class="text-decoration-none">
+                                        <?php echo htmlspecialchars($post['username'] ?? 'Unknown'); ?>
+                                    </a>
                                     <i class="lni lni-calendar-days ps-4"></i>
-                                    <p class="ps-2"><?php echo date('d M, Y', strtotime($post['updated_at'])); ?></p>
+                                    <p class="ps-2"><?php echo date('d M, Y', strtotime($post['created_at'])); ?></p>
                                 </div>
                                 <div class="author_box category_name">
                                     <p>Category: <?php echo htmlspecialchars($post['category_name'] ?? 'Uncategorized'); ?></p>
@@ -104,16 +106,18 @@
                                     <!-- Share Modal Trigger -->
                                     <i class="lni lni-share-1" data-bs-toggle="modal"
                                         data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
-                                    <!-- share modal is in footer -->
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
-            <?php
+                    <?php
                 }
             } else {
-                echo "<p>No posts available.</p>";
+                echo '<div class="nothing_found text-center">
+                <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                <p class="text-center mt-4">No Published posts found.</p>
+              </div>';
             }
             ?>
         </div>
@@ -146,7 +150,7 @@
             <!-- about icon -->
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php?category_id=15">
                         <img src="assets/uploads/science.svg" class="img-fluid" alt="sicence-icon">
                         <h4 class="text-center">Technology</h4>
                     </a>
@@ -154,7 +158,7 @@
             </div>
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php?category_id=8">
                         <img src="assets/uploads/health.svg" class="img-fluid" alt="health-icon">
                         <h4 class="text-center">Health</h4>
                     </a>
@@ -162,7 +166,7 @@
             </div>
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php?category_id=7">
                         <img src="assets/uploads/food.svg" class="img-fluid" alt="food-icon">
                         <h4 class="text-center">Food</h4>
                     </a>
@@ -170,7 +174,7 @@
             </div>
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php?category_id=3">
                         <img src="assets/uploads/education.svg" class="img-fluid" alt="education-icon">
                         <h4 class="text-center">Education</h4>
                     </a>
@@ -178,7 +182,7 @@
             </div>
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php?category_id=37">
                         <img src="assets/uploads/travel.svg" class="img-fluid" alt="travel-icon">
                         <h4 class="text-center">Travel</h4>
                     </a>
@@ -186,7 +190,7 @@
             </div>
             <div class="col-md-2">
                 <div class="about_icon">
-                    <a href="">
+                    <a href="blog.php">
                         <img src="assets/uploads/more.svg" class="img-fluid" alt="more-icon">
                         <h4 class="text-center">And Many More</h4>
                     </a>

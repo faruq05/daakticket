@@ -231,7 +231,10 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                         <?php
                     }
                 } else {
-                    echo "<p>No published posts found.</p>";
+                    echo '<div class="nothing_found text-center">
+                    <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                    <p class="text-center mt-4">No Published posts found.</p>
+                  </div>';
                 }
                 ?>
             </div>

@@ -44,18 +44,17 @@
             // Get the selected category from query string
             $category_filter = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
 
-            // Modify the query based on the selected category
             $query = "SELECT p.*, u.username, c.category_name
-                      FROM blog_post p
-                      LEFT JOIN user u ON p.user_id = u.user_id
-                      LEFT JOIN category c ON p.category_id = c.category_id";
+            FROM blog_post p
+            LEFT JOIN user u ON p.user_id = u.user_id
+            LEFT JOIN category c ON p.category_id = c.category_id
+            WHERE p.status = 'approved'";
 
             if ($category_filter) {
-                $query .= " WHERE p.category_id = $category_filter";
+                $query .= " AND p.category_id = $category_filter";
             }
 
             $query .= " ORDER BY p.created_at DESC";
-
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
@@ -71,9 +70,11 @@
                             <div class="post_title">
                                 <div class="author_box d-flex align-items-center pt-2">
                                     <i class="lni lni-pencil-1"></i>
-                                    <p class="ps-2"><?php echo htmlspecialchars($post['username'] ?? 'Unknown'); ?></p>
+                                    <a href="profile.php?user_id=<?php echo $post['user_id']; ?>" class="text-decoration-none">
+                                        <?php echo htmlspecialchars($post['username'] ?? 'Unknown'); ?>
+                                    </a>
                                     <i class="lni lni-calendar-days ps-4"></i>
-                                    <p class="ps-2"><?php echo date('d M, Y', strtotime($post['updated_at'])); ?></p>
+                                    <p class="ps-2"><?php echo date('d M, Y', strtotime($post['created_at'])); ?></p>
                                 </div>
                                 <div class="author_box category_name">
                                     <p>Category: <?php echo htmlspecialchars($post['category_name'] ?? 'Uncategorized'); ?></p>

@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-include 'sidebar.php';
+include 'admin_sidebar.php';
 
 // Ensure admin is logged in
 if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 1001) {

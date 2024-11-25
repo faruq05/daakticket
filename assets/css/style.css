@@ -41,17 +41,17 @@ p {
     background-color: var(--cs-dangerhover);
 }
 
-.btn-cscolor{
+.btn-cscolor {
     background-color: var(--cs-accent);
     color: var(--cs-white);
 }
 
-.btn-cscolor:hover{
+.btn-cscolor:hover {
     background-color: var(--cs-hover);
     color: var(--cs-white);
 }
 
-.aprv td a:hover{
+.aprv td a:hover {
     color: var(--cs-hover);
 }
 
@@ -97,6 +97,31 @@ a {
 
 .space {
     padding: 16px 0px 25px 0px;
+}
+
+.btn-edit{
+    background-color: var(--cs-warning);
+    transition: .2s all ease-in-out;
+    font-size: 14px;
+    color: var(--cs-black);
+}
+
+.btn-edit:hover{
+    background-color: var(--cs-warnhover);
+    color: var(--cs-black);
+    
+}
+
+.btn-delete{
+    background-color: var(--cs-danger);
+    transition: .2s all ease-in-out;
+    font-size: 14px;
+    color: var(--cs-white);
+}
+
+.btn-delete:hover{
+    background-color: var(--cs-dangerhover);
+    color: var(--cs-white);
 }
 
 .form-control:focus {
@@ -301,6 +326,7 @@ a {
     background-color: #e8e4dc7d;
     backdrop-filter: blur(12px); */
     padding: 16px;
+    background-color: var(--cs-white);
 }
 
 .post_title a h3 {
@@ -319,10 +345,13 @@ a {
     font-size: 14px;
 }
 
-.author_box p {
+.author_box p, .author_box a {
     font-size: 14px;
     font-style: italic;
     font-weight: 400;
+}
+.author_box a:hover{
+    color: var(--cs-hover);
 }
 
 .like_box i {
@@ -395,7 +424,8 @@ a {
     transition: .2s all ease-in-out;
 }
 
-.copyright p a:hover, .claim p a:hover {
+.copyright p a:hover,
+.claim p a:hover {
     color: var(--cs-hover);
 }
 
@@ -517,6 +547,14 @@ a {
     justify-content: center;
 }
 
+.breadcrumb li a{
+    font-style: normal !important;
+    font-size: 16px;
+}
+.breadcrumb li a:hover{
+    color: var(--cs-hover);
+}
+
 .contactpg_form h2 {
     font-size: 30px;
     margin-bottom: 15px;
@@ -636,7 +674,7 @@ a {
 
 .exist_post i {
     font-size: 22px;
- 
+
 }
 
 .ep_title a h3 {
@@ -657,9 +695,10 @@ a {
     color: var(--cs-accent);
 }
 
-.ep_dlt{
+.ep_dlt {
     gap: 10px;
 }
+
 .ep_dlt .dltp i {
     color: #fff;
     background-color: var(--cs-danger);
@@ -771,13 +810,25 @@ a {
 
 .comment-add {
     display: flex;
-    align-items: center;
+    align-items: start;
     margin-top: 20px;
+  
 }
 
-.comment-date {
-    font-size: 14px;
-    margin: 0px 5px;
+.comment_content h4{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.comment_content p{
+    font-size: 18px;
+    color:var(--cs-black);
+    margin: 5px 0px;
+}
+
+.comment-date p{
+    font-size: 12px;
+    color: #0000009c;
 }
 
 .comment-count-box a i {
@@ -806,6 +857,10 @@ a {
 .post_react i {
 
     font-size: 25px;
+}
+
+.post_react i:hover{
+    color: var(--cs-warnhover);
 }
 
 /* Container for User Info and Post History Tables */
@@ -952,7 +1007,7 @@ a {
     color: var(--cs-black);
 }
 
-.nav-pills .nav-link:hover{
+.nav-pills .nav-link:hover {
     border: 1px solid var(--cs-warnhover);
 
     color: var(--cs-white);
@@ -969,6 +1024,62 @@ a {
     background-color: var(--cs-warnhover);
 }
 
-.drp button i{
+.drp button i {
     margin: 0;
+}
+
+/* user profile page */
+.banner_user {
+    background: url(../uploads/user_banner.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: cover;
+    background-color: var(--cs-primary);
+}
+
+.banner_user .row {
+    min-height: 45vh;
+    margin-bottom: -15vh;
+}
+
+.user_pfp {
+    background-color: #ffffff65;
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.user_pfp p {
+    text-align: center;
+}
+
+.user_pfp p i {
+    font-size: 50px;
+}
+
+.total_inter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0px;
+}
+
+.total_inter .qty {
+    border: 1px solid #00000036;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.total_inter .qty i {
+    font-size: 25px;
+    padding-right: 5px;
+}
+
+.total_inter .qty strong {
+    font-size: 18px;
 }

@@ -4,7 +4,7 @@ include 'header.php';
 include 'sidebar.php';
 if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
-
+    $role_id = $_SESSION['role_id'];
     // Fetch the post data from the database
     $query = "SELECT * FROM blog_post WHERE post_id = '$post_id'";
     $result = mysqli_query($conn, $query);
@@ -47,7 +47,11 @@ if (isset($_GET['post_id'])) {
 
             $_SESSION['message'] = "Post updated successfully, waiting for admin approval!";
             $_SESSION['messageType'] = "success";
-            header('Location: user_dashboard.php');
+            if ($role_id == 1001) {
+                header('Location: admin_dashboard.php');
+            } else {
+                header('Location: user_dashboard.php');
+            }
             exit();
         } else {
             $_SESSION['message'] = "Failed to update post. Please try again.";
@@ -55,9 +59,11 @@ if (isset($_GET['post_id'])) {
         }
     }
 } else {
-    // Redirect if no post_id is provided
-    header('Location: user_dashboard.php');
-    exit();
+    if ($role_id == 1001) {
+        header('Location: admin_dashboard.php');
+    } else {
+        header('Location: user_dashboard.php');
+    }
 }
 ob_end_flush(); ?>
 
@@ -122,7 +128,7 @@ ob_end_flush(); ?>
                     </div>
                     <div class="form-group post_button  mt-3">
                         <button type="submit" name="submit_post" class="btn btn-cs">Update Post</button>
-                        <a href="user_dashboard.php" class="btn btn-cs ms-2">Don't want to Edit</a>
+                        <a href="<?php echo ($role_id == 1001) ? 'admin_dashboard.php' : 'user_dashboard.php'; ?>" class="btn btn-cs ms-2">Don't want to Edit</a>
                     </div>
 
                 </form>
