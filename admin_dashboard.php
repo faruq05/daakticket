@@ -308,8 +308,7 @@ $result = mysqli_query($conn, $query);
                                                         // Query to fetch post history
                                                         $query = "SELECT history_id, ph.post_id, p.title, u.username, ph.change_description
                                             FROM post_history ph LEFT JOIN user u ON ph.user_id = u.user_id
-                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";
-                                                        ;
+                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";;
 
                                                         $result = mysqli_query($conn, $query);
 
