@@ -928,7 +928,7 @@ a {
 .notification-list li {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .notification-list li a {
@@ -1116,11 +1116,11 @@ a {
     align-items: center;
 }
 
-#noti_bell button i{
+#noti_bell button i {
     animation: buzz 2s infinite ease-in-out;
 }
 
-#noti_bell button i:hover{
+#noti_bell button i:hover {
     animation: none;
     transform: scale(1.05);
 }
@@ -1147,3 +1147,15 @@ a {
     }
 }
 
+.rpttl {
+    color: var(--cs-black);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.nnl li {
+    list-style: inside;
+}

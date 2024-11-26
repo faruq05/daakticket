@@ -12,8 +12,7 @@ $pending_search_query = isset($_GET['pending_search']) ? mysqli_real_escape_stri
 $approved_search_query = isset($_GET['approved_search']) ? mysqli_real_escape_string($conn, $_GET['approved_search']) : '';
 $rejected_search_query = isset($_GET['rejected_search']) ? mysqli_real_escape_string($conn, $_GET['rejected_search']) : '';
 
-
-// Fetch posts based on status
+//pending
 $pending_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_image, u.username, bp.created_at 
                         FROM blog_post bp
                         INNER JOIN user u ON bp.user_id = u.user_id
@@ -23,6 +22,7 @@ $pending_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_imag
                         ORDER BY bp.created_at DESC";
 $pending_posts = mysqli_query($conn, $pending_posts_query);
 
+//approved
 $approved_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_image, u.username, bp.created_at 
                          FROM blog_post bp
                          INNER JOIN user u ON bp.user_id = u.user_id
@@ -32,6 +32,7 @@ $approved_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_ima
                          ORDER BY bp.created_at DESC";
 $approved_posts = mysqli_query($conn, $approved_posts_query);
 
+//rejected
 $rejected_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_image, u.username, bp.created_at, bp.rejection_reason 
                          FROM blog_post bp
                          INNER JOIN user u ON bp.user_id = u.user_id
@@ -41,6 +42,7 @@ $rejected_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_ima
                          ORDER BY bp.created_at DESC";
 $rejected_posts = mysqli_query($conn, $rejected_posts_query);
 
+//reported
 $filter_status = isset($_GET['status']) ? $_GET['status'] : 'pending';
 $reported_posts_query = "SELECT rp.report_id, 
            bp.post_id, 

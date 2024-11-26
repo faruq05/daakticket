@@ -31,6 +31,3 @@ if (in_array($current_page, $protected_pages) && !isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-?>
-
-
