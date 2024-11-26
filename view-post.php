@@ -176,14 +176,14 @@ ob_end_flush();
                         <form method="POST">
                             <input type="hidden" name="toggle_like" value="1">
                             <button type="submit" class="like-icon-button">
-                                <i class="fa-solid fa-thumbs-up<?php echo $user_liked ? ' liked' : ''; ?>"></i>
+                                <i class="tooltip-test fa-solid fa-thumbs-up<?php echo $user_liked ? ' liked' : ''; ?>" title="Like"></i>
                             </button>
 
                         </form>
                     </div>
                     <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>#comment_section">
-                            <i class="lni lni-comment-1-text"></i></a>
+                            <i class="lni lni-comment-1-text tooltip-test"  title="Comments"></i></a>
                         <span class="comment-count">
                             <?php
                             $post_id = $post['post_id'];
@@ -196,42 +196,12 @@ ob_end_flush();
                     </div>
                     <div class="share_box">
                         <!-- Share Modal Trigger -->
-                        <i class="lni lni-share-1" data-bs-toggle="modal"
+                        <i class="lni lni-share-1 tooltip-test" title="Share this post" data-bs-toggle="modal"
                             data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
                     <div class="report_box">
-                        <?php
-                        // report
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_report'])) {
-                            // Retrieve the reporter's user ID from the session
-                            if (!isset($_SESSION['user_id'])) {
-                                $_SESSION['message'] = "You must be logged in to report a post.";
-                                $_SESSION['messageType'] = "error";
-                                header("Location: login.php");
-                                exit();
-                            }
-                        
-                            $user_id = intval($_SESSION['user_id']);
-                            $post_id = intval($_POST['post_id']);  
-                            $report_reason = $conn->real_escape_string($_POST['report_reason']); 
-                        
-                            // Insert report into the database
-                            $report_query = "INSERT INTO report (post_id, report_reason, user_id) 
-                                             VALUES ('$post_id', '$report_reason', '$user_id')";
-                        
-                            if ($conn->query($report_query)) {
-                                $_SESSION['message'] = "Thank you for your report. Our team will review it shortly.";
-                                $_SESSION['messageType'] = "success";
-                            } else {
-                                $_SESSION['message'] = "An error occurred. Please try again.";
-                                $_SESSION['messageType'] = "error";
-                            }
-                            header("Location: view-post.php?post_id=$post_id");
-                            exit();
-                        }  
-                        ?>
                         <!-- Report trigger -->
-                        <i class="lni lni-flag-1 ms-2" data-bs-toggle="modal"
+                        <i class="lni lni-flag-1 ms-2 tooltip-test" title="Report this post" data-bs-toggle="modal"
                             data-bs-target="#reportModal-<?php echo $post['post_id']; ?>"></i>
                     </div>
 
@@ -300,27 +270,28 @@ ob_end_flush();
                         aria-labelledby="reportModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form method="POST" action="submit_report.php">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
-                                        <div class="mb-3">
-                                            <label for="reportReason" class="form-label">Reason for Reporting</label>
-                                            <textarea class="form-control" id="reportReason" name="report_reason"
-                                                rows="4" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-delete"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-edit" name="submit_report">Submit
-                                            Report</button>
-                                    </div>
-                                </form>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <?php if (isset($_SESSION['user_id'])): ?>
+                                        <form action="handle_report.php" method="POST">
+                                            <div class="mb-2">
+                                                <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                                                <textarea name="report_reason" class="form-control"
+                                                    placeholder="Reason for reporting" required></textarea>
+                                            </div>
+                                            <button type="submit" name="submit_report" class="btn btn-edit">Submit
+                                                Report</button>
+                                            <button type="button" class="btn btn-delete"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <p>You must <a href="login.php">log in</a> to report a post.</p>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>

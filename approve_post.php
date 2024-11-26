@@ -41,15 +41,27 @@ $rejected_posts_query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_ima
                          ORDER BY bp.created_at DESC";
 $rejected_posts = mysqli_query($conn, $rejected_posts_query);
 
-$reported_posts_query = "SELECT rp.report_id, bp.post_id, bp.title, bp.content, bp.created_at, 
-                                u.username AS author, r.username AS reporter, rp.report_reason, rp.report_date
-                         FROM report rp
-                         INNER JOIN blog_post bp ON rp.post_id = bp.post_id
-                         INNER JOIN user u ON bp.user_id = u.user_id
-                         INNER JOIN user r ON rp.user_id = r.user_id
-                         ORDER BY rp.report_date DESC";
+$filter_status = isset($_GET['status']) ? $_GET['status'] : 'pending';
+$reported_posts_query = "SELECT rp.report_id, 
+           bp.post_id, 
+           bp.title, 
+           bp.content, 
+           bp.created_at, 
+           u.user_id AS author_user_id,
+           u.username AS author, 
+           r.user_id AS reporter_user_id, 
+           r.username AS reporter, 
+           rp.report_reason, 
+           rp.report_date, 
+           rp.status, 
+           rp.dismiss_reason
+    FROM report rp
+    INNER JOIN blog_post bp ON rp.post_id = bp.post_id
+    INNER JOIN user u ON bp.user_id = u.user_id
+    INNER JOIN user r ON rp.user_id = r.user_id
+    WHERE rp.status = '$filter_status'
+    ORDER BY rp.report_date DESC";
 $reported_posts = mysqli_query($conn, $reported_posts_query);
-
 
 ?>
 
@@ -89,13 +101,15 @@ $reported_posts = mysqli_query($conn, $reported_posts_query);
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link <?php echo ($current_tab == 'report' ? 'active' : ''); ?>"
-                                id="pills-report-tab" data-bs-toggle="pill" data-bs-target="#pills-rejected"
-                                type="button" role="tab" aria-controls="pills-report"
+                                id="pills-report-tab" data-bs-toggle="pill" data-bs-target="#pills-report" type="button"
+                                role="tab" aria-controls="pills-report"
                                 aria-selected="<?php echo ($current_tab == 'report' ? 'true' : 'false'); ?>">
                                 Report Posts
                             </button>
                         </li>
                     </ul>
+
+                    <!-- tabs -->
                     <div class="tab-content" id="pills-tabContent">
                         <!-- Pending Posts Tab -->
                         <div class="tab-pane  <?php echo ($current_tab == 'pending' ? 'show active' : ''); ?>"
@@ -145,7 +159,84 @@ $reported_posts = mysqli_query($conn, $reported_posts_query);
                             <?php displayPostsTable($rejected_posts, 'rejected'); ?>
                         </div>
 
-                        
+                        <!-- Reported Posts Tab -->
+                        <div class="tab-pane <?php echo ($current_tab == 'report' ? 'show active' : ''); ?>"
+                            id="pills-report" role="tabpanel" aria-labelledby="pills-report-tab">
+
+                            <?php if (mysqli_num_rows($reported_posts) > 0): ?>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-white">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Post Title</th>
+                                                <th>Reported By</th>
+                                                <th>Author</th>
+                                                <th>Reason</th>
+                                                <th>Reported At</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $counter = 1; ?>
+                                            <?php while ($report = mysqli_fetch_assoc($reported_posts)): ?>
+                                                <tr>
+                                                    <td><?php echo $counter++; ?></td>
+                                                    <td><a href="view-post.php?post_id=<?php echo $report['post_id']; ?>">
+                                                            <?php echo htmlspecialchars($report['title']); ?></a></td>
+                                                    <td><a
+                                                            href="profile.php?user_id=<?php echo $report['reporter_user_id']; ?>"><?php echo htmlspecialchars($report['reporter']); ?></a>
+                                                    </td>
+                                                    <td><a
+                                                            href="profile.php?user_id=<?php echo $report['author_user_id']; ?>"><?php echo htmlspecialchars($report['author']); ?></a>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($report['report_reason']); ?></td>
+                                                    <td><?php echo date('d/m/Y H:i:s', strtotime($report['report_date'])); ?>
+                                                    </td>
+                                                    <td>
+                                                        <form action="resolve_report.php" method="POST" class="d-inline">
+                                                            <input type="hidden" name="report_id"
+                                                                value="<?php echo $report['report_id']; ?>">
+                                                            <input type="hidden" name="post_id"
+                                                                value="<?php echo $report['post_id']; ?>">
+                                                            <!-- Reject Post -->
+                                                            <div class="mb-2">
+                                                                <label for="reject_reason_<?php echo $report['report_id']; ?>"
+                                                                    class="form-label">Rejection Reason:</label>
+                                                                <textarea name="rejection_reason"
+                                                                    id="reject_reason_<?php echo $report['report_id']; ?>"
+                                                                    class="form-control mb-2"
+                                                                    placeholder="Enter rejection reason" rows="3"></textarea>
+                                                                <button type="submit" name="action" value="reject"
+                                                                    class="btn btn-danger btn-sm">Reject Post</button>
+                                                            </div>
+                                                            <!-- Dismiss Report -->
+                                                            <div>
+                                                                <label for="dismiss_reason_<?php echo $report['report_id']; ?>"
+                                                                    class="form-label">Dismissal Reason:</label>
+                                                                <textarea name="dismiss_reason"
+                                                                    id="dismiss_reason_<?php echo $report['report_id']; ?>"
+                                                                    class="form-control mb-2"
+                                                                    placeholder="Enter dismissal reason" rows="3"></textarea>
+                                                                <button type="submit" name="action" value="dismiss"
+                                                                    class="btn btn-edit btn-sm">Dismiss Report</button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            <?php endwhile; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else: ?>
+                                <tbody>
+                                    <div class="nothing_found text-center">
+                                        <img src="assets/uploads/empty.png" class="img-fluid w-10" alt="nothing">
+                                        <p class="text-center mt-4">No Reported posts found.</p>
+                                    </div>
+                                </tbody>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -217,10 +308,5 @@ function displayPostsTable($posts, $tab)
         </div>
     <?php endif;
 }
-
-
 ?>
-
-
-
 <?php include 'footer.php'; ?>

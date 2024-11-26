@@ -20,8 +20,6 @@ $protected_pages = [
     'upload_profile_picture.php',
     'user_dashboard.php',
     'init.php',
-    'update_report_status.php',
-    'submit_report.php',
 ];
 
 // Get the current script name

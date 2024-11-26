@@ -99,27 +99,27 @@ a {
     padding: 16px 0px 25px 0px;
 }
 
-.btn-edit{
+.btn-edit {
     background-color: var(--cs-warning);
     transition: .2s all ease-in-out;
     font-size: 14px;
     color: var(--cs-black);
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     background-color: var(--cs-warnhover);
     color: var(--cs-black);
-    
+
 }
 
-.btn-delete{
+.btn-delete {
     background-color: var(--cs-danger);
     transition: .2s all ease-in-out;
     font-size: 14px;
     color: var(--cs-white);
 }
 
-.btn-delete:hover{
+.btn-delete:hover {
     background-color: var(--cs-dangerhover);
     color: var(--cs-white);
 }
@@ -134,6 +134,10 @@ a {
 
 .btn-srch {
     padding: 10px 20px !important;
+}
+
+.modal {
+    --bs-modal-width: 50%;
 }
 
 .custom-shape-divider-bottom-1731212084 {
@@ -345,12 +349,14 @@ a {
     font-size: 14px;
 }
 
-.author_box p, .author_box a {
+.author_box p,
+.author_box a {
     font-size: 14px;
     font-style: italic;
     font-weight: 400;
 }
-.author_box a:hover{
+
+.author_box a:hover {
     color: var(--cs-hover);
 }
 
@@ -547,11 +553,12 @@ a {
     justify-content: center;
 }
 
-.breadcrumb li a{
+.breadcrumb li a {
     font-style: normal !important;
     font-size: 16px;
 }
-.breadcrumb li a:hover{
+
+.breadcrumb li a:hover {
     color: var(--cs-hover);
 }
 
@@ -812,21 +819,21 @@ a {
     display: flex;
     align-items: start;
     margin-top: 20px;
-  
+
 }
 
-.comment_content h4{
+.comment_content h4 {
     font-size: 16px;
     font-weight: 500;
 }
 
-.comment_content p{
+.comment_content p {
     font-size: 18px;
-    color:var(--cs-black);
+    color: var(--cs-black);
     margin: 5px 0px;
 }
 
-.comment-date p{
+.comment-date p {
     font-size: 12px;
     color: #0000009c;
 }
@@ -859,7 +866,7 @@ a {
     font-size: 25px;
 }
 
-.post_react i:hover{
+.post_react i:hover {
     color: var(--cs-warnhover);
 }
 
@@ -1083,3 +1090,60 @@ a {
 .total_inter .qty strong {
     font-size: 18px;
 }
+
+/* notification panel */
+.bell {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+}
+
+.bell i {
+    font-size: 30px;
+    color: #000;
+    background-color: var(--cs-warnhover);
+    padding: 10px;
+    border-radius: 50px;
+
+}
+
+.notibtn {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+#noti_bell button i{
+    animation: buzz 2s infinite ease-in-out;
+}
+
+#noti_bell button i:hover{
+    animation: none;
+    transform: scale(1.05);
+}
+
+@keyframes buzz {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
