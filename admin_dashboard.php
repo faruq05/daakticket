@@ -81,7 +81,7 @@ $result = mysqli_query($conn, $query);
                     </div>
                 </div>
 
-                <!-- user_info profile -->
+                <!-- Admin_info profile -->
 
                 <div class="col-md-12 cp60">
                     <div class="user_info">
@@ -104,7 +104,7 @@ $result = mysqli_query($conn, $query);
                         }
                         ?>
 
-                        <!-- User Information Form -->
+                        <!-- admin Information Form -->
                         <form action="admin_dashboard.php" method="POST" class="user-info-form">
                             <div class="row">
                                 <div class="col-md-6">
@@ -208,9 +208,10 @@ $result = mysqli_query($conn, $query);
 
                 <!-- all user section and post history -->
                 <div class="tables-container row" id="all_user">
+
                     <!-- User Info Section -->
                     <div class="user-info-container col-md-12 cp60">
-                        <h3 class="mb-4">User Information...</h3>
+                        <h3 class="mb-4">User Information</h3>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
@@ -222,6 +223,7 @@ $result = mysqli_query($conn, $query);
                                             <th>Status</th>
                                             <th>Role</th>
                                             <th>Registered</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user-info-table">
@@ -232,26 +234,46 @@ $result = mysqli_query($conn, $query);
 
                                         if ($result && mysqli_num_rows($result) > 0) {
                                             while ($user = mysqli_fetch_assoc($result)) {
+                                                $user_id = htmlspecialchars($user['user_id']);
+                                                $role = $user['role_id'] == 1001 ? 'Admin' : 'User';
+
                                                 echo "<tr>";
                                                 echo "<td>" . htmlspecialchars($sl_no++) . "</td>";
-                                                echo "<td><a href='profile.php?user_id=" . htmlspecialchars($user['user_id']) . "'>" . htmlspecialchars($user['username']) . "</a></td>";
+                                                echo "<td><a href='profile.php?user_id=$user_id'>" . htmlspecialchars($user['username']) . "</a></td>";
                                                 echo "<td>" . htmlspecialchars($user['email']) . "</td>";
                                                 echo "<td>" . htmlspecialchars($user['status']) . "</td>";
-                                                echo "<td>" . htmlspecialchars($user['role_id'] == 1 ? 'Admin' : 'User') . "</td>";
+                                                echo "<td>$role</td>";
                                                 echo "<td>" . htmlspecialchars(date('d M, Y', strtotime($user['registration_date']))) . "</td>";
+
+                                                // Display action dropdown only for admins
+                                                echo "<td>";
+                                                if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1001) {
+                                                    echo "<form action='update_role.php' method='POST' style='display: inline-block;'>";
+                                                    echo "<input type='hidden' name='user_id' value='$user_id'>";
+                                                    echo "<select name='role_action' class='form-control' onchange='this.form.submit()'>";
+                                                    echo "<option value=''>Change Role</option>";
+                                                    echo "<option value='make_admin'" . ($user['role_id'] == 1001 ? ' disabled' : '') . ">Make Admin</option>";
+                                                    echo "<option value='make_user'" . ($user['role_id'] == 1002 ? ' disabled' : '') . ">Make User</option>";
+                                                    echo "<option value='delete_user'>Delete User</option>";
+                                                    echo "</select>";
+                                                    echo "</form>";
+                                                } else {
+                                                    echo "No Action Available";
+                                                }
+                                                echo "</td>";
+
                                                 echo "</tr>";
                                             }
                                         } else {
-                                            echo "<tr><td colspan='5'>No users found.</td></tr>";
+                                            echo "<tr><td colspan='7'>No users found.</td></tr>";
                                         }
                                         ?>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
-
                     </div>
+
 
                     <!-- Post History Section -->
                     <div class="post-history-container col-md-12 cp60" id="post_history">
@@ -286,8 +308,7 @@ $result = mysqli_query($conn, $query);
                                                         // Query to fetch post history
                                                         $query = "SELECT history_id, ph.post_id, p.title, u.username, ph.change_description
                                             FROM post_history ph LEFT JOIN user u ON ph.user_id = u.user_id
-                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";
-                                                        ;
+                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";;
 
                                                         $result = mysqli_query($conn, $query);
 
