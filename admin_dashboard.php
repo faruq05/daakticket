@@ -220,28 +220,29 @@ $result = mysqli_query($conn, $query);
                                             <th>Sl No</th>
                                             <th>Username</th>
                                             <th>Email</th>
-                                            <th>Status</th>
                                             <th>Role</th>
                                             <th>Registered</th>
                                             <th>Action</th>
+                                            <th>Online Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="user-info-table">
                                         <?php
                                         $sl_no = 1;
-                                        $query = "SELECT user_id, username, email, status, role_id, registration_date FROM user";
+                                        $query = "SELECT u.user_id, u.username, u.email, u.role_id, u.registration_date, s.session_token, s.logout_timestamp
+                                        FROM user u LEFT JOIN session s ON u.user_id = s.user_id";
                                         $result = mysqli_query($conn, $query);
 
                                         if ($result && mysqli_num_rows($result) > 0) {
                                             while ($user = mysqli_fetch_assoc($result)) {
                                                 $user_id = htmlspecialchars($user['user_id']);
                                                 $role = $user['role_id'] == 1001 ? 'Admin' : 'User';
+                                                $is_online = !empty($user['session_token']) && is_null($user['logout_timestamp']);
 
                                                 echo "<tr>";
                                                 echo "<td>" . htmlspecialchars($sl_no++) . "</td>";
                                                 echo "<td><a href='profile.php?user_id=$user_id'>" . htmlspecialchars($user['username']) . "</a></td>";
                                                 echo "<td>" . htmlspecialchars($user['email']) . "</td>";
-                                                echo "<td>" . htmlspecialchars($user['status']) . "</td>";
                                                 echo "<td>$role</td>";
                                                 echo "<td>" . htmlspecialchars(date('d M, Y', strtotime($user['registration_date']))) . "</td>";
 
@@ -261,7 +262,13 @@ $result = mysqli_query($conn, $query);
                                                     echo "No Action Available";
                                                 }
                                                 echo "</td>";
-
+                                                echo "<td>";
+                                                if ($is_online) {
+                                                    echo "<span style='color: green; font-weight: bold;'>● Online</span>";
+                                                } else {
+                                                    echo "<span style='color: red; font-weight: bold;'>● Offline</span>";
+                                                }
+                                                echo "</td>";
                                                 echo "</tr>";
                                             }
                                         } else {
@@ -308,7 +315,8 @@ $result = mysqli_query($conn, $query);
                                                         // Query to fetch post history
                                                         $query = "SELECT history_id, ph.post_id, p.title, u.username, ph.change_description
                                             FROM post_history ph LEFT JOIN user u ON ph.user_id = u.user_id
-                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";;
+                                            LEFT JOIN blog_post p ON ph.post_id = p.post_id ORDER BY ph.history_id DESC";
+                                                        ;
 
                                                         $result = mysqli_query($conn, $query);
 

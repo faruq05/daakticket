@@ -6,6 +6,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = intval($_POST['user_id']);
     $role_action = $_POST['role_action'];
 
+    // if there is only one admin
+    $admin_count_query = "SELECT COUNT(*) as admin_count FROM user WHERE role_id = 1001";
+    $admin_count_result = mysqli_query($conn, $admin_count_query);
+    $admin_count_data = mysqli_fetch_assoc($admin_count_result);
+    $admin_count = intval($admin_count_data['admin_count']);
+
+    if ($admin_count === 1 && $role_action === 'make_user' && $user_id == $_SESSION['user_id']) {
+        // Prevent the only admin from changing their role
+        $_SESSION['message'] = "You cannot change your role to a user because you are the only admin.";
+        $_SESSION['messageType'] = "error";
+        header("Location: admin_dashboard.php");
+        exit();
+    }
+
     if ($role_action === 'make_admin') {
         $update_query = "UPDATE user SET role_id = 1001 WHERE user_id = $user_id";
         $success_message = "User successfully made an Admin.";
@@ -48,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['messageType'] = "error";
     }
 
-    // Redirect back to admin dashboard
     header("Location: admin_dashboard.php");
     exit();
 }
