@@ -65,7 +65,7 @@
             <div class="col-md-6 pt-5">
                 <div class="copyright text-end">
                     <p>
-                        &copy; 2024 DaakTicket. All Rights Reserved. Developed By <a href="">Group 05</a>
+                        &copy; 2024 DaakTicket. All Rights Reserved. Developed By <a href="about_daakticket.php" target="_blank">Group 05</a>
                     </p>
                 </div>
             </div>

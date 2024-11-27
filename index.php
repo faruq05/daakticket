@@ -110,7 +110,7 @@
                     <?php
                 }
             } else {
-                echo '<div class="nothing_found text-center">
+                echo '<div class="nothing_found text-center col-md-4">
                     <img src="assets/uploads/published.png" class="img-fluid w-10" alt="published">
                     <p class="text-center mt-4">No Published posts found.</p>
                   </div>';
