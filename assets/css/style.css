@@ -1179,7 +1179,11 @@ a:hover{
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    box-shadow: 0px 12px 18px 2px #00000014;
+    transition: .2s all ease-in-out;
+}
+
+.instructor:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .instructor p{

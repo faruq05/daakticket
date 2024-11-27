@@ -67,6 +67,9 @@
                     <p>
                         &copy; 2024 DaakTicket. All Rights Reserved. Developed By <a href="about_daakticket.php" target="_blank">Group 05</a>
                     </p>
+                    <p>
+                        <a href="terms-condition.php">Terms & Conditions</a>
+                    </p>
                 </div>
             </div>
         </div>
