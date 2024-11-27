@@ -6,9 +6,11 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+$user_id = intval($_SESSION['user_id']);
 
 // Fetch all media records from the media table
-$query = "SELECT * FROM media ORDER BY uploaded_at DESC";
+$query = "SELECT m.* FROM media AS m INNER JOIN blog_post AS bp ON m.post_id = bp.post_id
+WHERE bp.user_id = $user_id ORDER BY m.uploaded_at DESC";
 $result = mysqli_query($conn, $query);
 
 ?>
