@@ -103,11 +103,7 @@
                                             ?>
                                         </span>
                                     </div>
-                                    <!-- Share Modal Trigger -->
-                                    <i class="lni lni-share-1" data-bs-toggle="modal"
-                                        data-bs-target="#shareModal-<?php echo $post['post_id']; ?>"></i>
                                 </div>
-
                             </div>
                         </div>
                     </div>
