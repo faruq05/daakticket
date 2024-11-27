@@ -136,7 +136,7 @@ a {
     padding: 10px 20px !important;
 }
 
-.modal {
+.noti-modal{
     --bs-modal-width: 50%;
 }
 
