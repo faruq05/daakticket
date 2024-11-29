@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="contactpg aboutpg">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-12 text-center">
                 <h2>Explore blogs</h2>
@@ -15,7 +15,7 @@
 
 <!-- blog starts -->
 <div class="blogs cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="about_title d-flex align-items-center justify-content-between mb-5">
             <!-- Filter by categories -->
             <h3>Filter By</h3>

@@ -1,9 +1,16 @@
 <?php
+ob_start();
 include 'header.php';
 include 'sidebar.php';
-?>
-<div class=" main dashboard">
-    <div class="container">
+if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
+    $_SESSION['message'] = 'Please verify your OTP before accessing the dashboard.';
+    $_SESSION['messageType'] = 'error';
+    header('Location: verify_otp.php');
+    exit();
+}
+ob_end_flush();?>
+<div class=" main dashboard usb">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-12 cp60" id="profile">
                 <div class="dash">

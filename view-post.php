@@ -144,14 +144,14 @@ $like_count = mysqli_fetch_assoc($like_count_result)['like_count'];
 ob_end_flush();
 ?>
 
-<div class="container">
+<div class="container-lg cp20">
     <div class="row">
         <div class="col-md-12">
             <!-- Post Details -->
             <div class="postpg">
                 <img src="<?php echo htmlspecialchars($post['feature_image'] ?? 'assets/default-image.jpg'); ?>"
                     alt="Feature Image" class="img-fluid">
-                <div class="d-flex align-items-center justify-content-between">
+                <div class="postdetails d-flex align-items-center justify-content-between">
                     <div class="pcriteria mt-3 mb-2">
                         <p><strong>Category:</strong>
                             <?php echo htmlspecialchars($post['category_name'] ?? 'Uncategorized'); ?></p>
@@ -165,7 +165,7 @@ ob_end_flush();
                         </a>
                     </div>
                 </div>
-                <div class="post_content">
+                <div class="post_content mt-5">
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
                 </div>

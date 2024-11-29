@@ -2,9 +2,9 @@
 
 <!-- banner starts -->
 <div class="banner">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-xl-6 col-md-12">
                 <div class="banner-title">
                     <h1>Daak Ticket .</h1>
                     <h2 class="space">Delivering Ideas, Inspiring Minds – A Platform for Knowledge, Stories, and
@@ -15,8 +15,7 @@
             </div>
         </div>
     </div>
-</div>
-<div class="custom-shape-divider-bottom-1731212084">
+    <div class="custom-shape-divider-bottom-1731212084">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
             d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
@@ -29,11 +28,13 @@
             class="shape-fill"></path>
     </svg>
 </div>
+</div>
+
 
 
 <!-- blog starts -->
 <div class="blogs cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="about_title d-flex align-items-center justify-content-between mb-5">
             <h2>Featured Blogs</h2>
             <div class="abt_btn">
@@ -123,7 +124,7 @@
 
 <!-- about 0-->
 <div class="about cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center gy-4">
             <div class="col-md-6">
                 <div class="about_title_box">
@@ -143,8 +144,10 @@
                     <img src="assets/uploads/about-blog.webp" class="img-fluid" alt="about_blog">
                 </div>
             </div>
+        </div>
+        <div class="row abt_icon">
             <!-- about icon -->
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php?category_id=15">
                         <img src="assets/uploads/science.svg" class="img-fluid" alt="sicence-icon">
@@ -152,7 +155,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php?category_id=8">
                         <img src="assets/uploads/health.svg" class="img-fluid" alt="health-icon">
@@ -160,7 +163,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php?category_id=7">
                         <img src="assets/uploads/food.svg" class="img-fluid" alt="food-icon">
@@ -168,7 +171,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php?category_id=3">
                         <img src="assets/uploads/education.svg" class="img-fluid" alt="education-icon">
@@ -176,7 +179,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php?category_id=37">
                         <img src="assets/uploads/travel.svg" class="img-fluid" alt="travel-icon">
@@ -184,7 +187,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
                     <a href="blog.php">
                         <img src="assets/uploads/more.svg" class="img-fluid" alt="more-icon">
@@ -192,7 +195,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

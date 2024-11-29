@@ -78,7 +78,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                         <!-- Display each post -->
                         <div class="exist_post">
                             <div class="row align-items-center">
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="post_ftimg">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <?php if ($feature_image && file_exists($feature_image)) { ?>
@@ -90,7 +90,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6">
                                     <div class="ep_title">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <h3><?php echo htmlspecialchars($title); ?></h3>
@@ -99,13 +99,13 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         <span>Category: <?php echo htmlspecialchars($category_name); ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="created">
                                         <span>Created at <?php echo $created_at; ?></span> <br>
                                         <span>Updated at <?php echo $updated_at; ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-2">
                                     <div class="like_box mt-2 d-flex align-items-center">
                                         <i class="lni lni-thumbs-up-3 me-0"></i>
                                         <span class="like-count ps-2">
@@ -192,7 +192,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="ep_dlt d-flex justify-content-center">
                                         <a href="delete-post.php?post_id=<?php echo $post_id; ?>"
                                             onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
@@ -272,7 +272,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                         <!-- Display each post -->
                         <div class="exist_post">
                             <div class="row align-items-center">
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="post_ftimg">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <?php if ($feature_image && file_exists($feature_image)) { ?>
@@ -284,7 +284,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6">
                                     <div class="ep_title">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <h3><?php echo htmlspecialchars($title); ?></h3>
@@ -293,13 +293,13 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         <span>Category: <?php echo htmlspecialchars($category_name); ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="created">
                                         <span>Created at <?php echo $created_at; ?></span> <br>
                                         <span>Updated at <?php echo $updated_at; ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-2">
                                     <div class="like_box mt-2 d-flex align-items-center">
                                         <i class="lni lni-thumbs-up-3 me-0"></i>
                                         <span class="like-count ps-2">
@@ -386,7 +386,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="ep_dlt d-flex justify-content-center">
                                         <a href="delete-post.php?post_id=<?php echo $post_id; ?>"
                                             onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
@@ -462,7 +462,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                         <!-- Display each post -->
                         <div class="exist_post">
                             <div class="row align-items-center">
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="post_ftimg">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <?php if ($feature_image && file_exists($feature_image)) { ?>
@@ -474,7 +474,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6">
                                     <div class="ep_title">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <h3><?php echo htmlspecialchars($title); ?></h3>
@@ -483,13 +483,13 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         <span>Category: <?php echo htmlspecialchars($category_name); ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="created">
                                         <span>Created at <?php echo $created_at; ?></span> <br>
                                         <span>Updated at <?php echo $updated_at; ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-md-2">
                                     <div class="like_box mt-2 d-flex align-items-center">
                                         <i class="lni lni-thumbs-up-3 me-0"></i>
                                         <span class="like-count ps-2">
@@ -576,7 +576,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="ep_dlt d-flex justify-content-center">
                                         <a href="delete-post.php?post_id=<?php echo $post_id; ?>"
                                             onclick="return confirm('Are you sure you want to delete this post?')" class="dltp">
@@ -632,7 +632,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                         </div>
                         <div class="exist_post">
                             <div class="row align-items-center">
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-6">
                                     <div class="post_ftimg">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <?php if ($feature_image && file_exists($feature_image)) { ?>
@@ -644,7 +644,7 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xl-4 col-lg-4 col-md-6">
                                     <div class="ep_title">
                                         <a href="view-post.php?post_id=<?php echo $post['post_id']; ?>">
                                             <h3><?php echo htmlspecialchars($title); ?></h3>
@@ -653,13 +653,13 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         <span>Category: <?php echo htmlspecialchars($category_name); ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="created">
                                         <span>Created at <?php echo $created_at; ?></span> <br>
                                         <span>Updated at <?php echo $updated_at; ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-xl-2 col-lg-2 col-md-4">
                                     <div class="rejection">
                                         <span><strong>Rejected Reason:</strong>
                                             <?php echo htmlspecialchars($rejection_reason); ?></span>
@@ -689,6 +689,5 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
         </div>
     </div>
 
-    <!-- Add New Post Button -->
-    <a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
+    <!-- Add New Post Button --><a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
 </div>

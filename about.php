@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="contactpg aboutpg">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-12 text-center">
                 <h2>About Us</h2>
@@ -14,7 +14,7 @@
 </div>
 
 <div class="about_body cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <div class="col-md-12">
                 <div class="about_content">
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<!-- <div class="container-fluid">
+<!-- <div class="container-lg-fluid">
     <div class="row">
         <div class="obj">
             <h3>Project Details</h3>
@@ -51,7 +51,7 @@
     </div>
 </div>
 <div class="team cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <div class="col-md-6">
                 <h3>Project Objective</h3>

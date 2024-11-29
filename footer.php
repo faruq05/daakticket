@@ -1,6 +1,6 @@
 <!-- footer starts-->
 <div class="footer cp60" id="footer">
-    <div class="container">
+    <div class="container-lg">
         <div class="row justify-content-space-between">
             <div class="col-md-6">
                 <div class="contact_title">

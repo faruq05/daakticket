@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="contactpg">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-12 text-center">
                 <h2>Contact Us</h2>
@@ -15,7 +15,7 @@
 
 <!-- form contact -->
 <div class="contactpg_form cp60 ">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-6">
                 <h2>Get in Touch With Us</h2>

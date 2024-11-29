@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 <div class="contactpg aboutpg">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-md-12 text-center">
                 <h2>About DaakTicket</h2>
@@ -14,7 +14,7 @@
 </div>
 
 <div class="team cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row justify-content-between">
             <div class="col-md-4">
                 <h4 class="mb-2 d-flex align-items-center"><img src="assets/uploads/code.svg" class="pe-2"
@@ -70,29 +70,29 @@
 
 </div>
 <div class="instructor_panel cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center">
             <h2>Instructed By ...</h2>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3">
                 <div class="instructor">
                     <img src="assets/uploads/NLH_sir.jpg" class="img-fluid mb-3" alt="NLH">
                     <h3 class="mb-2">Mr. Nabil Bin Hannan <b>(NLH)</b></h3>
                     <p>Course Instructor: CSE311 Database Systems</p>
                     <p>Section: 10</p>
-                    <p>Email: <a href="mailto:nabil.hannan@northsouth.edu">nabil.hannan@northsouth.edu</a></p>
+                    <p><a href="mailto:nabil.hannan@northsouth.edu"  class="d-flex align-items-center"><i class="lni lni-envelope-1 pe-2"></i>Email</a></p>
                 </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3">
                 <div class="instructor">
                     <img src="assets/uploads/tushar_basak_vai.webp" class="img-fluid mb-3" alt="tushar_basak">
                     <h3 class="mb-2">Tushar Basak</h3>
                     <!-- <p>Faculty Initial: <b>NLH</b></p> -->
                     <p>Lab Instructor: CSE311L Database Systems</p>
                     <p>Section: 10</p>
-                    <p>Email: <a href="mailto:tushar.basak@northsouth.edu">tushar.basak@northsouth.edu</a></p>
+                    <p><a href="mailto:tushar.basak@northsouth.edu" class="d-flex align-items-center"><i class="lni lni-envelope-1 pe-2"></i>Email</a></p>
                 </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3 vect">
                 <img src="assets/uploads/instructor.png" class="img-fluid" alt="instructor">
             </div>
         </div>
@@ -100,26 +100,26 @@
 </div>
 
 <div class="team_panel cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row align-items-center ">
             <h2>Team Member ...</h2>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3 vect order-md-2">
                 <img src="assets/uploads/team.png" class="img-fluid" alt="team">
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3">
                 <div class="instructor">
                     <img src="assets/uploads/galib.JPG" class="img-fluid mb-3" alt="galib">
                     <h3 class="mb-2">Abdur Rahman Galib</h3>
                     <p>ID: 2231208642</p>
-                    <p>Email: <a href="mailto:abdur.galib@northsouth.edu">abdur.galib@northsouth.edu</a></p>
+                    <p><a href="mailto:abdur.galib@northsouth.edu"  class="d-flex align-items-center"><i class="lni lni-envelope-1 pe-2"></i>Email</a></p>
                 </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-xl-4 col-md-6 col-sm-6 mt-3">
                 <div class="instructor">
                     <img src="assets/uploads/faruq.png" class="img-fluid mb-3" alt="NLH_sir">
                     <h3 class="mb-2">Omor Faruq</h3>
                     <p>ID: 2231568642</p>
-                    <p>Email: <a href="mailto:mohammed.faruq@northsouth.edu">mohammed.faruq@northsouth.edu</a></p>
+                    <p><a href="mailto:mohammed.faruq@northsouth.edu" class="d-flex align-items-center"><i class="lni lni-envelope-1 pe-2"></i>Email</a></p>
                 </div>
             </div>
 
@@ -128,7 +128,7 @@
 </div>
 
 <div class="task_panel cp60">
-    <div class="container">
+    <div class="container-lg">
         <div class="row cp60">
             <h2>Task Management ...</h2>
             <div class="col-md-6 mt-3">

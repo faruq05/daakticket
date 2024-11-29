@@ -4,10 +4,14 @@ include 'header.php';
 session_start(); // Start the session
 ?>
 <div class="user_access">
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             <!-- login form -->
             <div class="col-md-6">
+                <div class="cta cta3 mt-5">
+                    <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
+                        learners.</h2>
+                </div>
                 <div class="logIn" id="signInForm">
                     <h2>Already a Member? Sign In</h2>
                     <form action="login.php" method="POST">
@@ -42,50 +46,34 @@ session_start(); // Start the session
                         $user = mysqli_fetch_assoc($result);
 
                         if (password_verify($password, $user['password_hash'])) {
-                            // Set session variables for the logged-in user
+                            $otp = rand(100000, 999999);
+                            $otp_hash = password_hash($otp, PASSWORD_BCRYPT);
+                            $otp_expiry = date('Y-m-d H:i:s', strtotime('+1 minutes'));
+                            $user_id = $user['user_id'];
+                            $update_otp_query = "UPDATE User SET user_otp = '$otp_hash', reset_token_expires_at = '$otp_expiry' WHERE user_id = $user_id";
+                            mysqli_query($conn, $update_otp_query);
+
+                            // Set session variables for OTP verification
                             $_SESSION['user_id'] = $user['user_id'];
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['role_id'] = $user['role_id'];
+                            $_SESSION['otp_verified'] = false;
 
-                            // Generate a new session token
-                            $session_token = bin2hex(random_bytes(32));
-                            $user_id = $user['user_id'];
-
-                            // Check if a session already exists for the user
-                            $check_session_query = "SELECT * FROM session WHERE user_id = $user_id";
-                            $session_result = mysqli_query($conn, $check_session_query);
-
-                            if (mysqli_num_rows($session_result) > 0) {
-                                // Update the existing session with new token and login time
-                                $update_session_query = "
-                    UPDATE session 
-                    SET session_token = '$session_token', login_timestamp = NOW(), logout_timestamp = NULL 
-                    WHERE user_id = $user_id";
-                                mysqli_query($conn, $update_session_query);
-                            } else {
-                                // Insert new session record if it doesn't exist
-                                $insert_session_query = "
-                    INSERT INTO session (user_id, session_token, login_timestamp) 
-                    VALUES ($user_id, '$session_token', NOW())";
-                                mysqli_query($conn, $insert_session_query);
-                            }
-
-                            // Redirect based on the user's role
-                            if ($user['role_id'] == 1001) {
-                                // Admin role
-                                $_SESSION['message'] = "Welcome, Admin " . $_SESSION['username'] . "!";
+                            include 'otpmail.php';
+                            $otp_sent = sendOTPEmail($user['email'], $otp);
+                            if ($otp_sent) {
+                                $_SESSION['message'] = 'OTP has been sent to your email. Please check your inbox.';
                                 $_SESSION['messageType'] = 'success';
-                                header('Location: admin_dashboard.php');
+                                header('Location: verify_otp.php');
+                                exit();
                             } else {
-                                // Regular user role
-                                $_SESSION['message'] = "Welcome, " . $_SESSION['username'] . "!";
-                                $_SESSION['messageType'] = 'success';
-                                header('Location: user_dashboard.php');
+                                $_SESSION['message'] = 'Failed to send OTP. Please try again later.';
+                                $_SESSION['messageType'] = 'error';
+                                header('Location: login.php');
+                                exit();
                             }
-                            exit();
                         } else {
-
                             $_SESSION['message'] = 'Incorrect password. Please try again.';
                             $_SESSION['messageType'] = 'error';
                         }
@@ -93,11 +81,10 @@ session_start(); // Start the session
                         $_SESSION['message'] = 'No account found with that email.';
                         $_SESSION['messageType'] = 'error';
                     }
-
-                    $conn->close();
                 }
-                ob_end_flush(); ?>
-                <div class="cta mt-5">
+                ob_end_flush();
+                ?>
+                <div class="cta cta2 mt-5">
                     <img src="assets/uploads/logo.png" class="img-fluid" alt="logo">
                     <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
                         learners.</h2>

@@ -1,0 +1,306 @@
+@media (max-width: 1499px) {
+    #sidebar {
+        width: 0;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    #sidebar.expand {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    #sidebar.expand .toggle-btn {
+        top: 1rem;
+        border: 1px solid #fff;
+    }
+
+    #sidebar.expand .toggle-btn i {
+        color: #fff;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        padding: 100px 0px;
+    }
+
+    .toggle-btn {
+        background-color: #19191944;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 1rem;
+        position: fixed;
+        top: 5rem;
+        left: 1rem;
+        z-index: 1100;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: .2s all ease-in-out;
+        backdrop-filter: blur(5px);
+    }
+
+    .toggle-btn i {
+        font-size: 1.5rem;
+        color: #000;
+    }
+
+    .ep_dlt {
+        flex-wrap: wrap;
+    }
+
+
+
+}
+
+@media(max-width:1024px) {
+    h2 {
+        font-size: 38px;
+    }
+
+    .logIn h2,
+    .cta h2 {
+        font-size: 28px;
+    }
+
+
+    .post_ftimg img {
+        height: 250px;
+    }
+
+}
+
+
+@media(max-width:991px) {
+
+    h1 {
+        font-size: 74px;
+    }
+
+    .ep_dlt {
+        justify-content: end !important;
+    }
+
+    .created {
+        margin-top: 10px;
+    }
+
+    .cp60 {
+        padding: 60px 15px;
+    }
+
+    #masonry-grid .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .subscribe-form form {
+        flex-direction: column;
+    }
+
+    .subscribe-form form button[type="submit"] {
+        width: 50%;
+        margin-top: 10px;
+    }
+
+    .usb .container-lg {
+        padding: 0px 15px;
+    }
+
+    .exist_post {
+        margin: 20px 0px 20px 0px;
+    }
+
+    
+    .postdetails{
+        flex-direction: column;
+    }
+
+    .pcriteria {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post_react{
+        width: 40%!important;
+        margin-bottom: 20px;
+    }
+
+}
+
+
+
+@media(max-width:767px) {
+
+
+    h1 {
+        font-size: 64px;
+    }
+
+    .banner .row {
+        min-height: 80vh;
+    }
+
+    .contact_title p {
+        margin: 10px 0px;
+    }
+
+    .subscribe-form form {
+        flex-direction: row;
+    }
+
+    .subscribe-form form button[type="submit"] {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .exist_post .row {
+        gap: 20px;
+    }
+
+    #masonry-grid .col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+
+    .ep_dlt {
+        justify-content: start !important;
+    }
+
+    .created {
+        margin-top: 0;
+    }
+
+    .post_ftimg img {
+        height: 350px;
+        object-position: top;
+    }
+
+    .cp60 {
+        padding: 40px 10px;
+    }
+
+    .tables-container .cp60 {
+        padding-bottom: 0;
+    }
+
+    .abt_icon {
+        margin-top: 20px;
+    }
+
+    .abt_icon .col-sm-6 {
+        margin-bottom: 10px;
+    }
+
+    .about_img {
+        margin-top: 20px;
+    }
+
+    .cta3 {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .cta2 {
+        display: none;
+    }
+
+    .user_access {
+        padding-top: 60px;
+    }
+
+    .user_access .row {
+        gap: 20px;
+    }
+
+    .usb .container-lg {
+        padding: 0px 20px;
+    }
+
+    .postpg img {
+        height: 500px;
+    }
+
+    .post_react{
+        width: 50%!important;
+        margin-bottom: 20px;
+    }
+
+    .vect{
+        display: none;
+    }
+
+    .instructor h3{
+        font-size: 23px;
+    }
+
+    .team .row{
+        gap: 20px;
+    }
+
+}
+
+@media (max-width: 575px) {
+    h1 {
+        font-size: 50px;
+    }
+
+    h2 {
+        font-size: 33px;
+    }
+
+    .btn-cs {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .cp60 {
+        padding: 30px 10px !important;
+    }
+
+    .add_category,
+    .history_header,
+    .forgot_pass {
+        padding: 0 10px;
+    }
+
+    .history-panel {
+        margin: 0px 10px;
+    }
+
+    #masonry-grid .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .abt_icon {
+        margin-top: 20px;
+    }
+
+    .abt_icon .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-bottom: 10px;
+    }
+
+    .postdetails{
+        flex-direction: column;
+    }
+
+    .pcriteria {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post_react{
+        width: 80%!important;
+        margin-bottom: 20px;
+    }
+}

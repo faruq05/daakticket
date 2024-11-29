@@ -18,10 +18,10 @@ $query = "SELECT bp.post_id, bp.title, bp.content, bp.feature_image, bp.created_
 $result = mysqli_query($conn, $query);
 ?>
 
-<div class=" main dashboard">
-    <div class="container">
+<div class=" main dashboard usb">
+    <div class="container-lg">
         <div class="row align-items-center">
-            <div class="col-md-12">
+            <div class="col-md-12 ">
                 <div class="col-md-12 cp60" id="profile">
                     <div class="dash">
                         <!-- profile_picture -->
@@ -207,10 +207,10 @@ $result = mysqli_query($conn, $query);
                 </div>
 
                 <!-- all user section and post history -->
-                <div class="tables-container row" id="all_user">
+                <div class="tables-container cp60 row" id="all_user">
 
                     <!-- User Info Section -->
-                    <div class="user-info-container col-md-12 cp60">
+                    <div class="user-info-container col-md-12">
                         <h3 class="mb-4">User Information</h3>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -352,8 +352,8 @@ $result = mysqli_query($conn, $query);
             </div>
 
             <!-- category view -->
-            <div class="col-md-12">
-                <div class="add_category cp60 dash_font" id="add_category">
+            <div class="col-md-12 cp60">
+                <div class="add_category dash_font" id="add_category">
                     <h3 class="mb-4">Existing Categories</h3>
                     <table class="table table-bordered">
                         <thead>
@@ -457,8 +457,10 @@ $result = mysqli_query($conn, $query);
 
             <!-- forgot_password -->
             <div class="col-md-12 add_post cp60 dash_font" id="forgot_password">
-                <h3>Forgot Password?</h3>
-                <p class="mt-2"><a href="forgot_password.php">Click Here</a> to change password</p>
+                <div class="forgot_pass">
+                    <h3>Forgot Password?</h3>
+                    <p class="mt-2"><a href="forgot_password.php">Click Here</a> to change password</p>
+                </div>
             </div>
         </div>
         <div class="row">
