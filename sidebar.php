@@ -5,7 +5,7 @@
                 <i class="lni lni-dashboard-square-1"></i>
             </button>
             <div class="sidebar-logo">
-                <a href="#"> <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
+                <a href="user_dashboard.php"> <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
                         <p><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                     <?php endif; ?>
                 </a>

@@ -5,8 +5,9 @@
                 <i class="lni lni-dashboard-square-1"></i>
             </button>
             <div class="sidebar-logo">
-                <a href="#">
-                    <p>admin</p>
+                <a href="admin_dashboard.php"> <?php if (isset($_SESSION['user_id']) && isset($_SESSION['username'])): ?>
+                        <p><?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                    <?php endif; ?>
                 </a>
             </div>
         </div>
@@ -47,7 +48,7 @@
                     <span>Add New Category</span>
                 </a>
             </li>
-            
+
             <li class="sidebar-item">
                 <a href="admin_action.php" class="sidebar-link">
                     <i class="lni lni-gear-1"></i>
