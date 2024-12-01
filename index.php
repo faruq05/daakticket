@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class="row abt_icon">
+        <div class="row abt_icon mt-5">
             <!-- about icon -->
             <div class="col-md-2 col-sm-6">
                 <div class="about_icon">
