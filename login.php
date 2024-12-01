@@ -8,10 +8,6 @@ session_start(); // Start the session
         <div class="row">
             <!-- login form -->
             <div class="col-md-6">
-                <div class="cta cta3 mt-5">
-                    <h2>Join DaakTicket today and become part of a vibrant community of storytellers, thinkers, and
-                        learners.</h2>
-                </div>
                 <div class="logIn" id="signInForm">
                     <h2>Already a Member? Sign In</h2>
                     <form action="login.php" method="POST">
@@ -48,7 +44,7 @@ session_start(); // Start the session
                         if (password_verify($password, $user['password_hash'])) {
                             $otp = rand(100000, 999999);
                             $otp_hash = password_hash($otp, PASSWORD_BCRYPT);
-                            $otp_expiry = date('Y-m-d H:i:s', strtotime('+1 minutes'));
+                            $otp_expiry = date('Y-m-d H:i:s', strtotime('+5 minutes'));
                             $user_id = $user['user_id'];
                             $update_otp_query = "UPDATE User SET user_otp = '$otp_hash', reset_token_expires_at = '$otp_expiry' WHERE user_id = $user_id";
                             mysqli_query($conn, $update_otp_query);

@@ -35,9 +35,9 @@
         padding: 1rem;
         position: fixed;
         top: 5rem;
-        left: 1rem;
+        left: 0;
         z-index: 1100;
-        border-radius: 50%;
+        border-radius: 0 10px 10px 0px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -117,8 +117,8 @@
         margin: 20px 0px 20px 0px;
     }
 
-    
-    .postdetails{
+
+    .postdetails {
         flex-direction: column;
     }
 
@@ -127,8 +127,8 @@
         flex-direction: column;
     }
 
-    .post_react{
-        width: 40%!important;
+    .post_react {
+        width: 40% !important;
         margin-bottom: 20px;
     }
 
@@ -203,11 +203,6 @@
         margin-top: 20px;
     }
 
-    .cta3 {
-        display: block;
-        margin-bottom: 20px;
-    }
-
     .cta2 {
         display: none;
     }
@@ -228,26 +223,43 @@
         height: 500px;
     }
 
-    .post_react{
-        width: 50%!important;
+    .post_react {
+        width: 50% !important;
         margin-bottom: 20px;
     }
 
-    .vect{
+    .vect {
         display: none;
     }
 
-    .instructor h3{
+    .instructor h3 {
         font-size: 23px;
     }
 
-    .team .row{
+    .team .row {
         gap: 20px;
     }
 
 }
 
 @media (max-width: 575px) {
+    .navbar-nav .nav-item .nav-link {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    #offcanvasTop {
+        min-height: auto;
+    }
+
+    .navbar-brand img {
+        width: 110px;
+    }
+
+    .nav-item {
+        margin: auto;
+    }
+
     h1 {
         font-size: 50px;
     }
@@ -290,7 +302,7 @@
         margin-bottom: 10px;
     }
 
-    .postdetails{
+    .postdetails {
         flex-direction: column;
     }
 
@@ -299,8 +311,18 @@
         flex-direction: column;
     }
 
-    .post_react{
-        width: 80%!important;
+    .post_react {
+        width: 80% !important;
         margin-bottom: 20px;
+    }
+
+    .banner h2 {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 34px;
+    }
+
+    .banner-title {
+        margin: 140px 0px;
     }
 }

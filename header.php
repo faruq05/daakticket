@@ -57,7 +57,7 @@ include 'db.php';
      
 
     <div class="header" id="header">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-md">
             <div class="container-lg">
                 <a class="navbar-brand" href="index.php"><img src="assets/uploads/logo.png" class="img-fluid"
                         alt="logo"></a>
