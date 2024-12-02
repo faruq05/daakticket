@@ -37,10 +37,6 @@ if (isset($_POST['submit-contact-form'])) {
         $mail->addAddress('daakticket05@gmail.com', $name);
         //Add a recipient
 
-        // //Attachments
-        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'New Enquiry - DaakTicket contact form';

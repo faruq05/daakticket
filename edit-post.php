@@ -5,7 +5,6 @@ include 'sidebar.php';
 if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
     $role_id = $_SESSION['role_id'];
-    // Fetch the post data from the database
     $query = "SELECT * FROM blog_post WHERE post_id = '$post_id'";
     $result = mysqli_query($conn, $query);
     $post = mysqli_fetch_assoc($result);
@@ -23,23 +22,21 @@ if (isset($_GET['post_id'])) {
         $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
         $feature_image = $post['feature_image']; // Default to current feature image
 
-        // Handle feature image upload
+        // image upload
         if (isset($_FILES['feature_image']) && $_FILES['feature_image']['error'] === UPLOAD_ERR_OK) {
             $image_tmp = $_FILES['feature_image']['tmp_name'];
             $image_name = 'post_' . time() . '_' . $_FILES['feature_image']['name'];
             $image_path = 'assets/uploads/post_images/' . $image_name;
 
             if (move_uploaded_file($image_tmp, $image_path)) {
-                $feature_image = $image_path; // Update to the new image
+                $feature_image = $image_path; 
             }
         }
 
-        // Update post in the database
         $update_query = "UPDATE blog_post SET title = '$title', content = '$content', feature_image = '$feature_image', category_id = '$category_id', status = 'pending', updated_at = NOW() WHERE post_id = '$post_id'";
         $update_result = mysqli_query($conn, $update_query);
 
         if ($update_result) {
-            // add the update in post_history
             $change_description = "Updated post: $title";
             $log_query = "INSERT INTO post_history (post_id, user_id, change_description) 
                           VALUES ('$post_id', '{$_SESSION['user_id']}', '$change_description')";
@@ -117,8 +114,7 @@ ob_end_flush(); ?>
                         <select name="category_id" id="category_id" class="form-control">
                             <option value="">Select Category</option>
                             <?php
-                            // Fetch categories from the database
-                            $category_query = "SELECT * FROM category";
+                             $category_query = "SELECT * FROM category";
                             $category_result = mysqli_query($conn, $category_query);
                             while ($category = mysqli_fetch_assoc($category_result)) {
                                 echo "<option value='{$category['category_id']}'" . ($category['category_id'] == $post['category_id'] ? ' selected' : '') . ">{$category['category_name']}</option>";

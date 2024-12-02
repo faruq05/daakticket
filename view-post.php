@@ -16,12 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_like'])) {
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
 
-        // Check if the user already liked the post
         $check_like_query = "SELECT * FROM likes WHERE post_id = $post_id AND user_id = $user_id";
         $like_result = mysqli_query($conn, $check_like_query);
 
         if (mysqli_num_rows($like_result) === 0) {
-            // User hasn't liked the post, insert a new like
             $like_query = "INSERT INTO likes (post_id, user_id, created_at) VALUES ($post_id, $user_id, NOW())";
             if (mysqli_query($conn, $like_query)) {
                 $_SESSION['message'] = "You liked the post!";
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_like'])) {
                 $_SESSION['message'] = "Error liking the post. Please try again.";
             }
         } else {
-            // User already liked the post, delete the like
             $unlike_query = "DELETE FROM likes WHERE post_id = $post_id AND user_id = $user_id";
             if (mysqli_query($conn, $unlike_query)) {
                 $_SESSION['message'] = "You unliked the post.";
@@ -307,7 +304,6 @@ ob_end_flush();
             <?php
             if ($comments_result && mysqli_num_rows($comments_result) > 0) {
                 while ($comment = mysqli_fetch_assoc($comments_result)) {
-                    // Determine the user's profile image or use a placeholder
                     $profile_image = !empty($comment['profile_picture'])
                         ? htmlspecialchars($comment['profile_picture'])
                         : 'assets/uploads/profile_pictures/default_profile.png';

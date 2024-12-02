@@ -35,7 +35,6 @@ if ($profile_picture && file_exists($profile_picture)) {
     $_SESSION['messageType'] = 'error';
 }
 
-// Redirect back to the profile page
 if ($role_id == 1001) {
     header('Location: admin_dashboard.php');
 } else {

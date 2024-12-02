@@ -18,7 +18,7 @@ if (!function_exists('log_admin_action')) {
         }
     }
 }
-// Example of logging an action (you can remove this after testing)
+
 if (isset($_SESSION['user_id'])) {
     log_admin_action($conn, "Viewed admin activity log");
 }
@@ -28,7 +28,7 @@ $query = "SELECT a.action_id, u.username, a.action_description, a.action_timesta
           LEFT JOIN user u ON a.user_id = u.user_id
           ORDER BY a.action_timestamp DESC";
 $result = mysqli_query($conn, $query);
-// Check for query error
+
 if (!$result) {
     echo "Error: " . mysqli_error($conn);
 }

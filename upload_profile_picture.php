@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$role_id = $_SESSION['role_id']; // Assuming role_id is stored in the session
+$role_id = $_SESSION['role_id']; 
 
 // Check if the file was uploaded
 if (isset($_FILES['profile_picture'])) {
@@ -47,7 +47,6 @@ if (isset($_FILES['profile_picture'])) {
     }
 }
 
-// Role-based redirection
 if ($role_id == 1001) { // Admin
     header('Location: admin_dashboard.php');
 } else { // Regular user

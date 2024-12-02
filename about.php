@@ -43,56 +43,5 @@
         </div>
     </div>
 </div>
-<!-- <div class="container-lg-fluid">
-    <div class="row">
-        <div class="obj">
-            <h3>Project Details</h3>
-        </div>
-    </div>
-</div>
-<div class="team cp60">
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Project Objective</h3>
-                <p class="mt-4">The objective of this project is to create a functional and engaging blog post
-                    website using PHP where users can create, view, and interact with blog posts. The website will focus
-                    on user
-                    experience, performance, and ease of use.
-                </p>
-            </div>
-            <div class="col-md-6">
-                <h3>Functionalites</h3>
-                <ul class="mt-4">
-                    <li>
-                        User Authentication: Users will be able to register, log in, and log out to manage their
-                        posts and comments.
-                    </li>
-                    <li>
-                        Post Creation and Management: Registered users can create, edit, and delete blog posts.
-                    </li>
-                    <li>
-                        Commenting System: Users can leave comments on blog posts to encourage engagement
-                        and interaction.
-                    </li>
-                    <li>
-                        Categories: Blog posts will be organized by categories to improve navigation and content
-                        discovery.
-                    </li>
-                    <li>
-                        Search Functionality: Users can search blog posts by title, category, or keywords.
-                    </li>
-                    <li>
-                        Responsive Design: The website will be mobile-friendly and responsive, adapting to
-                        different screen sizes.
-                    </li>
-                    <li>
-                        Admin Panel: An admin panel will be provided to manage users, posts, and comments.
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <?php include 'footer.php'; ?>

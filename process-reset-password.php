@@ -67,7 +67,6 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $password_hash, $user["user_id"]);
 $stmt->execute();
 
-// Set success message and redirect to login page
 $_SESSION['message'] = "Password updated successfully. You can now log in.";
 $_SESSION['messageType'] = "success";
 header("Location: login.php");

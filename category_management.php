@@ -45,8 +45,6 @@ if (isset($_GET['delete_id'])) {
         $_SESSION['message'] = "Failed to delete category. Please try again.";
         $_SESSION['messageType'] = "error";
     }
-
-    // Redirect to reset the URL and avoid retaining the delete_id parameter
     header('Location: category_management.php');
     exit();
 }
@@ -101,7 +99,7 @@ ob_end_flush();
                                             Delete
                                         </a></td>
                                         </tr>";
-                                    $serialNo++; // Increment the serial number
+                                    $serialNo++; 
                                 }
                             } else {
                                 echo "<tr><td colspan='3' class='text-center'>No categories available.</td></tr>";

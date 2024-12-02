@@ -200,24 +200,20 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                         <a href="edit-post.php?post_id=<?php echo $post_id; ?>" class="edtp"><i
                                                 class="lni lni-pen-to-square"></i></a>
-                                        <!-- Changing Post Status -->
                                         <div class="dropdown drp">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton<?php echo $post_id; ?>" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
-                                                <!-- Gear Icon with Color Change Based on Status -->
                                                 <i class="lni lni-gear-1"
                                                     style="color: <?php echo ($post['status'] == 'approved') ?>;"></i>
                                             </button>
                                             <ul class="dropdown-menu"
                                                 aria-labelledby="dropdownMenuButton<?php echo $post_id; ?>">
                                                 <?php if ($post['status'] == 'approved'): ?>
-                                                    <!-- Option to change post to draft -->
                                                     <li><a class="dropdown-item"
                                                             href="change-status.php?post_id=<?php echo $post_id; ?>&status=draft">Change
                                                             to Draft</a></li>
                                                 <?php else: ?>
-                                                    <!-- Option to change post to publish -->
                                                     <li><a class="dropdown-item"
                                                             href="change-status.php?post_id=<?php echo $post_id; ?>&status=approved">Publish</a>
                                                     </li>
@@ -394,24 +390,23 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
                                         </a>
                                         <a href="edit-post.php?post_id=<?php echo $post_id; ?>" class="edtp"><i
                                                 class="lni lni-pen-to-square"></i></a>
-                                        <!-- Dropdown for Changing Post Status -->
+
                                         <div class="dropdown drp">
                                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                                 id="dropdownMenuButton<?php echo $post_id; ?>" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
-                                                <!-- Gear Icon with Color Change Based on Status -->
+
                                                 <i class="lni lni-gear-1"
                                                     style="color: <?php echo ($post['status'] == 'approved') ?>;"></i>
                                             </button>
                                             <ul class="dropdown-menu"
                                                 aria-labelledby="dropdownMenuButton<?php echo $post_id; ?>">
                                                 <?php if ($post['status'] == 'approved'): ?>
-                                                    <!-- Option to change post to draft -->
+
                                                     <li><a class="dropdown-item"
                                                             href="change-status.php?post_id=<?php echo $post_id; ?>&status=draft">Change
                                                             to Draft</a></li>
                                                 <?php else: ?>
-                                                    <!-- Option to change post to publish -->
                                                     <li><a class="dropdown-item"
                                                             href="change-status.php?post_id=<?php echo $post_id; ?>&status=approved">Publish</a>
                                                     </li>
@@ -689,5 +684,5 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'published';
         </div>
     </div>
 
-    <!-- Add New Post Button --><a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
+    <a href="add-new-post.php" class="btn btn-cs">Add New Post</a>
 </div>

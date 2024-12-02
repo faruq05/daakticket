@@ -84,11 +84,11 @@
                                     <i class="lni lni-thumbs-up-3"></i>
                                     <span class="like-count ps-2">
                                         <?php
-                                        $post_id = $post['post_id']; // Assuming $post['post_id'] is already available
+                                        $post_id = $post['post_id']; 
                                         $like_query = "SELECT COUNT(*) AS like_count FROM likes WHERE post_id = '$post_id'";
                                         $like_result = mysqli_query($conn, $like_query);
                                         $like_data = mysqli_fetch_assoc($like_result);
-                                        echo htmlspecialchars($like_data['like_count'] ?? 0); // if no likes then 0
+                                        echo htmlspecialchars($like_data['like_count'] ?? 0); 
                                         ?>
                                     </span>
                                     <div class="comment-count-box d-flex align-items-center ps-3 pe-3">
@@ -100,7 +100,7 @@
                                             $comment_query = "SELECT COUNT(*) AS comment_count FROM comment WHERE post_id = '$post_id'";
                                             $comment_result = mysqli_query($conn, $comment_query);
                                             $comment_data = mysqli_fetch_assoc($comment_result);
-                                            echo htmlspecialchars($comment_data['comment_count'] ?? 0); // if no comments then 0
+                                            echo htmlspecialchars($comment_data['comment_count'] ?? 0);
                                             ?>
                                         </span>
                                     </div>

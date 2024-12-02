@@ -1,16 +1,13 @@
 <?php
 include 'header.php';
 
-// Get the user ID from the query string
 $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : null;
 
-// Validate user ID
 if (!$user_id) {
     echo "<div class='alert alert-danger'>Invalid user profile.</div>";
     exit;
 }
 
-// Fetch user details and stats in one place
 $user_query = "
     SELECT 
         u.username, u.first_name, u.last_name, u.email, 

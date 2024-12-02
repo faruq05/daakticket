@@ -161,7 +161,6 @@ $result = mysqli_query($conn, $query);
                                 </div>
                             </div>
 
-                            <!-- Update Button -->
                             <button type="submit" name="update_user_info" class="btn btn-cs">Update</button>
                         </form>
 
@@ -245,8 +244,6 @@ $result = mysqli_query($conn, $query);
                                                 echo "<td>" . htmlspecialchars($user['email']) . "</td>";
                                                 echo "<td>$role</td>";
                                                 echo "<td>" . htmlspecialchars(date('d M, Y', strtotime($user['registration_date']))) . "</td>";
-
-                                                // Display action dropdown only for admins
                                                 echo "<td>";
                                                 if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 1001) {
                                                     echo "<form action='update_role.php' method='POST' style='display: inline-block;'>";
@@ -376,7 +373,7 @@ $result = mysqli_query($conn, $query);
                                         <td>{$category['category_name']}</td>
                                         
                                         </tr>";
-                                    $serialNo++; // Increment the serial number
+                                    $serialNo++;
                                 }
                             } else {
                                 echo "<tr><td colspan='3' class='text-center'>No categories available.</td></tr>";
