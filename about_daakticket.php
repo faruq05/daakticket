@@ -104,7 +104,7 @@
 <div class="team_panel cp60">
     <div class="container-lg">
         <div class="row align-items-center ">
-            <h2>Team Member ...(Group 05)</h2>
+            <h2>Team Member ... (Group 05)</h2>
             <div class="col-xl-4 col-md-6 col-sm-6 mt-3 vect order-md-2">
                 <img src="assets/uploads/team.png" class="img-fluid" alt="team">
             </div>
@@ -136,7 +136,7 @@
 <div class="features cp60">
     <div class="container-lg">
         <div class="row">
-            <h2>Features at a Glance</h2>
+            <h2>Features at a Glance ...</h2>
             <div class="col-md-6 mt-3">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
