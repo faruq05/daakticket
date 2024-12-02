@@ -241,10 +241,11 @@
                                     <li>Search Published Post</li>
                                     <li>View All User Information</li>
                                     <li>Display Online User Status</li>
+                                    <li>Change User Role (User, Admin)</li>
                                     <li>Post History Management for All Users</li>
                                     <li>Add, Edit, Delete, Draft, and View Posts</li>
                                     <li>Post Manager for Approvals, Rejections, and Report Handling</li>
-                                    <li>Create New Categories</li>
+                                    <li>Create New Categories and Delete Categories</li>
                                     <li>Admin Activity Log</li>
                                     <li>Notifications for Likes, Comments, and Reports</li>
                                     <li>View and Clear Browsing History</li>
@@ -265,6 +266,7 @@
     <div class="container-lg">
         <div class="row">
             <h2>Task Management ...</h2>
+          
             <div class="col-md-6 mt-3">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -278,8 +280,49 @@
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <ul class="func">
-                                    <li></li>
+                                    <p class="mb-2"><b>Pages:</b></p>
+                                    <li>Home</li>
+                                    <li>About Page</li>
+                                    <li>Search Page</li>
+                                    <li>User Public Profile</li>
+                                    <li>Login and Registration Pages (Registration part)</li>
                                 </ul>
+                                <ul class="func mt-4">
+                                    <p class="mb-2"><b>Functionalities:</b></p>
+                                    <li><a href="https://prnt.sc/kzzFUUsb3VlL" target="_blank">Search Functionality</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/nH9qB3ncmjdZ" target="_blank">Newsletter
+                                            Subscription</a></li>
+                                    <li><a href="https://prnt.sc/soGVejvf0VP2" target="_blank">New User Registration</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://prnt.sc/rXvJ722RCI69" target="_blank">Password Recovery System
+                                            (Option 1)</a>,
+                                        <a href="https://prnt.sc/UTa4HMMnP5lM" target="_blank">(Option 2)</a>
+                                    </li>
+                                    <li>Admin Dashboard</li>
+                                    <li><a href="https://prnt.sc/yOIOJ-MQE26-" target="_blank">Profile Picture Upload
+                                            and Delete</a></li>
+                                    <li><a href="https://prnt.sc/xrj20o3ZvKiX" target="_blank">Delete Posts</a></li>
+                                    <li>
+                                        <a href="https://prnt.sc/9LBPQ9Oe6EU9" target="_blank">Published, Draft,
+                                            Pending, and Rejected Posts View</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://prnt.sc/GTIz7H9-xd8f" target="_blank">Switch Between Published
+                                            and Draft Posts</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/Y-8nGXPc7upu" target="_blank">View All User
+                                            Information</a></li>
+                                    <li><a href="https://prnt.sc/gN87rL0jrUXU" target="_blank">Post History Management
+                                            for All Users</a></li>
+                                    <li><a href="https://prnt.sc/fwIPNt_BOT3r" target="_blank">Create New Categories</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/IF_TtEbBWDVa" target="_blank">Admin Activity Log</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/_WFSa2EuR1GV" target="_blank">Logout Option</a></li>
+                                </ul>
+                                <p class="mt-3 text-start">General collaboration on UI design, CSS styling, and responsiveness.</p>
                             </div>
                         </div>
                     </div>
@@ -298,8 +341,44 @@
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <ul class="func">
-                                    <li></li>
+                                    <p class="mb-2"><b>Pages:</b></p>
+                                    <li>Blog Archive</li>
+                                    <li>Contact Page</li>
+                                    <li>View Post Page</li>
+                                    <li>Login and Registration Pages (Login part)</li>
+                                    <li>Terms and Conditions</li>
+                                    <li>About Daakticket</li>
                                 </ul>
+                                <ul class="func mt-4">
+                                    <p class="mb-2"><b>Functionalities:</b></p>
+                                    <li><a href="https://prnt.sc/Km4EUECr1nKf" target="_blank">Category-based
+                                            Filtering</a></li>
+                                    <li><a href="https://prnt.sc/f6-IHuIDawXB" target="_blank">Like, Share, Comment,
+                                            Report Post</a></li>
+                                    <li><a href="https://prnt.sc/ijRQE2qYypfQ" target="_blank">Two-Factor
+                                            Authentication</a></li>
+                                    <li><a href="https://prnt.sc/9Dn6QNoGnrQC" target="_blank">User Login</a></li>
+                                    <li>Email Send (PHP Mailer)</li>
+                                    <li>User Dashboard</li>
+                                    <li><a href="https://prnt.sc/0uWH-9pruJjU" target="_blank">View and Edit User
+                                            Information</a></li>
+                                    <li>
+                                        <a href="https://prnt.sc/3gncs5j_A2ej" target="_blank">Add Post</a>,
+                                        <a href="https://prnt.sc/djM4cF4OHodW" target="_blank">Edit Post</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/nnp4POsn3eiX" target="_blank">Notification
+                                            Management</a></li>
+                                    <li>
+                                        <a href="https://prnt.sc/5BZwYScLhZZ9" target="_blank">Post Manager for
+                                            Approvals, Rejections, Pending and Report Handling</a>
+                                    </li>
+                                    <li><a href="https://prnt.sc/Xt8m4-c94NQL" target="_blank">Display Online User
+                                            Status</a></li>
+                                    <li><a href="https://prnt.sc/Wln2RUGMgkF5" target="_blank">View and Clear Browsing
+                                            History</a></li>
+                                </ul>
+                                <p class="mt-3 text-start">General collaboration on UI design, CSS styling, and responsiveness.</p>
+
                             </div>
                         </div>
                     </div>
