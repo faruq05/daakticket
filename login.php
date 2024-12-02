@@ -56,6 +56,25 @@ session_start(); // Start the session
                             $_SESSION['role_id'] = $user['role_id'];
                             $_SESSION['otp_verified'] = false;
 
+                            //online status
+                            $session_token = bin2hex(random_bytes(32));
+                            $user_id = $user['user_id'];
+                            $check_session_query = "SELECT * FROM session WHERE user_id = $user_id";
+                            $session_result = mysqli_query($conn, $check_session_query);
+
+                            if (mysqli_num_rows($session_result) > 0) {
+                                $update_session_query = "
+                                    UPDATE session 
+                                    SET session_token = '$session_token', login_timestamp = NOW(), logout_timestamp = NULL 
+                                    WHERE user_id = $user_id";
+                                mysqli_query($conn, $update_session_query);
+                            } else {
+                                $insert_session_query = "
+                                    INSERT INTO session (user_id, session_token, login_timestamp) 
+                                    VALUES ($user_id, '$session_token', NOW())";
+                                mysqli_query($conn, $insert_session_query);
+                            }
+
                             include 'otpmail.php';
                             $otp_sent = sendOTPEmail($user['email'], $otp);
                             if ($otp_sent) {
