@@ -158,7 +158,7 @@
                                     <li>View Post Page</li>
                                     <li>Login and Registration Pages</li>
                                     <li>Terms and Conditions</li>
-                                    <li>About Daakticket</li>
+                                    <li>About Daakticket - Project Overview page</li>
                                 </ul>
                             </div>
                         </div>
@@ -179,6 +179,7 @@
                                     <li>Search Functionality</li>
                                     <li>Newsletter Subscription</li>
                                     <li>Category-based Filtering</li>
+                                    <li>Like, Share, Comment, Report Post</li>
                                     <li>User Login</li>
                                     <li>New User Registration</li>
                                     <li>Send Emails via Contact Form</li>
