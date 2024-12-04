@@ -1,7 +1,12 @@
 <?php
 include 'header.php';
 include 'admin_sidebar.php';
-
+if (!isset($_SESSION['otp_verified']) || $_SESSION['otp_verified'] !== true) {
+    $_SESSION['message'] = 'Please verify your OTP before accessing the dashboard.';
+    $_SESSION['messageType'] = 'error';
+    header('Location: verify_otp.php');
+    exit();
+}
 
 // Check if the user is logged in as an admin
 if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 1001) {
