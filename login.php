@@ -1,7 +1,6 @@
 <?php
 ob_start();
 include 'header.php';
-session_start(); // Start the session
 ?>
 <div class="user_access">
     <div class="container-lg">

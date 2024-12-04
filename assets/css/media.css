@@ -261,7 +261,7 @@
     }
 
     h1 {
-        font-size: 50px;
+        font-size: 45px;
     }
 
     h2 {
@@ -324,5 +324,9 @@
 
     .banner-title {
         margin: 140px 0px;
+    }
+
+    .main{
+        min-height: auto;
     }
 }
